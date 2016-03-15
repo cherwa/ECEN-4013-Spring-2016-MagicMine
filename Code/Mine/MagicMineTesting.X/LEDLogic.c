@@ -268,6 +268,7 @@ void playPattern(LED_Pattern pattern) {
         case DAMAGE:
             for (int i = 0; i < 4; i++) {
                 playDamage();
+                 
             } 
             break;
         case HEAL:
