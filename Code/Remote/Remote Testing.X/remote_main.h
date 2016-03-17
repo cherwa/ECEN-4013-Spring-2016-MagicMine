@@ -12,14 +12,42 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
 #include "remote_common.h"
-
-    static volatile SpellType selectedSpell = NO_SELECTION;
+#include "bluetooth_commands.h"
+    
+    typedef enum {
+        DISARMED,
+        MANUAL_MODE,
+        AUTOMATIC_MODE
+    } arm_mode_t;
+    
+    static volatile spell_t selectedSpell = NO_SELECTION;
     
     void main(void);
-    SpellType getSpellType(void);
-    void setSpellType(const SpellType spellType);
-
+    void setSpellType(const spell_t spellType);
+    
+    // Self test functions.
+    static bool spellButtonsPassed = false;
+    static bool indicatorLEDsPassed = false;
+    
+    // Status/Enable parameters
+    static volatile arm_mode_t armedMode = DISARMED;
+    static volatile bool armButtonEnabled = false;
+    
+    /**
+     * Tests the spell buttons by flashing them 3 times
+     */
+    static void testSpellButtons(void);
+    
+    /**
+     * Tests the indicator LEDs by flashing them 3 times.
+     */
+    static void testIndicatorLEDs(void);
+    
+    static bool bluetoothEnterCommandMode(void);
+    void sendBluetoothCommand(bluetooth_cmnd_t cmnd);
+    
 #ifdef	__cplusplus
 }
 #endif

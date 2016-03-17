@@ -44,8 +44,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  */
 
-#include "mcc_generated_files/mcc.h"
 #include "remote_main.h"
+#include "mcc_generated_files/mcc.h"
 
 /*
                          Main application
@@ -70,18 +70,119 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
+    // Initialize Remote's program to start state
+    
+    // Connect to all peripherals
+    
+    // Flash button LEDs
+    testSpellButtons();
+    
+    // Flash indicator LEDs
+    testIndicatorLEDs();
+    
+    if (! (spellButtonsPassed & indicatorLEDsPassed) ) {
+        // We have failed so bad if we get here...
+        // Show failure
+    }
+    
+    // Try to connect to the mine
+    //@TODO Activate Bluetooth module and try to connect to the mine
+    
+    // Indicate success or failure
+    
     while (1)
     {
         // Add your application code
     }
 }
 
-static SpellType getSpellType(void) {
-    return selectedSpell;
-} 
-
-static void setSpellType(const SpellType spellType) {
+void setSpellType(const spell_t spellType) {
     selectedSpell = spellType;
+}
+
+static void testSpellButtons(void) {
+    
+    WHITE_LED_LAT = 1;
+    BLUE_LED_LAT = 1;
+    YELLOW_LED_LAT = 1;
+    RED_LED_LAT = 1;
+    
+    delay_n_ms(20);
+    
+    WHITE_LED_LAT = 0;
+    BLUE_LED_LAT = 0;
+    YELLOW_LED_LAT = 0;
+    RED_LED_LAT = 0;
+    
+    delay_n_ms(10);
+    
+    
+    WHITE_LED_LAT = 1;
+    BLUE_LED_LAT = 1;
+    YELLOW_LED_LAT = 1;
+    RED_LED_LAT = 1;
+    
+    delay_n_ms(20);
+    
+    WHITE_LED_LAT = 0;
+    BLUE_LED_LAT = 0;
+    YELLOW_LED_LAT = 0;
+    RED_LED_LAT = 0;
+    
+    delay_n_ms(10);
+    
+    WHITE_LED_LAT = 1;
+    BLUE_LED_LAT = 1;
+    YELLOW_LED_LAT = 1;
+    RED_LED_LAT = 1;
+    
+    delay_n_ms(20);
+    
+    WHITE_LED_LAT = 0;
+    BLUE_LED_LAT = 0;
+    YELLOW_LED_LAT = 0;
+    RED_LED_LAT = 0;
+    
+    // If no one turns the device off we are good... Probably.
+    spellButtonsPassed = true;
+}
+
+static void testIndicatorLEDs(void) {
+    
+    //@TODO Actually test the LEDs
+    
+    indicatorLEDsPassed = true;
+}
+
+//static bool bluetoothEnterCommandMode(void) {
+//    
+//    EUSART_Write('$');
+//    EUSART_Write('$');
+//    EUSART_Write('$');
+//    
+//    return true;
+//}
+
+void sendBluetoothCommand(bluetooth_cmnd_t cmnd) {
+        
+    switch(cmnd) {
+        case CONNECT_TO_MINE:
+            // Connect to the mine...
+            break;
+        case HEARTBEAT:
+            // Send the heartbeat to the mine to ensure we are still connected.
+            break;
+        case RANGE_TEST:
+            break;
+        case SET_ARM_MODE:
+            break;
+        case DETONATE:
+            EUSART_Write('D'); EUSART_Write('E'); EUSART_Write('T');
+            break;
+        default:
+            printf ("Unknown Command Given...");
+            break;
+        }
 }
 
 /**
