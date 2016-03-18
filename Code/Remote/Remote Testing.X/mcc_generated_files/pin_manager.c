@@ -1,27 +1,27 @@
 /**
   Generated Pin Manager File
 
-  Company:
-    Microchip Technology Inc.
+  @authors Microchip Technology Inc.
+  @authors Matthew Atkins
 
-  File Name:
-    pin_manager.c
+  @file pin_manager.c
 
-  Summary:
-    This is the Pin Manager file generated using MPLAB(c) Code Configurator
+  @brief This is the Pin Manager file generated using MPLAB(c) Code Configurator
 
-  Description:
-    This header file provides implementations for pin APIs for all pins selected in the GUI.
-    Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - v3.00
-        Device            :  PIC16F1579
-        Driver Version    :  1.02
+  @detials This header file provides implementations for pin APIs for all pins selected in the GUI.<br>
+    Generation Information:
+      - Product Revision  :  MPLAB(c) Code Configurator - v3.00
+      - Device            :  PIC16F1579
+      - Driver Version    :  1.02
+ * <p>
     The generated drivers are tested against the following:
-        Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+      - Compiler          :  XC8 1.35
+      - MPLAB             :  MPLAB X 3.20
 
-    Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+    @copyright Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+*/
 
+/*
     Microchip licenses to you the right to use, modify, copy and distribute
     Software only when embedded on a Microchip microcontroller or digital signal
     controller that is integrated into your product or third party product
@@ -49,7 +49,14 @@
 #include <stdbool.h>
 #include "../remote_main.h"
 
-uint16_t t_start = 0;
+/** 
+ * The time that the arm button was first pressed when selecting an arming mode.
+ * This is used to see how long the button has been held down.
+ * <br>
+ * If the button has been held down for more than 3 seconds, then the arming mode
+ * is set to [MANUAL_MODE](@ref MANUAL_MODE) otherwise it is set to [AUTOMATIC_MODE](@ref AUTOMATIC_MODE).
+ */
+uint16_t armButtonPressedStartTime;
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -91,8 +98,6 @@ void PIN_MANAGER_Initialize(void)
     GIE = state;
 }
 
-uint16_t armedButtonPressedStartTime;
-
 void PIN_MANAGER_IOC(void)
 {    
     if((IOCBP7 == 1) && (IOCBF7 == 1)) {
@@ -100,7 +105,7 @@ void PIN_MANAGER_IOC(void)
         if (armedMode != DISARMED) {
         
             //Handling code for IOC on positive edge pin RB7 
-            uint16_t diff = armedButtonPressedStartTime - TMR1_ReadTimer();
+            uint16_t diff = armButtonPressedStartTime - TMR1_ReadTimer();
             
             // Timer 1 has it's period set to 25ms so, 3s / 25ms = 120
             if (diff >= 120) {
@@ -137,13 +142,12 @@ void PIN_MANAGER_IOC(void)
             // We are already armed, make sure we are in manual mode and try
             // to detonate
             if (armedMode == MANUAL_MODE) {
-                // Send the detonate command via bluetooth.
+                // Send the detonate command via Bluetooth.
                 
                 sendBluetoothCommand(DETONATE);
                 
                 // Did it work?
                 while (!EUSART_DataReady) {}
-                    
                     
                 uint8_t readData = EUSART_Read();
 
@@ -168,7 +172,7 @@ void PIN_MANAGER_IOC(void)
     {
         //Handling code for IOC falling edge on pin RB7
         // Record start time
-        armedButtonPressedStartTime = TMR1_ReadTimer();
+        armButtonPressedStartTime = TMR1_ReadTimer();
         
         // clear interrupt-on-change flag
         IOCBF7 = 0;

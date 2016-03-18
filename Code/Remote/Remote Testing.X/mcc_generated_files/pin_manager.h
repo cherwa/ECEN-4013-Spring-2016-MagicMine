@@ -354,28 +354,13 @@
 #define IO_RC7_SetDigitalMode()   do { ANSC7 = 0; } while(0)
 
 
-
 /**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    GPIO and peripheral I/O initialization
- * @Example
-    PIN_MANAGER_Initialize();
+ * Called for GPIO and peripheral I/O initialization
  */
 void PIN_MANAGER_Initialize (void);
 
 /**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    Interrupt on Change Handling routine
- * @Example
-    PIN_MANAGER_IOC();
+ *  Interrupt on Change Handling routine
  */
 void PIN_MANAGER_IOC(void);
 

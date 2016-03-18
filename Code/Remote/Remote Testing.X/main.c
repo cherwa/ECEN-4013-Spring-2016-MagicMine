@@ -4,26 +4,25 @@
   Company:
     Microchip Technology Inc.
 
-  File Name:
-    main.c
+  @file main.c
 
-  Summary:
-    This is the main file generated using MPLAB(c) Code Configurator
+  @brief This is the main file generated using MPLAB(c) Code Configurator
 
-  Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
-    Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - v3.00
-        Device            :  PIC16F1579
-        Driver Version    :  2.00
+  @details This header file provides implementations for driver APIs for all modules selected in the GUI.
+ * <br>
+    Generation Information:
+       - Product Revision   :  MPLAB(c) Code Configurator v3.00
+       - Device            :  PIC16F1579
+       - Driver Version    :  2.00
+ * <p>
     The generated drivers are tested against the following:
-        Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+       - Compiler          :  XC8 1.35
+       - MPLAB             :  MPLAB X 3.20
+ 
+@copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 */
 
 /*
-Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
-
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
 controller that is integrated into your product or third party product
@@ -47,8 +46,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "remote_main.h"
 #include "mcc_generated_files/mcc.h"
 
-/*
-                         Main application
+/**
+ * @brief Main application
  */
 void main(void)
 {
@@ -86,7 +85,8 @@ void main(void)
     }
     
     // Try to connect to the mine
-    //@TODO Activate Bluetooth module and try to connect to the mine
+    /** @todo Activate Bluetooth module and try to connect to the mine */
+    
     
     // Indicate success or failure
     
@@ -100,7 +100,7 @@ void setSpellType(const spell_t spellType) {
     selectedSpell = spellType;
 }
 
-static void testSpellButtons(void) {
+void testSpellButtons(void) {
     
     WHITE_LED_LAT = 1;
     BLUE_LED_LAT = 1;
@@ -147,24 +147,42 @@ static void testSpellButtons(void) {
     spellButtonsPassed = true;
 }
 
-static void testIndicatorLEDs(void) {
+void testIndicatorLEDs(void) {
     
-    //@TODO Actually test the LEDs
+    /** @todo Actually test the LEDs */
     
     indicatorLEDsPassed = true;
 }
 
-//static bool bluetoothEnterCommandMode(void) {
-//    
-//    EUSART_Write('$');
-//    EUSART_Write('$');
-//    EUSART_Write('$');
-//    
-//    return true;
-//}
+bool bluetoothEnterCommandMode(void) {
+    
+    EUSART_Write('$');
+    EUSART_Write('$');
+    EUSART_Write('$');
+    
+    // Twiddle our thumbs while we wait for data from the module...
+    while (!EUSART_DataReady) {}
+    
+    uint8_t buff[3];
+    
+    while (eusartRxCount > 0) {
+        buff[3 - eusartRxCount] = EUSART_Read();
+    }
+    
+    // Module returns CMD if it entered command mode
+    if (buff != "CMD") {
+//        indicateError
+        
+        return false;
+    } else {
+        return true;
+    }
+}
 
 void sendBluetoothCommand(bluetooth_cmnd_t cmnd) {
         
+    /** @todo need to perform a check to see if we are still connected */
+    
     switch(cmnd) {
         case CONNECT_TO_MINE:
             // Connect to the mine...
@@ -174,7 +192,9 @@ void sendBluetoothCommand(bluetooth_cmnd_t cmnd) {
             break;
         case RANGE_TEST:
             break;
-        case SET_ARM_MODE:
+        case SET_ARM_MODE_MANUAL:
+            break;
+        case SET_ARM_MODE_AUTO:
             break;
         case DETONATE:
             EUSART_Write('D'); EUSART_Write('E'); EUSART_Write('T');
