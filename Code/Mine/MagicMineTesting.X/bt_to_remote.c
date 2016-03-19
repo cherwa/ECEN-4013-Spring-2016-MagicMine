@@ -7,10 +7,23 @@
 #include "bt_to_remote.h"
 
 bool remote_bt_enter_command_mode(void) {
+    
+    // Enter command mode
+    BT_RMT_CMD_LAT = 1;
+    
+    if (EUSART1_DataReady) {
+        e
+    }
+    
+    EUSART1_Write();
+    
     return true;
 }
     
 bool remote_bt_exit_command_mode(void) {
+    
+    // Set command pin low
+    BT_RMT_CMD_LAT = 0;
     return true;
 }
     

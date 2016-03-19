@@ -13,6 +13,9 @@
         </logicalFolder>
         <itemPath>bt_common.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="IR" projectFiles="true">
+        <itemPath>ir_common.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="LEDs" projectFiles="true">
         <itemPath>LEDLogic.h</itemPath>
       </logicalFolder>
@@ -27,8 +30,8 @@
       </logicalFolder>
       <itemPath>config.h</itemPath>
       <itemPath>NeoCol.h</itemPath>
-      <itemPath>util_functions.h</itemPath>
       <itemPath>main.h</itemPath>
+      <itemPath>util_functions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
