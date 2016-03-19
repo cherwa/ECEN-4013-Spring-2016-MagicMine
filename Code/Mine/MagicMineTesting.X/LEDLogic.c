@@ -1,18 +1,18 @@
-#include "LEDColors.h"
+#include "LEDLogic.h"
 #include "mcc_generated_files/mcc.h"
 
 static void LEDOne() {
-    LATBbits.LATB1 = 1;
+    LED_OUT_LAT = 1;
     Nop();
     Nop();
-    LATBbits.LATB1 = 0;
+    LED_OUT_LAT = 0;
     Nop();
 }
 
 static void LEDZero() {
-    LATBbits.LATB1 = 1;
+    LED_OUT_LAT = 1;
     Nop();
-    LATBbits.LATB1 = 0;
+    LED_OUT_LAT = 0;
     Nop();
 }
 
@@ -263,12 +263,13 @@ void playHeal(){
 
 void playPattern(LED_Pattern pattern) {
     
-    switch(pattern) {
+    // Disable interrupts
+    INTERRUPT_PeripheralInterruptDisable();
     
+    switch(pattern) {
         case DAMAGE:
             for (int i = 0; i < 4; i++) {
                 playDamage();
-                 
             } 
             break;
         case HEAL:
@@ -278,4 +279,6 @@ void playPattern(LED_Pattern pattern) {
     
     clearPattern();
     
+    // Re-enable interrupts
+    INTERRUPT_PeripheralInterruptEnable();
 }

@@ -56,16 +56,22 @@ void  INTERRUPT_Initialize (void)
 
     // Clear peripheral interrupt priority bits (default reset value)
 
-    // TMRI
-    IPR1bits.TMR2IP = 0;
+    // TXI
+    IPR3bits.TX2IP = 0;
+    // RCI
+    IPR3bits.RC2IP = 0;
 }
 
 void interrupt INTERRUPT_InterruptManager (void)
 {
    // interrupt handler
-    if(PIE1bits.TMR2IE == 1 && PIR1bits.TMR2IF == 1)
+    if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
     {
-        TMR2_ISR();
+        EUSART2_Transmit_ISR();
+    }
+    else if(PIE3bits.RC2IE == 1 && PIR3bits.RC2IF == 1)
+    {
+        EUSART2_Receive_ISR();
     }
     else
     {

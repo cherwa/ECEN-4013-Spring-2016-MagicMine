@@ -51,13 +51,13 @@ void PIN_MANAGER_Initialize(void)
     LATB = 0x0;
     LATA = 0x0;
     LATC = 0x0;
-    ANSELA = 0x2E;
+    ANSELA = 0x2F;
     ANSELB = 0x3E;
-    ANSELC = 0xE0;
-    TRISB = 0xFC;
-    TRISC = 0xDB;
+    ANSELC = 0xFC;
+    TRISB = 0xFE;
+    TRISC = 0xFF;
     WPUB = 0xFF;
-    TRISA = 0xFE;
+    TRISA = 0xFF;
 
     INTCON2bits.nRBPU = 0x0;
 
