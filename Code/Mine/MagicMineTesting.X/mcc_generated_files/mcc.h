@@ -51,8 +51,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
+#include "eusart1.h"
 #include "eusart2.h"
-#include "memory.h"
 
 #define _XTAL_FREQ  16000000
 

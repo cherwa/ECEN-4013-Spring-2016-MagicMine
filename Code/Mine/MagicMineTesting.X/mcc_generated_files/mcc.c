@@ -115,6 +115,7 @@ void SYSTEM_Initialize(void)
     INTERRUPT_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
+    EUSART1_Initialize();
     EUSART2_Initialize();
 }
 

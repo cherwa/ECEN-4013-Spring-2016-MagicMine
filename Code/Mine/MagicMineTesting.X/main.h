@@ -42,15 +42,16 @@ extern "C" {
      * 
      * @warning This is obviously not comprehensive, some devices, such as the PIRs
      *  are too basic to test meaningfully. <br>
-     *  If any of the self tests fail, the device will loop the
+     *  
+     * @warning If any of the self tests fail, the device will loop the
      *  [self test failed pattern](@ref SELF_TEST_FAILED) until reset.
      */
     static void connect_to_peripherals(void);
     
    /**
     * @name Self Test Functions
-    *  These functions will attempt to connect to and configure their
-    *  corresponding device.
+    * These functions will attempt to connect to and configure their
+    * corresponding device.
     */
     ///@{
     static void init_Bluetooth_to_PIU(void);

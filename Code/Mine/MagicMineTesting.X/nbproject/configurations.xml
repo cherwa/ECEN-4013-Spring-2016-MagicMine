@@ -4,19 +4,30 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="Bluetooth" projectFiles="true">
+        <logicalFolder name="f1" displayName="Bluetooth 2.0" projectFiles="true">
+          <itemPath>bt_to_PIU.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f2" displayName="Bluetooth 4.0" projectFiles="true">
+          <itemPath>bt_to_remote.h</itemPath>
+        </logicalFolder>
+        <itemPath>bt_common.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="LEDs" projectFiles="true">
+        <itemPath>LEDLogic.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
-        <itemPath>mcc_generated_files/memory.h</itemPath>
         <itemPath>mcc_generated_files/eusart2.h</itemPath>
         <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/eusart1.h</itemPath>
       </logicalFolder>
       <itemPath>config.h</itemPath>
       <itemPath>NeoCol.h</itemPath>
       <itemPath>util_functions.h</itemPath>
-      <itemPath>LEDLogic.h</itemPath>
       <itemPath>main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -26,20 +37,30 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="Bluetooth" projectFiles="true">
+        <logicalFolder name="f1" displayName="Bluetooth 2.0" projectFiles="true">
+          <itemPath>bt_to_PIU.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f2" displayName="Bluetooth 4.0" projectFiles="true">
+          <itemPath>bt_to_remote.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="LEDs" projectFiles="true">
+        <itemPath>LEDLogic.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
-        <itemPath>mcc_generated_files/memory.c</itemPath>
         <itemPath>mcc_generated_files/eusart2.c</itemPath>
+        <itemPath>mcc_generated_files/eusart1.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="NeoPixel" projectFiles="true">
         <itemPath>NeoCol.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>LEDLogic.c</itemPath>
       <itemPath>util_functions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

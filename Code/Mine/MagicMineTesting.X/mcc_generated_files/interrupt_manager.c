@@ -60,6 +60,10 @@ void  INTERRUPT_Initialize (void)
     IPR3bits.TX2IP = 0;
     // RCI
     IPR3bits.RC2IP = 0;
+    // TXI
+    IPR1bits.TX1IP = 0;
+    // RCI
+    IPR1bits.RC1IP = 0;
 }
 
 void interrupt INTERRUPT_InterruptManager (void)
@@ -72,6 +76,14 @@ void interrupt INTERRUPT_InterruptManager (void)
     else if(PIE3bits.RC2IE == 1 && PIR3bits.RC2IF == 1)
     {
         EUSART2_Receive_ISR();
+    }
+    else if(PIE1bits.TX1IE == 1 && PIR1bits.TX1IF == 1)
+    {
+        EUSART1_Transmit_ISR();
+    }
+    else if(PIE1bits.RC1IE == 1 && PIR1bits.RC1IF == 1)
+    {
+        EUSART1_Receive_ISR();
     }
     else
     {
