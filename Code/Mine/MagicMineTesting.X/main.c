@@ -1,11 +1,10 @@
 /**
   Generated Main Source File
 
-  Company:
-    Microchip Technology Inc.
+  @authors Microchip Technology Inc.
+  @authros Matthew Atkins
 
-  File Name:
-    main.c
+  @file main.c
 
   @brief This is the main file generated using MPLAB(c) Code Configurator
 
@@ -124,6 +123,39 @@ static void init_Bluetooth_to_remote(void) {
 static void init_audio_controller(void) {
     /** @todo Actually test the audio controller*/
     audio_controller_online = true;
+}
+
+void stunned(void) {
+    
+    play_audio_file(AUDIO_STUN_HIT);
+    //@todo Disable non-essential interrupts (i.e. motion, IR)
+    
+    // i should be a value that causes delay for 10 sec.
+    for (uint8_t i = 0; i < 200; i++) {
+        playPattern(LED_STUN_SELF);
+        delay_25ms_n_times(1);
+    }
+    
+    play_audio_file(AUDIO_STUN_END);
+    playPattern(LED_ARMED);
+    //@todo Re-enable non-essential interrupts
+}
+
+void detonate(void) {
+    
+    //@todo Disable non-essential interrupts (i.e. motion, IR)
+    
+    // Delay 2 seconds
+    delay_25ms_n_times(80);
+    
+    transmit_ir_packet(IR_SPELL_DAMAGE);
+    play_audio_file(AUDIO_DAMAGE_CAST);
+    playPattern(LED_DAMAGE);
+    
+    
+    
+    // @todo inform player that the mine has detonated
+    //@todo Re-enable non-essential interrupts
 }
 
 /**

@@ -1,5 +1,5 @@
 #include "LEDLogic.h"
-#include "mcc_generated_files/mcc.h"
+#include "util_functions.h"
 
 static void LEDOne() {
     LED_OUT_LAT = 1;
@@ -261,19 +261,46 @@ void playHeal(){
 	__delay_ms (25);
 }
 
+// Experimental!  
+void pulse(void) {
+    
+    uint8_t pixel;
+    
+    for (uint8_t i = 0; i < 64; i++) {
+        
+        for (pixel = 0; pixel < PIXEL_COUNT; pixel++) {
+            
+            if (i == 0) {
+                greenPixels[i] = 0;
+                redPixels[i] = 0;
+                bluePixels[i] = 0;
+            } else {
+                greenPixels[i] += 4;
+                redPixels[i] += 4;
+                bluePixels[i] += 4;
+            }
+        }
+        
+        delay_25ms_n_times(3);
+    }
+}
+
 void playPattern(LED_Pattern pattern) {
     
     // Disable interrupts
     INTERRUPT_PeripheralInterruptDisable();
     
     switch(pattern) {
-        case DAMAGE:
+        case LED_DAMAGE:
             for (int i = 0; i < 4; i++) {
                 playDamage();
             } 
             break;
-        case HEAL:
+        case LED_HEAL:
             playHeal();
+            break;
+        case LED_SELF_TEST_PASSED:
+            pulse();
             break;
     }
     
@@ -281,4 +308,50 @@ void playPattern(LED_Pattern pattern) {
     
     // Re-enable interrupts
     INTERRUPT_PeripheralInterruptEnable();
+}
+
+static void fill_color(uint8_t* grb) {
+    
+    for (uint8_t i = 0; i < PIXEL_COUNT; i++) {
+        greenPixels[i] = grb[0];
+        redPixels[i] = grb[1];
+        bluePixels[i] = grb[2];
+    }
+}
+
+static void draw(void) {
+    
+    uint8_t pixel;
+    int8_t bitCount;
+    
+    for (pixel = 0; pixel < PIXEL_COUNT; pixel++) {
+        
+        for (bitCount = 7; bitCount >= 0; bitCount--) {
+            send_bit(bit_test(greenPixels[pixel], bitCount));
+        }
+        
+        for (bitCount = 7; bitCount >= 0; bitCount--) {
+            send_bit(bit_test(redPixels[pixel], bitCount));
+        }
+        
+        for (bitCount = 7; bitCount >= 0; bitCount--) {
+            send_bit(bit_test(bluePixels[pixel], bitCount));
+        }
+    }
+}
+
+/** @todo This function needs to be tested extensively for timing.*/
+
+static void send_bit(uint8_t val) {
+    
+    switch (val) {
+        case 1:
+            LED_OUT_LAT = 1;
+            Nop();
+            Nop();
+            break;
+        case 0:
+            LED_OUT_LAT = 0;
+            break;
+    }
 }

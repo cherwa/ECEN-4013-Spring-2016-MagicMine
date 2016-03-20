@@ -11,19 +11,18 @@
 extern "C" {
 #endif
 
+#include "mcc_generated_files/mcc.h"
 #include "bt_common.h"
 
-    typedef enum {
-        CONNECT
-    } PIU_bt_cmnd_t;
-
-    static bt_device_state_t state = DISCONECTED;
+    static bt_device_state_t state = BT_STATE_DISCONECTED;
     
     bool PIU_bt_enter_command_mode(void);
     
     bool PIU_bt_exit_command_mode(void);
     
-    void PIU_bt_send_command(PIU_bt_cmnd_t cmnd);
+    bool PIU_bt_connect_to_PIU(void);
+    
+    void PIU_bt_send_command(bt_cmnd_t cmnd);
     
     bt_device_state_t PIU_bt_get_device_state(void);
     

@@ -11,12 +11,6 @@ bool remote_bt_enter_command_mode(void) {
     // Enter command mode
     BT_RMT_CMD_LAT = 1;
     
-    if (EUSART1_DataReady) {
-        e
-    }
-    
-    EUSART1_Write();
-    
     return true;
 }
     
@@ -27,16 +21,12 @@ bool remote_bt_exit_command_mode(void) {
     return true;
 }
     
-void remote_bt_send_command(remote_bt_cmnd_t cmnd) {
+void remote_bt_send_command(bt_cmnd_t cmnd) {
     
     switch (cmnd) {
-        case START_ADVERTISING:
+        case BT_CMND_START_ADVERTISING:
             break;
-        case STOP_ADVERTISING:
-            break;
-        case ARM_SUCCESFUL:
-            break;
-        case DETONATED:
+        case BT_CMND_STOP_ADVERTISING:
             break;
         default:
             break;

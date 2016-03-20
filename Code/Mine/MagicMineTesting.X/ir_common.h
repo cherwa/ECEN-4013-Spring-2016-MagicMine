@@ -12,17 +12,17 @@ extern "C" {
 #endif
 
     typedef enum spell_type {
-        DAMAGE = 0,
-        STUN = 2,
-        HEAL = 4
+        IR_SPELL_DAMAGE = 0,
+        IR_SPELL_STUN = 2,
+        IR_SPELL_HEAL = 4
     } ir_spell_id_t;
 
     struct ir_packet {
-        uint8_t id_h;
-        uint8_t id_l;
-        uint8_t spell_id;
-        uint8_t uuid;
-        uint8_t crc;
+        const uint8_t id_h;
+        const uint8_t id_l;
+        const uint8_t spell_id;
+        const uint8_t uuid;
+        const uint8_t crc;
     };
     
     const uint8_t id_h = 0;

@@ -11,22 +11,16 @@
 extern "C" {
 #endif
 
+#include "mcc_generated_files/mcc.h"
 #include "bt_common.h"
     
-    typedef enum {
-        START_ADVERTISING,
-        STOP_ADVERTISING,
-        ARM_SUCCESFUL,        
-        DETONATED
-    } remote_bt_cmnd_t;
-
-    static bt_device_state_t state = DISCONECTED;
+    static bt_device_state_t state = BT_STATE_DISCONECTED;
     
     bool remote_bt_enter_command_mode(void);
     
     bool remote_bt_exit_command_mode(void);
     
-    void remote_bt_send_command(remote_bt_cmnd_t cmnd);
+    void remote_bt_send_command(bt_cmnd_t cmnd);
     
     bt_device_state_t remote_bt_get_device_state(void);
     

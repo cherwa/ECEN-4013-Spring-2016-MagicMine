@@ -12,8 +12,8 @@ extern "C" {
 #endif
 
 #include "mcc_generated_files/mcc.h"
-    
-    void delay_25ms_n_times(uint8_t n);
+        
+    void delay_25ms_n_times(uint16_t n);
 
 #ifdef	__cplusplus
 }

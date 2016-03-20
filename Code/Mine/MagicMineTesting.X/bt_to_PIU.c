@@ -14,13 +14,9 @@ bool PIU_bt_exit_command_mode(void) {
     return true;
 }
     
-void PIU_bt_send_command(PIU_bt_cmnd_t cmnd) {
-    switch (cmnd) {
-        case CONNECT:
-            break;
-        default:
-            break;
-    }
+void PIU_bt_send_command(bt_cmnd_t cmnd) {
+
+    /** @todo Send the command*/
 }
     
 bt_device_state_t PIU_bt_get_device_state(void) {

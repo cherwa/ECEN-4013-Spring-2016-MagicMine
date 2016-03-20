@@ -8,7 +8,8 @@
 
 #include "util_functions.h"
 
-void delay_25ms_n_times(uint8_t n) {
+void delay_25ms_n_times(uint16_t n) {
+    
     for (n; n > 1; n--) {
         __delay_ms (25);
     }

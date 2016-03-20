@@ -48,6 +48,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
   Section: Included Files
 */
 #include "eusart1.h"
+#include "../bt_common.h"
 
 /**
   Section: Macro Declarations
@@ -190,6 +191,23 @@ void EUSART1_Receive_ISR(void)
         eusart1RxHead = 0;
     }
     eusart1RxCount++;
+    
+    // All commands from the remote MUST be 1 byte value from bt_commands enum
+    if (sizeof(eusart1RxBuffer) == 1) {
+        // See if we have a valid command
+        switch (eusart1RxBuffer[0]) {
+            case BT_CMND_ARM_AUTO:
+                break;
+            case BT_CMND_ARM_MANUAL:
+                break;
+            case BT_CMND_DETONATE:
+                break;
+            case BT_CMND_FAILURE:
+                break;
+            case BT_CMND_SUCCESS:
+                break;
+        }
+    }
 }
 /**
   End of File
