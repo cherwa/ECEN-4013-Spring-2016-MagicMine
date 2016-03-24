@@ -59,109 +59,141 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
-// get/set LED_OUT aliases
-#define LED_OUT_TRIS               TRISB0
-#define LED_OUT_LAT                LATB0
-#define LED_OUT_PORT               RB0
-#define LED_OUT_WPU                WPUB0
-#define LED_OUT_ANS                ANSB0
-#define LED_OUT_SetHigh()    do { LATB0 = 1; } while(0)
-#define LED_OUT_SetLow()   do { LATB0 = 0; } while(0)
-#define LED_OUT_Toggle()   do { LATB0 = ~LATB0; } while(0)
-#define LED_OUT_GetValue()         RB0
-#define LED_OUT_SetDigitalInput()    do { TRISB0 = 1; } while(0)
-#define LED_OUT_SetDigitalOutput()   do { TRISB0 = 0; } while(0)
+// get/set ACEL_INT aliases
+#define ACEL_INT_TRIS               TRISB4
+#define ACEL_INT_LAT                LATB4
+#define ACEL_INT_PORT               RB4
+#define ACEL_INT_WPU                WPUB4
+#define ACEL_INT_ANS                ANSB4
+#define ACEL_INT_SetHigh()    do { LATB4 = 1; } while(0)
+#define ACEL_INT_SetLow()   do { LATB4 = 0; } while(0)
+#define ACEL_INT_Toggle()   do { LATB4 = ~LATB4; } while(0)
+#define ACEL_INT_GetValue()         RB4
+#define ACEL_INT_SetDigitalInput()    do { TRISB4 = 1; } while(0)
+#define ACEL_INT_SetDigitalOutput()   do { TRISB4 = 0; } while(0)
 
-#define LED_OUT_SetPullup()    do { WPUB0 = 1; } while(0)
-#define LED_OUT_ResetPullup()   do { WPUB0 = 0; } while(0)
-#define LED_OUT_SetAnalogMode()   do { ANSB0 = 1; } while(0)
-#define LED_OUT_SetDigitalMode()   do { ANSB0 = 0; } while(0)
-
-
-// get/set LED_OUT aliases
-#define LED_OUT_TRIS               TRISB0
-#define LED_OUT_LAT                LATB0
-#define LED_OUT_PORT               RB0
-#define LED_OUT_WPU                WPUB0
-#define LED_OUT_ANS                ANSB0
-#define LED_OUT_SetHigh()    do { LATB0 = 1; } while(0)
-#define LED_OUT_SetLow()   do { LATB0 = 0; } while(0)
-#define LED_OUT_Toggle()   do { LATB0 = ~LATB0; } while(0)
-#define LED_OUT_GetValue()         RB0
-#define LED_OUT_SetDigitalInput()    do { TRISB0 = 1; } while(0)
-#define LED_OUT_SetDigitalOutput()   do { TRISB0 = 0; } while(0)
-
-#define LED_OUT_SetPullup()    do { WPUB0 = 1; } while(0)
-#define LED_OUT_ResetPullup()   do { WPUB0 = 0; } while(0)
-#define LED_OUT_SetAnalogMode()   do { ANSB0 = 1; } while(0)
-#define LED_OUT_SetDigitalMode()   do { ANSB0 = 0; } while(0)
+#define ACEL_INT_SetPullup()    do { WPUB4 = 1; } while(0)
+#define ACEL_INT_ResetPullup()   do { WPUB4 = 0; } while(0)
+#define ACEL_INT_SetAnalogMode()   do { ANSB4 = 1; } while(0)
+#define ACEL_INT_SetDigitalMode()   do { ANSB4 = 0; } while(0)
 
 
 // get/set LED_OUT aliases
-#define LED_OUT_TRIS               TRISB0
-#define LED_OUT_LAT                LATB0
-#define LED_OUT_PORT               RB0
-#define LED_OUT_WPU                WPUB0
-#define LED_OUT_ANS                ANSB0
-#define LED_OUT_SetHigh()    do { LATB0 = 1; } while(0)
-#define LED_OUT_SetLow()   do { LATB0 = 0; } while(0)
-#define LED_OUT_Toggle()   do { LATB0 = ~LATB0; } while(0)
-#define LED_OUT_GetValue()         RB0
-#define LED_OUT_SetDigitalInput()    do { TRISB0 = 1; } while(0)
-#define LED_OUT_SetDigitalOutput()   do { TRISB0 = 0; } while(0)
+#define LED_OUT_TRIS               TRISB5
+#define LED_OUT_LAT                LATB5
+#define LED_OUT_PORT               RB5
+#define LED_OUT_WPU                WPUB5
+#define LED_OUT_ANS                ANSB5
+#define LED_OUT_SetHigh()    do { LATB5 = 1; } while(0)
+#define LED_OUT_SetLow()   do { LATB5 = 0; } while(0)
+#define LED_OUT_Toggle()   do { LATB5 = ~LATB5; } while(0)
+#define LED_OUT_GetValue()         RB5
+#define LED_OUT_SetDigitalInput()    do { TRISB5 = 1; } while(0)
+#define LED_OUT_SetDigitalOutput()   do { TRISB5 = 0; } while(0)
 
-#define LED_OUT_SetPullup()    do { WPUB0 = 1; } while(0)
-#define LED_OUT_ResetPullup()   do { WPUB0 = 0; } while(0)
-#define LED_OUT_SetAnalogMode()   do { ANSB0 = 1; } while(0)
-#define LED_OUT_SetDigitalMode()   do { ANSB0 = 0; } while(0)
-
-
-// get/set BT_RMT_CMD aliases
-#define BT_RMT_CMD_TRIS               TRISC5
-#define BT_RMT_CMD_LAT                LATC5
-#define BT_RMT_CMD_PORT               RC5
-#define BT_RMT_CMD_ANS                ANSC5
-#define BT_RMT_CMD_SetHigh()    do { LATC5 = 1; } while(0)
-#define BT_RMT_CMD_SetLow()   do { LATC5 = 0; } while(0)
-#define BT_RMT_CMD_Toggle()   do { LATC5 = ~LATC5; } while(0)
-#define BT_RMT_CMD_GetValue()         RC5
-#define BT_RMT_CMD_SetDigitalInput()    do { TRISC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalOutput()   do { TRISC5 = 0; } while(0)
-
-#define BT_RMT_CMD_SetAnalogMode()   do { ANSC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalMode()   do { ANSC5 = 0; } while(0)
+#define LED_OUT_SetPullup()    do { WPUB5 = 1; } while(0)
+#define LED_OUT_ResetPullup()   do { WPUB5 = 0; } while(0)
+#define LED_OUT_SetAnalogMode()   do { ANSB5 = 1; } while(0)
+#define LED_OUT_SetDigitalMode()   do { ANSB5 = 0; } while(0)
 
 
-// get/set BT_RMT_CMD aliases
-#define BT_RMT_CMD_TRIS               TRISC5
-#define BT_RMT_CMD_LAT                LATC5
-#define BT_RMT_CMD_PORT               RC5
-#define BT_RMT_CMD_ANS                ANSC5
-#define BT_RMT_CMD_SetHigh()    do { LATC5 = 1; } while(0)
-#define BT_RMT_CMD_SetLow()   do { LATC5 = 0; } while(0)
-#define BT_RMT_CMD_Toggle()   do { LATC5 = ~LATC5; } while(0)
-#define BT_RMT_CMD_GetValue()         RC5
-#define BT_RMT_CMD_SetDigitalInput()    do { TRISC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalOutput()   do { TRISC5 = 0; } while(0)
+// get/set LED_OUT aliases
+#define LED_OUT_TRIS               TRISB5
+#define LED_OUT_LAT                LATB5
+#define LED_OUT_PORT               RB5
+#define LED_OUT_WPU                WPUB5
+#define LED_OUT_ANS                ANSB5
+#define LED_OUT_SetHigh()    do { LATB5 = 1; } while(0)
+#define LED_OUT_SetLow()   do { LATB5 = 0; } while(0)
+#define LED_OUT_Toggle()   do { LATB5 = ~LATB5; } while(0)
+#define LED_OUT_GetValue()         RB5
+#define LED_OUT_SetDigitalInput()    do { TRISB5 = 1; } while(0)
+#define LED_OUT_SetDigitalOutput()   do { TRISB5 = 0; } while(0)
 
-#define BT_RMT_CMD_SetAnalogMode()   do { ANSC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalMode()   do { ANSC5 = 0; } while(0)
+#define LED_OUT_SetPullup()    do { WPUB5 = 1; } while(0)
+#define LED_OUT_ResetPullup()   do { WPUB5 = 0; } while(0)
+#define LED_OUT_SetAnalogMode()   do { ANSB5 = 1; } while(0)
+#define LED_OUT_SetDigitalMode()   do { ANSB5 = 0; } while(0)
 
 
-// get/set BT_RMT_CMD aliases
-#define BT_RMT_CMD_TRIS               TRISC5
-#define BT_RMT_CMD_LAT                LATC5
-#define BT_RMT_CMD_PORT               RC5
-#define BT_RMT_CMD_ANS                ANSC5
-#define BT_RMT_CMD_SetHigh()    do { LATC5 = 1; } while(0)
-#define BT_RMT_CMD_SetLow()   do { LATC5 = 0; } while(0)
-#define BT_RMT_CMD_Toggle()   do { LATC5 = ~LATC5; } while(0)
-#define BT_RMT_CMD_GetValue()         RC5
-#define BT_RMT_CMD_SetDigitalInput()    do { TRISC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalOutput()   do { TRISC5 = 0; } while(0)
+// get/set LED_OUT aliases
+#define LED_OUT_TRIS               TRISB5
+#define LED_OUT_LAT                LATB5
+#define LED_OUT_PORT               RB5
+#define LED_OUT_WPU                WPUB5
+#define LED_OUT_ANS                ANSB5
+#define LED_OUT_SetHigh()    do { LATB5 = 1; } while(0)
+#define LED_OUT_SetLow()   do { LATB5 = 0; } while(0)
+#define LED_OUT_Toggle()   do { LATB5 = ~LATB5; } while(0)
+#define LED_OUT_GetValue()         RB5
+#define LED_OUT_SetDigitalInput()    do { TRISB5 = 1; } while(0)
+#define LED_OUT_SetDigitalOutput()   do { TRISB5 = 0; } while(0)
 
-#define BT_RMT_CMD_SetAnalogMode()   do { ANSC5 = 1; } while(0)
-#define BT_RMT_CMD_SetDigitalMode()   do { ANSC5 = 0; } while(0)
+#define LED_OUT_SetPullup()    do { WPUB5 = 1; } while(0)
+#define LED_OUT_ResetPullup()   do { WPUB5 = 0; } while(0)
+#define LED_OUT_SetAnalogMode()   do { ANSB5 = 1; } while(0)
+#define LED_OUT_SetDigitalMode()   do { ANSB5 = 0; } while(0)
+
+
+// get/set AUDIO_PAM_SBY aliases
+#define AUDIO_PAM_SBY_TRIS               TRISC1
+#define AUDIO_PAM_SBY_LAT                LATC1
+#define AUDIO_PAM_SBY_PORT               RC1
+#define AUDIO_PAM_SBY_SetHigh()    do { LATC1 = 1; } while(0)
+#define AUDIO_PAM_SBY_SetLow()   do { LATC1 = 0; } while(0)
+#define AUDIO_PAM_SBY_Toggle()   do { LATC1 = ~LATC1; } while(0)
+#define AUDIO_PAM_SBY_GetValue()         RC1
+#define AUDIO_PAM_SBY_SetDigitalInput()    do { TRISC1 = 1; } while(0)
+#define AUDIO_PAM_SBY_SetDigitalOutput()   do { TRISC1 = 0; } while(0)
+
+
+
+// get/set AUDIO_WVT_RST aliases
+#define AUDIO_WVT_RST_TRIS               TRISC2
+#define AUDIO_WVT_RST_LAT                LATC2
+#define AUDIO_WVT_RST_PORT               RC2
+#define AUDIO_WVT_RST_ANS                ANSC2
+#define AUDIO_WVT_RST_SetHigh()    do { LATC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetLow()   do { LATC2 = 0; } while(0)
+#define AUDIO_WVT_RST_Toggle()   do { LATC2 = ~LATC2; } while(0)
+#define AUDIO_WVT_RST_GetValue()         RC2
+#define AUDIO_WVT_RST_SetDigitalInput()    do { TRISC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalOutput()   do { TRISC2 = 0; } while(0)
+
+#define AUDIO_WVT_RST_SetAnalogMode()   do { ANSC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalMode()   do { ANSC2 = 0; } while(0)
+
+
+// get/set AUDIO_WVT_RST aliases
+#define AUDIO_WVT_RST_TRIS               TRISC2
+#define AUDIO_WVT_RST_LAT                LATC2
+#define AUDIO_WVT_RST_PORT               RC2
+#define AUDIO_WVT_RST_ANS                ANSC2
+#define AUDIO_WVT_RST_SetHigh()    do { LATC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetLow()   do { LATC2 = 0; } while(0)
+#define AUDIO_WVT_RST_Toggle()   do { LATC2 = ~LATC2; } while(0)
+#define AUDIO_WVT_RST_GetValue()         RC2
+#define AUDIO_WVT_RST_SetDigitalInput()    do { TRISC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalOutput()   do { TRISC2 = 0; } while(0)
+
+#define AUDIO_WVT_RST_SetAnalogMode()   do { ANSC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalMode()   do { ANSC2 = 0; } while(0)
+
+
+// get/set AUDIO_WVT_RST aliases
+#define AUDIO_WVT_RST_TRIS               TRISC2
+#define AUDIO_WVT_RST_LAT                LATC2
+#define AUDIO_WVT_RST_PORT               RC2
+#define AUDIO_WVT_RST_ANS                ANSC2
+#define AUDIO_WVT_RST_SetHigh()    do { LATC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetLow()   do { LATC2 = 0; } while(0)
+#define AUDIO_WVT_RST_Toggle()   do { LATC2 = ~LATC2; } while(0)
+#define AUDIO_WVT_RST_GetValue()         RC2
+#define AUDIO_WVT_RST_SetDigitalInput()    do { TRISC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalOutput()   do { TRISC2 = 0; } while(0)
+
+#define AUDIO_WVT_RST_SetAnalogMode()   do { ANSC2 = 1; } while(0)
+#define AUDIO_WVT_RST_SetDigitalMode()   do { ANSC2 = 0; } while(0)
 
 
 

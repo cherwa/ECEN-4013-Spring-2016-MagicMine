@@ -43,6 +43,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include <pic18.h>
 #include "main.h"
+#include "Wtv020sd16p.h"
+#include "bt_common.h"
+#include "bt_to_PIU.h"
+
+#include <string.h>
+#include <stdio.h>
 
 /*
     Main application
@@ -69,10 +75,10 @@ void main(void) {
     //INTERRUPT_GlobalInterruptLowDisable();
 
     // Enable the Global Interrupts
-    INTERRUPT_GlobalInterruptEnable();
+//    INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
-    INTERRUPT_PeripheralInterruptEnable();
+//    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
 //    INTERRUPT_GlobalInterruptDisable();
@@ -80,13 +86,92 @@ void main(void) {
     // Disable the Peripheral Interrupts
 //    INTERRUPT_PeripheralInterruptDisable();
     
-    init_logic();
-    connect_to_peripherals();
+//    ANSELBbits.ANSB5 = 0;
+//    TRISBbits.TRISB5 = 0;
+//    LATBbits.LATB5 = 0;
+    
+//    playPattern(LED_DAMAGE);
+//    delay_25ms_n_times(80);
+//    playPattern(LED_HEAL);
+//    delay_25ms_n_times(10);
+//    playPattern(LED_HEAL);
+    
+//    uint8_t grb[3];
+//    grb[0] = 128;
+//    grb[1] = 128;
+//    grb[2] = 128;
+//    
+//    fill_color(grb);
+//    draw();
+    
+//    LATCbits.LATC2 = 1;
+    
+//    reset();
+    
+    EUSART1_Write('H');
+    __delay_us (10);
+    EUSART1_Write('I');
+    __delay_us (10);
+    EUSART1_Write('\n');
+    
+    bt_packet_t to_send;
+    
+    to_send.start = 0x3C;
+    to_send.func = 0x01;
+    to_send.data1 = 0x00;
+    to_send.data2 = 0x00;
+    to_send.data3 = PIU_COLOR_RED;
+    
+    EUSART1_Write('T');
+    __delay_us (10);
+    EUSART1_Write('R');
+    __delay_us (10);
+    EUSART1_Write('\n');
+    
+    PIU_bt_transmit_packet(to_send);
+    
+    uint8_t char_buff[15];
+    uint8_t read_byte;
+    
+    while (1) {
+////        dout[0] = 0xFF;
+////        dout[1] = 0xF7;
+////        SPI1_Exchange8bitBuffer(din, 1, dout);
+////        dout[0] = 0xFF;
+////        dout[1] = 0xFE;
+////        SPI1_Exchange8bitBuffer(din, 1, dout);
+//        
+////        reset();
+//        playVoice(0);
+//        unmute();
+        do {
+
+            if (EUSART2_DataReady) {
+
+                for (uint8_t i = 0; i < 15; i++) {
+                    read_byte = EUSART1_Read();
+                    char_buff[i] = read_byte;
+
+                    if (read_byte == '\n' || read_byte == '\0') {
+                        break;
+                    }
+                    
+                }
+                
+                EUSART1_Write('A');
+                __delay_us (10);
+                EUSART1_Write('T');
+                __delay_us (10);
+                EUSART1_Write('\n');
+                memcpy(char_buff, '\0', sizeof(char_buff));
+            }
+        } while (!EUSART2_DataReady);
+    }
     
 }
 
 static void init_logic(void) {
-    
+    draw();
 }
 
 static void connect_to_peripherals(void) {

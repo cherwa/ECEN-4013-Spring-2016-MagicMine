@@ -5,7 +5,6 @@
  */
 
 #include <pic18.h>
-
 #include "util_functions.h"
 
 void delay_25ms_n_times(uint16_t n) {

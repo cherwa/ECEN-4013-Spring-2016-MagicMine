@@ -9,7 +9,7 @@
 bool remote_bt_enter_command_mode(void) {
     
     // Enter command mode
-    BT_RMT_CMD_LAT = 1;
+//    BT_RMT_CMD_LAT = 1;
     
     return true;
 }
@@ -17,16 +17,16 @@ bool remote_bt_enter_command_mode(void) {
 bool remote_bt_exit_command_mode(void) {
     
     // Set command pin low
-    BT_RMT_CMD_LAT = 0;
+//    BT_RMT_CMD_LAT = 0;
     return true;
 }
     
 void remote_bt_send_command(bt_cmnd_t cmnd) {
     
     switch (cmnd) {
-        case BT_CMND_START_ADVERTISING:
+        case BT_CMND_CONNECT:
             break;
-        case BT_CMND_STOP_ADVERTISING:
+        case BT_CMND_DISCONECT:
             break;
         default:
             break;

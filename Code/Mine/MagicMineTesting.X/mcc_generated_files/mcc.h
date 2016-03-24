@@ -51,8 +51,16 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
+#include "ccp4.h"
+#include "pwm5.h"
 #include "eusart1.h"
 #include "eusart2.h"
+#include "spi1.h"
+#include "i2c2.h"
+#include "tmr1.h"
+#include "tmr2.h"
+#include "tmr3.h"
+#include "tmr4.h"
 
 #define _XTAL_FREQ  16000000
 

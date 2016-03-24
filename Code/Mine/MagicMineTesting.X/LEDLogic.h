@@ -13,6 +13,7 @@ extern "C" {
     
 #include "mcc_generated_files/mcc.h"
     
+    bool last_pattern_was_heal = false;
     
 /**
  * Returns a value greater than 0 if the bit in 'var' is a '1' or 0 otherwise.
@@ -28,7 +29,8 @@ extern "C" {
  * will set result to 0b00001000 since bit_test will left shift '1' over by 3
  * which results in (0b00001000 & 0b00001000) which is equal to 0b00001000.
  */
-#define bit_test(var, pos) ((var) & (1<<(pos)))
+//#define bit_test(var, pos) ((var) & (1 << pos))
+#define PIXEL_COUNT 24
     
     /**
      * Enumerators specify predefined sequences for the LED ring to display.
@@ -43,7 +45,14 @@ extern "C" {
         LED_SELF_TEST_FAILED    /**< Indicates that one of the self tests have failed.*/
     } LED_Pattern;
     
-    const uint8_t PIXEL_COUNT = 24; /**< A constant value for the number of pixels in the ring.*/
+    static inline void LEDOne();
+    static inline void LEDZero();
+    
+    extern uint8_t byte_to_test;
+    extern uint8_t bit_to_test;
+    extern uint8_t to_return;
+    
+//    const uint8_t PIXEL_COUNT = 24; /**< A constant value for the number of pixels in the ring.*/
     
     /**
      * @name LED Pixel Buffers
@@ -55,6 +64,9 @@ extern "C" {
     static uint8_t redPixels[PIXEL_COUNT];
     static uint8_t bluePixels[PIXEL_COUNT];
     ///@}
+    
+    static uint8_t bit_test_result;
+    static unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
     
     /**
      * Plays the specified pattern on the LED ring.
@@ -81,7 +93,7 @@ extern "C" {
      * @endcode
      * The above will turn on the ring to 50% white.
      */
-    static void fill_color(uint8_t* grb);
+     void fill_color(uint8_t* grb);
     
     /**
      * Iterates over the color values stored in the [pixel buffers](@ref LED Pixel Buffers)
@@ -94,7 +106,7 @@ extern "C" {
      * 
      * @todo This function needs to be tested!
      */
-    static void draw(void);
+    void draw(void);
     
     /**
      * Writes a '1' or a '0' to the LED_OUT pin to the controller on the ring.
@@ -104,7 +116,11 @@ extern "C" {
      * 
      * @todo This function need to be tested!
      */
-    static void send_bit(uint8_t val);
+    static void send_bit(int8_t val);
+    
+    static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
+    
+    int8_t bit_test(uint8_t* byte_to_test, uint8_t* bit_to_test);
 
 #ifdef	__cplusplus
 }
