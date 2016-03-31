@@ -51,6 +51,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="Accelerometer" projectFiles="true">
+      </logicalFolder>
       <logicalFolder name="f5" displayName="Audio" projectFiles="true">
         <itemPath>audio.c</itemPath>
       </logicalFolder>
@@ -63,6 +65,7 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f4" displayName="IR" projectFiles="true">
+        <itemPath>ir_tx.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="LEDs" projectFiles="true">
         <itemPath>LEDLogic.c</itemPath>

@@ -3,7 +3,6 @@
  * @author: Matthew Atkins
  * @date Created on March 19, 2016, 5:21 PM
  */
-
 #ifndef IR_COMMON_H
 #define	IR_COMMON_H
 
@@ -11,6 +10,8 @@
 extern "C" {
 #endif
 
+#include "mcc_generated_files/mcc.h"
+    
     typedef enum spell_type {
         IR_SPELL_DAMAGE = 0,
         IR_SPELL_STUN = 2,
@@ -42,6 +43,20 @@ extern "C" {
      * @param spell_id The type of spell to send.
      */
     void transmit_ir_packet(ir_spell_id_t spell_id);
+    void wait1Sec(void);
+    void modulate_us(int time);
+    void waitLow_us(int time);
+    void waitLow30Cycles(void);
+    void waitLow15Cycles(void);
+    void modulate30Cycles(void);
+    void modulate15Cycles(void);
+    void bangBitsHard(uint8_t mirp0[], bool toTransmit[]);
+    void sendZero(void);
+    void sendOne(void);
+    void bangBitsSoftly(uint8_t mirp[]);
+    void getBitStream(uint8_t mirp0[], bool toTransmit[]);
+    uint8_t getCRC(uint8_t mirp0[]);
+    void IR_Start(void);
 
 #ifdef	__cplusplus
 }
