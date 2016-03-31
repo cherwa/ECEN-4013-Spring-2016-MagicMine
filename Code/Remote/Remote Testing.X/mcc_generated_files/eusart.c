@@ -154,6 +154,16 @@ void EUSART_Write(uint8_t txData)
     PIE1bits.TXIE = 1;
 }
 
+char getch(void)
+{
+    return EUSART_Read();
+}
+
+void putch(char txData)
+{
+    EUSART_Write(txData);
+}
+
 void EUSART_Transmit_ISR(void)
 {
 

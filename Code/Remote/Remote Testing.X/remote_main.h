@@ -15,6 +15,7 @@ extern "C" {
 #include <stdio.h>
 #include "remote_common.h"
 #include "bluetooth_commands.h"
+#include "buttons.h"
     
     /**
      * Values are used to indicate the current arming mode
@@ -31,18 +32,18 @@ extern "C" {
      * using the spell selections button. <b>Once this is set, it should
      * not be changed until the game is over or the mine is detonated!</b>
      */
-    volatile spell_t selectedSpell = NO_SELECTION;
+    extern volatile spell_t selectedSpell = NO_SELECTION;
     
     // Self test pass/fail indicators.
-    bool spellButtonsPassed = false;    /**< true if [testSpellButtons](@ref testSpellButtons) is successful*/
-    bool indicatorLEDsPassed = false;   /**< true if [testIndicatorLEDs](@ref testIndicatorLEDs) is successful*/
+    extern bool spellButtonsPassed = false;    /**< true if [testSpellButtons](@ref testSpellButtons) is successful*/
+    extern bool indicatorLEDsPassed = false;   /**< true if [testIndicatorLEDs](@ref testIndicatorLEDs) is successful*/
     
     // Status/Enable parameters
-    volatile arm_mode_t armedMode = DISARMED;   /**< inidicates the current arming mode for the mine.*/
-    volatile bool armButtonEnabled = false;     /**< set to true to enable the arm button to send a detonate command to the mine.*/
-    volatile bool connectedToMine = false;      /**< set to true if the remote has established a bluetooth connection to the mine. */
+    extern volatile arm_mode_t armedMode = DISARMED;   /**< inidicates the current arming mode for the mine.*/
+    extern volatile bool armButtonEnabled = false;     /**< set to true to enable the arm button to send a detonate command to the mine.*/
+    extern volatile bool connectedToMine = false;      /**< set to true if the remote has established a bluetooth connection to the mine. */
     
-    void main(void);
+    void main();
     
     /**
      * Set the currently selected spell type to the given [spell type](@ref spell_t)
@@ -51,17 +52,7 @@ extern "C" {
      */
     void setSpellType(spell_t spellType);
     
-    void testSpellButtons(void); /**< Tests the spell buttons by flashing them 3 times.*/
-    
-    void testIndicatorLEDs(void); /**< Tests the indicator LEDs by flashing them 3 times.*/
-    
-    bool bluetoothEnterCommandMode(void); /**< Attempts to set the Bluetooth module to command mode.*/
-    
-    /**
-     * Attempts to send the given command to the mine via Bluetooth
-     * @param cmnd The type of command to send. See [bluetooth_cmnd_t](@ref bluetooth_cmnd_t)
-     */
-    void sendBluetoothCommand(bluetooth_cmnd_t cmnd);
+    bool bluetoothEnterCommandMode(); /**< Attempts to set the Bluetooth module to command mode.*/
     
 #ifdef	__cplusplus
 }

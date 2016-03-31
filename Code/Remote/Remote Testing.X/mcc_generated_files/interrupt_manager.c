@@ -60,6 +60,10 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         EUSART_Receive_ISR();
     }
+    else if(PIE1bits.TMR2IE == 1 && PIR1bits.TMR2IF == 1)
+    {
+        TMR2_ISR();
+    }
     else if(INTCONbits.IOCIE == 1 && INTCONbits.IOCIF == 1)
     {
         PIN_MANAGER_IOC();

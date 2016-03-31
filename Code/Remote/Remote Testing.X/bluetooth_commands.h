@@ -18,12 +18,12 @@ extern "C" {
      * sent via Bluetooth.
      */
     typedef enum {
-        CONNECT_TO_MINE,        /**< Attempt to connect to the mine.*/
-        HEARTBEAT,              /**< Send a 'heartbeat' to ensure connectivity to the mine.*/
-        RANGE_TEST,             /**< Use BLE to get proximity to the mine.*/
-        SET_ARM_MODE_MANUAL,    /**< Send command to set mine to manual detonation mode. */
-        SET_ARM_MODE_AUTO,      /**< Send command to set mine to auto detonation mode.*/
-        DETONATE                /**< Send command to detonate the mine <b>if in manual mode.<b>*/
+        BT_CONNECT_TO_MINE,        /**< Attempt to connect to the mine.*/
+        BT_HEARTBEAT,              /**< Send a 'heartbeat' to ensure connectivity to the mine.*/
+        BT_GET_RSSI,               /**< Use BLE to get proximity to the mine.*/
+        BT_SET_ARM_MODE_MANUAL,    /**< Send command to set mine to manual detonation mode. */
+        BT_SET_ARM_MODE_AUTO,      /**< Send command to set mine to auto detonation mode.*/
+        BT_DETONATE                /**< Send command to detonate the mine <b>if in manual mode.<b>*/
     } bluetooth_cmnd_t;
 
 

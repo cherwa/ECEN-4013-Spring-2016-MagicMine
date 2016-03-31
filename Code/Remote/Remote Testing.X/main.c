@@ -49,7 +49,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 /**
  * @brief Main application
  */
-void main(void)
+void main()
 {
     // initialize the device
     SYSTEM_Initialize();
@@ -74,19 +74,18 @@ void main(void)
     // Connect to all peripherals
     
     // Flash button LEDs
-    testSpellButtons();
+    spellButtonsPassed =  btn_test_spell_btns();
     
     // Flash indicator LEDs
-    testIndicatorLEDs();
+    indicatorLEDsPassed = btn_test_LEDs();
     
     if (! (spellButtonsPassed & indicatorLEDsPassed) ) {
-        // We have failed so bad if we get here...
-        // Show failure
+//         We have failed so bad if we get here...
+//         Show failure
     }
     
     // Try to connect to the mine
     /** @todo Activate Bluetooth module and try to connect to the mine */
-    
     
     // Indicate success or failure
     
@@ -100,61 +99,7 @@ void setSpellType(const spell_t spellType) {
     selectedSpell = spellType;
 }
 
-void testSpellButtons(void) {
-    
-    WHITE_LED_LAT = 1;
-    BLUE_LED_LAT = 1;
-    YELLOW_LED_LAT = 1;
-    RED_LED_LAT = 1;
-    
-    delay_n_ms(20);
-    
-    WHITE_LED_LAT = 0;
-    BLUE_LED_LAT = 0;
-    YELLOW_LED_LAT = 0;
-    RED_LED_LAT = 0;
-    
-    delay_n_ms(10);
-    
-    
-    WHITE_LED_LAT = 1;
-    BLUE_LED_LAT = 1;
-    YELLOW_LED_LAT = 1;
-    RED_LED_LAT = 1;
-    
-    delay_n_ms(20);
-    
-    WHITE_LED_LAT = 0;
-    BLUE_LED_LAT = 0;
-    YELLOW_LED_LAT = 0;
-    RED_LED_LAT = 0;
-    
-    delay_n_ms(10);
-    
-    WHITE_LED_LAT = 1;
-    BLUE_LED_LAT = 1;
-    YELLOW_LED_LAT = 1;
-    RED_LED_LAT = 1;
-    
-    delay_n_ms(20);
-    
-    WHITE_LED_LAT = 0;
-    BLUE_LED_LAT = 0;
-    YELLOW_LED_LAT = 0;
-    RED_LED_LAT = 0;
-    
-    // If no one turns the device off we are good... Probably.
-    spellButtonsPassed = true;
-}
-
-void testIndicatorLEDs(void) {
-    
-    /** @todo Actually test the LEDs */
-    
-    indicatorLEDsPassed = true;
-}
-
-bool bluetoothEnterCommandMode(void) {
+bool bluetoothEnterCommandMode() {
     
     EUSART_Write('$');
     EUSART_Write('$');
@@ -177,32 +122,6 @@ bool bluetoothEnterCommandMode(void) {
     } else {
         return true;
     }
-}
-
-void sendBluetoothCommand(bluetooth_cmnd_t cmnd) {
-        
-    /** @todo need to perform a check to see if we are still connected */
-    
-    switch(cmnd) {
-        case CONNECT_TO_MINE:
-            // Connect to the mine...
-            break;
-        case HEARTBEAT:
-            // Send the heartbeat to the mine to ensure we are still connected.
-            break;
-        case RANGE_TEST:
-            break;
-        case SET_ARM_MODE_MANUAL:
-            break;
-        case SET_ARM_MODE_AUTO:
-            break;
-        case DETONATE:
-            EUSART_Write('D'); EUSART_Write('E'); EUSART_Write('T');
-            break;
-        default:
-            printf ("Unknown Command Given...");
-            break;
-        }
 }
 
 /**

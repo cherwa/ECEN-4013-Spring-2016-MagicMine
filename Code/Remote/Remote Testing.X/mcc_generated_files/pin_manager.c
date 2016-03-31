@@ -1,25 +1,26 @@
 /**
   Generated Pin Manager File
 
-  @authors Microchip Technology Inc.
-  @authors Matthew Atkins
+  Company:
+    Microchip Technology Inc.
 
-  @file pin_manager.c
+  File Name:
+    pin_manager.c
 
-  @brief This is the Pin Manager file generated using MPLAB(c) Code Configurator
+  Summary:
+    This is the Pin Manager file generated using MPLAB(c) Code Configurator
 
-  @detials This header file provides implementations for pin APIs for all pins selected in the GUI.<br>
-    Generation Information:
-      - Product Revision  :  MPLAB(c) Code Configurator - v3.00
-      - Device            :  PIC16F1579
-      - Driver Version    :  1.02
- * <p>
+  Description:
+    This header file provides implementations for pin APIs for all pins selected in the GUI.
+    Generation Information :
+        Product Revision  :  MPLAB(c) Code Configurator - v3.00
+        Device            :  PIC16F1579
+        Driver Version    :  1.02
     The generated drivers are tested against the following:
-      - Compiler          :  XC8 1.35
-      - MPLAB             :  MPLAB X 3.20
+        Compiler          :  XC8 1.35
+        MPLAB             :  MPLAB X 3.20
 
-    @copyright Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
-*/
+    Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 
 /*
     Microchip licenses to you the right to use, modify, copy and distribute
@@ -61,14 +62,14 @@ uint16_t armButtonPressedStartTime;
 void PIN_MANAGER_Initialize(void)
 {
     LATB = 0x0;
-    LATA = 0x0;
+    LATA = 0x3;
     LATC = 0x0;
     WPUA = 0x3F;
-    WPUB = 0xF0;
+    WPUB = 0x80;
     WPUC = 0xFF;
     TRISB = 0x80;
     TRISC = 0x21;
-    TRISA = 0xF;
+    TRISA = 0xC;
     ANSELA = 0x0;
     ANSELB = 0x0;
     ANSELC = 0x8;
@@ -76,6 +77,7 @@ void PIN_MANAGER_Initialize(void)
     OPTION_REGbits.nWPUEN = 0x0;
 
     // enable interrupt-on-change individually
+    IOCBP7 = 1;
     IOCBN7 = 1;
     IOCCN0 = 1;
     IOCAN2 = 1;
@@ -98,72 +100,73 @@ void PIN_MANAGER_Initialize(void)
     GIE = state;
 }
 
+
 void PIN_MANAGER_IOC(void)
 {    
-    if((IOCBP7 == 1) && (IOCBF7 == 1)) {
-        // Check to see if we are armed first
-        if (armedMode != DISARMED) {
+    if((IOCBP7 == 1) && (IOCBF7 == 1))
+    {
+        //@TODO Add handling code for IOC on pin RB7
         
-            //Handling code for IOC on positive edge pin RB7 
-            uint16_t diff = armButtonPressedStartTime - TMR1_ReadTimer();
-            
-            // Timer 1 has it's period set to 25ms so, 3s / 25ms = 120
-            if (diff >= 120) {
-                // Manual Mode
-
-                // Blink to indicate mode selection
-                for (uint8_t i = 0; i < 3; i++) {
-                    TRISBbits.TRISB6 = 1;
-                    delay_n_ms(5);
-                    TRISBbits.TRISB6 = 0;
-                    delay_n_ms(20);
-                }
-
-                armedMode = MANUAL_MODE;
-                armButtonEnabled = true;
-                TRISBbits.TRISB6 = 1;
-
-            } else {
-                // Auto-mode
-               
-                // Blink to indicate mode selection
-                for (uint8_t i = 0; i < 3; i++) {
-                    TRISBbits.TRISB6 = 1;
-                    delay_n_ms(5);
-                    TRISBbits.TRISB6 = 0;
-                    delay_n_ms(20);
-                }
-                
-                armedMode = AUTOMATIC_MODE;
-                armButtonEnabled = false;
-                TRISBbits.TRISB6 = 0;
-            }
-        } else {
-            // We are already armed, make sure we are in manual mode and try
-            // to detonate
-            if (armedMode == MANUAL_MODE) {
-                // Send the detonate command via Bluetooth.
-                
-                sendBluetoothCommand(DETONATE);
-                
-                // Did it work?
-                while (!EUSART_DataReady) {}
-                    
-                uint8_t readData = EUSART_Read();
-
-                if (readData == 'Y') {
-                    // Clean up the armed state since we detonated successfully
-                    armedMode = DISARMED;
-                    armButtonEnabled = false;
-                    TRISBbits.TRISB6 = 0;
-                } else {
-                    // We did not detonate successfully!
-
-                    // Indicate error here
-                }
-                    
-            }
-        }
+//        if (armButtonEnableds) {
+//            //Handling code for IOC on positive edge pin RB7 
+//            uint16_t diff = armButtonPressedStartTime - TMR1_ReadTimer();
+//            // Timer 1 has it's period set to 25ms so, 3s / 25ms = 120
+//            if (diff >= 120) {
+//                // Manual Mode
+//
+//                // Blink to indicate mode selection
+//                for (uint8_t i = 0; i < 3; i++) {
+//                    TRISBbits.TRISB6 = 1;
+//                    delay_n_ms(5);
+//                    TRISBbits.TRISB6 = 0;
+//                    delay_n_ms(20);
+//                }
+//
+//                armedMode = MANUAL_MODE;
+//                armButtonEnabled = true;
+//                TRISBbits.TRISB6 = 1;
+//
+//            } else {
+//                // Auto-mode
+//               
+//                // Blink to indicate mode selection
+//                for (uint8_t i = 0; i < 3; i++) {
+//                    TRISBbits.TRISB6 = 1;
+//                    delay_n_ms(5);
+//                    TRISBbits.TRISB6 = 0;
+//                    delay_n_ms(20);
+//                }
+//                
+//                armedMode = AUTOMATIC_MODE;
+//                armButtonEnabled = false;
+//                TRISBbits.TRISB6 = 0;
+//            }
+//        } else {
+//            // We are already armed, make sure we are in manual mode and try
+//            // to detonate
+//            if (armedMode == MANUAL_MODE) {
+//                // Send the detonate command via Bluetooth.
+//                
+//                sendBluetoothCommand(DETONATE);
+//                
+//                // Did it work?
+//                while (!EUSART_DataReady) {}
+//                    
+//                uint8_t readData = EUSART_Read();
+//
+//                if (readData == 'Y') {
+//                    // Clean up the armed state since we detonated successfully
+//                    armedMode = DISARMED;
+//                    armButtonEnabled = false;
+//                    TRISBbits.TRISB6 = 0;
+//                } else {
+//                    // We did not detonate successfully!
+//
+//                    // Indicate error here
+//                }
+//                    
+//            }
+//        }
         
         // clear interrupt-on-change flag
         IOCBF7 = 0;
@@ -182,10 +185,14 @@ void PIN_MANAGER_IOC(void)
         //Handling code for IOC on pin RC0 (White Spell)
         
         setSpellType(RED_SPELL);
-        WHITE_LED_LAT = 0;
-        BLUE_LED_LAT = 0;
-        YELLOW_LED_LAT = 0;
-        RED_LED_LAT = 1;
+//        WHITE_LED_LAT = 0;
+//        BLUE_LED_LAT = 0;
+//        YELLOW_LED_LAT = 0;
+//        RED_LED_LAT = 1;
+        LATAbits.LATA0 = 0;
+        LATAbits.LATA1 = 1;
+        LATBbits.LATB5 = 1;
+        LATBbits.LATB4 = 0;
         // clear interrupt-on-change flag
         IOCCF0 = 0;
     }
@@ -193,11 +200,16 @@ void PIN_MANAGER_IOC(void)
     {
         // Handling code for IOC on pin RA2 (Yellow Spell)
         
-        setSpellType(YELLOW_SPELL);
-        WHITE_LED_LAT = 0;
-        BLUE_LED_LAT = 0;
-        YELLOW_LED_LAT = 1;
-        RED_LED_LAT = 0;
+        setSpellType(BLUE_SPELL);
+//        WHITE_LED_LAT = 0;
+//        BLUE_LED_LAT = 0;
+//        YELLOW_LED_LAT = 1;
+//        RED_LED_LAT = 0;
+        
+        LATAbits.LATA0 = 1;
+        LATAbits.LATA1 = 0;
+        LATBbits.LATB5 = 0;
+        LATBbits.LATB4 = 1;
         
         // clear interrupt-on-change flag
         IOCAF2 = 0;        
@@ -206,11 +218,11 @@ void PIN_MANAGER_IOC(void)
     {
         // Handling code for IOC on pin RA1 (Blue Spell)
         
-        setSpellType(BLUE_SPELL);
-        WHITE_LED_LAT = 0;
-        BLUE_LED_LAT = 1;
-        YELLOW_LED_LAT = 0;
-        RED_LED_LAT = 0;
+        setSpellType(RED_SPELL);
+//        WHITE_LED_LAT = 0;
+//        BLUE_LED_LAT = 1;
+//        YELLOW_LED_LAT = 0;
+//        RED_LED_LAT = 0;
         
         // clear interrupt-on-change flag
         IOCAF1 = 0;        
@@ -220,10 +232,10 @@ void PIN_MANAGER_IOC(void)
         // Handling code for IOC on pin RA0 (White Spell)
         
         setSpellType(WHITE_SPELL);
-        WHITE_LED_LAT = 1;
-        BLUE_LED_LAT = 0;
-        YELLOW_LED_LAT = 0;
-        RED_LED_LAT = 0;
+//        WHITE_LED_LAT = 1;
+//        BLUE_LED_LAT = 0;
+//        YELLOW_LED_LAT = 0;
+//        RED_LED_LAT = 0;
         // clear interrupt-on-change flag
         IOCAF0 = 0;        
     }
@@ -231,7 +243,7 @@ void PIN_MANAGER_IOC(void)
     // If a spell was selected, activate the arm button!
     if (selectedSpell != NO_SELECTION) {
         armButtonEnabled = true;
-        TRISBbits.TRISB6 = 1;
+        LATBbits.LATB6 = 1;
     }
 }
 

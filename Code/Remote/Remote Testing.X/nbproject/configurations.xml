@@ -4,6 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="Bluetooth" projectFiles="true">
+        <itemPath>bluetooth_commands.h</itemPath>
+        <itemPath>bt_remote_to_mine.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Buttons" projectFiles="true">
+        <itemPath>buttons.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -12,10 +19,10 @@
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/eusart.h</itemPath>
         <itemPath>mcc_generated_files/tmr1.h</itemPath>
+        <itemPath>mcc_generated_files/tmr2.h</itemPath>
       </logicalFolder>
       <itemPath>remote_common.h</itemPath>
       <itemPath>remote_main.h</itemPath>
-      <itemPath>bluetooth_commands.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,6 +31,12 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="Bluetooth" projectFiles="true">
+        <itemPath>bt_remote_to_mine.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Buttons" projectFiles="true">
+        <itemPath>buttons.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -32,6 +45,7 @@
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
         <itemPath>mcc_generated_files/tmr1.c</itemPath>
+        <itemPath>mcc_generated_files/tmr2.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>remote_common.c</itemPath>
@@ -51,7 +65,7 @@
         <targetDevice>PIC16F1579</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>Simulator</platformTool>
+        <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.36</languageToolchainVersion>
         <platform>4</platform>
@@ -83,7 +97,7 @@
         <property key="define-macros" value=""/>
         <property key="extra-include-directories" value=""/>
         <property key="identifier-length" value="255"/>
-        <property key="operation-mode" value="free"/>
+        <property key="operation-mode" value="pro"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
         <property key="optimization-assembler-files" value="true"/>
