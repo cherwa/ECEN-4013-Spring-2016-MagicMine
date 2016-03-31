@@ -68,6 +68,7 @@ extern "C" {
     static uint8_t bit_test_result;
     static unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
     
+    
     /**
      * Plays the specified pattern on the LED ring.
      * @param pattern The pattern to play.

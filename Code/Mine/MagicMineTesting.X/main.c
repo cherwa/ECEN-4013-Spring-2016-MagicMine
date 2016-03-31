@@ -108,25 +108,25 @@ void main(void) {
     
 //    reset();
     
-    EUSART1_Write('H');
+    TX1REG = 'H';
     __delay_us (10);
-    EUSART1_Write('I');
+    TX1REG = 'I';
     __delay_us (10);
-    EUSART1_Write('\n');
+    TX1REG = '\n';
     
     bt_packet_t to_send;
     
     to_send.start = 0x3C;
-    to_send.func = 0x01;
+    to_send.func = PIU_BT_FUNC_CONNECT;
     to_send.data1 = 0x00;
     to_send.data2 = 0x00;
     to_send.data3 = PIU_COLOR_RED;
     
-    EUSART1_Write('T');
+    TX1REG = 'T';
     __delay_us (10);
-    EUSART1_Write('R');
+    TX1REG = 'R';
     __delay_us (10);
-    EUSART1_Write('\n');
+    TX1REG = '\n';
     
     PIU_bt_transmit_packet(to_send);
     
@@ -158,11 +158,11 @@ void main(void) {
                     
                 }
                 
-                EUSART1_Write('A');
+                TX1REG = 'A';
                 __delay_us (10);
-                EUSART1_Write('T');
+                TX1REG = 'T';
                 __delay_us (10);
-                EUSART1_Write('\n');
+                TX1REG = '\n';
                 memcpy(char_buff, '\0', sizeof(char_buff));
             }
         } while (!EUSART2_DataReady);

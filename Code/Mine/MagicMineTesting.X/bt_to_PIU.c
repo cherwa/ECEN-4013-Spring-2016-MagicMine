@@ -14,7 +14,7 @@ static inline void PIU_bt_clear_data_buff(void) {
 
 bool PIU_bt_enter_command_mode(void) {
     
-    EUSART2_Write('$'); EUSART2_Write('$'); EUSART2_Write('$');
+    TX2REG = '$'; TX2REG = '$'; TX2REG  = '$';
     
     PIU_bt_read_cmnd_to_buffer(3);
     
@@ -29,7 +29,7 @@ bool PIU_bt_enter_command_mode(void) {
     
 bool PIU_bt_exit_command_mode(void) {
     
-    EUSART2_Write('-'); EUSART2_Write('-'); EUSART2_Write('-'); EUSART2_Write('\n');
+    TX2REG = '-'; TX2REG = '-'; TX2REG = '-'; TX2REG = '\n';
     
     return true;
 }
@@ -41,7 +41,7 @@ void PIU_bt_send_command(bt_cmnd_t cmnd) {
             
             PIU_bt_enter_command_mode();
             
-            EUSART2_Write('G'); EUSART2_Write('R'); EUSART2_Write('\n');
+            TX2REG = 'G'; TX2REG = 'R'; TX2REG = '\n';
             
             PIU_bt_read_cmnd_to_buffer(12);
             
@@ -66,12 +66,12 @@ void PIU_bt_transmit_packet(bt_packet_t packet) {
     // Compute the CRC byte
     packet.crc = 0xFF - (packet.func + packet.data1 + packet.data2 + packet.data3);
     
-    EUSART2_Write(packet.start);
-    EUSART2_Write(packet.func);
-    EUSART2_Write(packet.data1);
-    EUSART2_Write(packet.data2);
-    EUSART2_Write(packet.data3);
-    EUSART2_Write(packet.crc);
+    TX2REG = packet.start;
+    TX2REG = packet.func;
+    TX2REG = packet.data1;
+    TX2REG = packet.data2;
+    TX2REG = packet.data3;
+    TX2REG = packet.crc;
 }
 
 void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read) {
