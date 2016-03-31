@@ -60,13 +60,13 @@ extern "C" {
      * pixel that will be sent when the [draw()](@ref draw) function is called.
      */
     ///@{
-    static uint8_t greenPixels[PIXEL_COUNT];
-    static uint8_t redPixels[PIXEL_COUNT];
-    static uint8_t bluePixels[PIXEL_COUNT];
+    uint8_t greenPixels[PIXEL_COUNT];
+    uint8_t redPixels[PIXEL_COUNT];
+    uint8_t bluePixels[PIXEL_COUNT];
     ///@}
     
-    static uint8_t bit_test_result;
-    static unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
+    uint8_t bit_test_result;
+    unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
     
     
     /**
