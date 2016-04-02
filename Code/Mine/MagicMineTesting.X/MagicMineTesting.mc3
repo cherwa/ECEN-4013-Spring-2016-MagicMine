@@ -118,7 +118,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISB"/>
-         <value>223</value>
+         <value>206</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="IOCB" settingAlias="IOCB7" alias="enabled"/>
@@ -1742,7 +1742,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB0"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="TMR4" registerAlias="TCON" settingAlias="TMRON" alias="on"/>
@@ -4174,7 +4174,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB4"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATC" settingAlias="LATC1"/>
@@ -5090,7 +5090,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB4"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="EUSART1" name="templateNameValue"/>
@@ -5954,7 +5954,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files/mcc.c</file>
-         <hash>b4a8f2819ef24b06a781aba86bef3f5f604631bc2cd610d932a313ae32aaf08d</hash>
+         <hash>16937a85946ad7d6f60865e98ff14483db242f69071d05a358419b48f6b6f79b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/pwm5.h</file>
@@ -5962,7 +5962,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files/pin_manager.c</file>
-         <hash>76ff443cb7d39b095ac50056c62f8a1cec9d76dfd2ed02a12d7ba20c03282c33</hash>
+         <hash>6d5203537da27e7c979034cfe9fed7e002de1e597e292aa41cc5d4ac982cd73e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/pwm5.c</file>
@@ -5970,7 +5970,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files/pin_manager.h</file>
-         <hash>b33217de684ae9ce13cf05f8b14da0c3d9ae4566f1f90d7e0a2adcd7774afaaa</hash>
+         <hash>0349723f9aded0815f7c4972498b796f6b5b04d16cd58c7262a03ba1ef200f40</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/tmr1.c</file>

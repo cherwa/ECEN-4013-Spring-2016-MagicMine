@@ -107,7 +107,7 @@ void main(void) {
     
 //    reset();
     
-    
+    delay_25ms_n_times(5);
     
     while (1) {
         

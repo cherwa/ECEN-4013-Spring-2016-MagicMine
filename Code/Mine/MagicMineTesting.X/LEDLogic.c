@@ -6,7 +6,7 @@ uint8_t bit_to_test;
 uint8_t to_return;
 
 static inline void LEDOne() {
-    LED_PIN = 1;   
+    LED_PIN = 1;
     Nop();
     Nop();
     LED_PIN = 0;
@@ -242,7 +242,10 @@ void playPattern(LED_Pattern pattern) {
     
     switch(pattern) {
         case LED_DAMAGE:
-            playDamage();
+            
+            for (uint8_t i = 0; i <= 5; i++) {
+                playDamage();
+            }
             break;
         case LED_HEAL:
             playHeal();

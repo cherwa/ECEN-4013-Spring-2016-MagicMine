@@ -54,8 +54,8 @@ void PIN_MANAGER_Initialize(void)
     ANSELA = 0xE;
     ANSELB = 0x0;
     ANSELC = 0x0;
-    TRISB = 0x9F;
-    TRISC = 0x91;
+    TRISB = 0xCE;
+    TRISC = 0xD1;
     WPUB = 0x6;
     TRISA = 0xEF;
 

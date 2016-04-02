@@ -34,7 +34,7 @@ extern "C" {
  */
 //#define bit_test(var, pos) ((var) & (1 << pos))
 #define PIXEL_COUNT 24
-#define LED_PIN LATBbits.LATB0
+#define LED_PIN LATBbits.LATB4
    
     /**
      * Enumerators specify predefined sequences for the LED ring to display.
