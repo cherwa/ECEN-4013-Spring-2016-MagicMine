@@ -89,9 +89,47 @@ void main()
     
     // Indicate success or failure
     
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    __delay_ms (25);
+    
+    
+    __delay_ms(5);
+    
     while (1)
     {
         // Add your application code
+        printf("Hello World!\n\r");
+        __delay_ms(5);
     }
 }
 

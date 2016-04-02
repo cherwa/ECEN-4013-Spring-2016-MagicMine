@@ -1,6 +1,6 @@
 /* 
  * File:   mainLoop.h
- * Author: matthew
+ * Author: Matthew Atkins
  *
  * Created on March 8, 2016, 3:20 AM
  */

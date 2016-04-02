@@ -1,0 +1,601 @@
+[p PRO_MODE GLOBOPT AUTOSTATIC LFSROK SPEEDOPT EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F26K22 ]
+[d frameptr 4065 ]
+"79 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/pin_manager.c
+[e E7440 patterns `uc
+LED_ARMED 0
+LED_DAMAGE 1
+LED_HEAL 2
+LED_STUN_CAST 3
+LED_STUN_SELF 4
+LED_SELF_TEST_PASSED 5
+LED_SELF_TEST_FAILED 6
+]
+"265 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/LEDLogic.c
+[e E7440 patterns `uc
+LED_ARMED 0
+LED_DAMAGE 1
+LED_HEAL 2
+LED_STUN_CAST 3
+LED_STUN_SELF 4
+LED_SELF_TEST_PASSED 5
+LED_SELF_TEST_FAILED 6
+]
+"62 /Applications/microchip/xc8/v1.36/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 /Applications/microchip/xc8/v1.36/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 /Applications/microchip/xc8/v1.36/sources/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 /Applications/microchip/xc8/v1.36/sources/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 /Applications/microchip/xc8/v1.36/sources/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"10 /Applications/microchip/xc8/v1.36/sources/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 /Applications/microchip/xc8/v1.36/sources/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 /Applications/microchip/xc8/v1.36/sources/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 /Applications/microchip/xc8/v1.36/sources/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"7 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/LEDLogic.c
+[v _delay_25ms_n_times delay_25ms_n_times `(v  1 e 1 0 ]
+"15
+[v _LEDOne LEDOne `T(v  1 s 1 LEDOne ]
+"23
+[v _LEDZero LEDZero `T(v  1 s 1 LEDZero ]
+"30
+[v _colorBlack colorBlack `(v  1 s 1 colorBlack ]
+"57
+[v _colorRed colorRed `(v  1 s 1 colorRed ]
+"84
+[v _colorGreen colorGreen `(v  1 s 1 colorGreen ]
+"111
+[v _colorYellow colorYellow `(v  1 s 1 colorYellow ]
+"170
+[v _clearPattern clearPattern `(v  1 e 1 0 ]
+"176
+[v _playDamage playDamage `(v  1 e 1 0 ]
+"195
+[v _playHeal playHeal `(v  1 e 1 0 ]
+"215
+[v _playStun playStun `(v  1 e 1 0 ]
+"241
+[v _pulse pulse `(v  1 e 1 0 ]
+"265
+[v _playPattern playPattern `(v  1 e 1 0 ]
+"300
+[v _draw draw `(v  1 e 1 0 ]
+"53 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/main.c
+[v _main main `(v  1 e 1 0 ]
+"58 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/ccp4.c
+[v _CCP4_Initialize CCP4_Initialize `(v  1 e 1 0 ]
+"81
+[v _CCP4_CaptureISR CCP4_CaptureISR `(v  1 e 1 0 ]
+"96
+[v _CCP4_CallBack CCP4_CallBack `(v  1 e 1 0 ]
+"52 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+"65
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+"112 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"122
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"50 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"73
+[v _PIN_MANAGER_IOC PIN_MANAGER_IOC `(v  1 e 1 0 ]
+"63 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+"89
+[v _TMR1_StartTimer TMR1_StartTimer `(v  1 e 1 0 ]
+"49 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+[v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
+"93
+[v _ANSELB ANSELB `VEuc  1 e 1 @3897 ]
+"142
+[v _ANSELC ANSELC `VEuc  1 e 1 @3898 ]
+[s S201 . 1 `uc 1 C4TSEL 1 0 :2:0 
+`uc 1 C5TSEL 1 0 :2:2 
+]
+"1246
+[s S204 . 1 `uc 1 C4TSEL0 1 0 :1:0 
+`uc 1 C4TSEL1 1 0 :1:1 
+`uc 1 C5TSEL0 1 0 :1:2 
+`uc 1 C5TSEL1 1 0 :1:3 
+]
+[u S209 . 1 `S201 1 . 1 0 `S204 1 . 1 0 ]
+[v _CCPTMRS1bits CCPTMRS1bits `VES209  1 e 1 @3912 ]
+"1924
+[v _CCP4CON CCP4CON `VEuc  1 e 1 @3927 ]
+"1993
+[v _CCPR4L CCPR4L `VEuc  1 e 1 @3928 ]
+"2012
+[v _CCPR4H CCPR4H `VEuc  1 e 1 @3929 ]
+"2584
+[v _WPUB WPUB `VEuc  1 e 1 @3937 ]
+[s S232 . 1 `uc 1 CCP3IE 1 0 :1:0 
+`uc 1 CCP4IE 1 0 :1:1 
+`uc 1 CCP5IE 1 0 :1:2 
+]
+"6067
+[u S236 . 1 `S232 1 . 1 0 ]
+[v _PIE4bits PIE4bits `VES236  1 e 1 @3962 ]
+[s S221 . 1 `uc 1 CCP3IF 1 0 :1:0 
+`uc 1 CCP4IF 1 0 :1:1 
+`uc 1 CCP5IF 1 0 :1:2 
+]
+"6098
+[u S225 . 1 `S221 1 . 1 0 ]
+[v _PIR4bits PIR4bits `VES225  1 e 1 @3963 ]
+[s S427 . 1 `uc 1 CCP3IP 1 0 :1:0 
+`uc 1 CCP4IP 1 0 :1:1 
+`uc 1 CCP5IP 1 0 :1:2 
+]
+"6132
+[s S431 . 1 `uc 1 CCIP3IP 1 0 :1:0 
+]
+[u S433 . 1 `S427 1 . 1 0 `S431 1 . 1 0 ]
+[v _IPR4bits IPR4bits `VES433  1 e 1 @3964 ]
+[s S655 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"6646
+[s S664 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S673 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 AN13 1 0 :1:5 
+`uc 1 TX2 1 0 :1:6 
+`uc 1 RX2 1 0 :1:7 
+]
+[s S682 . 1 `uc 1 FLT0 1 0 :1:0 
+`uc 1 C12IN3M 1 0 :1:1 
+`uc 1 P1B 1 0 :1:2 
+`uc 1 C12IN2M 1 0 :1:3 
+`uc 1 T5G 1 0 :1:4 
+`uc 1 T1G 1 0 :1:5 
+`uc 1 CK2 1 0 :1:6 
+`uc 1 DT2 1 0 :1:7 
+]
+[s S691 . 1 `uc 1 SRI 1 0 :1:0 
+`uc 1 C12IN3N 1 0 :1:1 
+`uc 1 CTED1 1 0 :1:2 
+`uc 1 C12IN2N 1 0 :1:3 
+`uc 1 P1D 1 0 :1:4 
+`uc 1 CCP3 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S700 . 1 `uc 1 CCP4 1 0 :1:0 
+`uc 1 P1C 1 0 :1:1 
+`uc 1 SDA2 1 0 :1:2 
+`uc 1 CTED2 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 T3CKI 1 0 :1:5 
+]
+[s S707 . 1 `uc 1 SS2 1 0 :1:0 
+`uc 1 SCL2 1 0 :1:1 
+`uc 1 SDI2 1 0 :1:2 
+`uc 1 P2A 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 P3A 1 0 :1:5 
+]
+[s S714 . 1 `uc 1 NOT_SS2 1 0 :1:0 
+]
+[s S716 . 1 `uc 1 nSS2 1 0 :1:0 
+`uc 1 SCK2 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SDO2 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 P2B 1 0 :1:5 
+]
+[s S723 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S726 . 1 `S655 1 . 1 0 `S664 1 . 1 0 `S673 1 . 1 0 `S682 1 . 1 0 `S691 1 . 1 0 `S700 1 . 1 0 `S707 1 . 1 0 `S714 1 . 1 0 `S716 1 . 1 0 `S723 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES726  1 e 1 @3969 ]
+"7337
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
+"7469
+[v _LATB LATB `VEuc  1 e 1 @3978 ]
+[s S888 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"7517
+[s S897 . 1 `uc 1 LB0 1 0 :1:0 
+]
+[s S899 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+]
+[s S902 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LB2 1 0 :1:2 
+]
+[s S905 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LB3 1 0 :1:3 
+]
+[s S908 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LB4 1 0 :1:4 
+]
+[s S911 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LB5 1 0 :1:5 
+]
+[s S914 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LB6 1 0 :1:6 
+]
+[s S917 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S920 . 1 `S888 1 . 1 0 `S897 1 . 1 0 `S899 1 . 1 0 `S902 1 . 1 0 `S905 1 . 1 0 `S908 1 . 1 0 `S911 1 . 1 0 `S914 1 . 1 0 `S917 1 . 1 0 ]
+[v _LATBbits LATBbits `VES920  1 e 1 @3978 ]
+"7601
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+[s S256 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"7649
+[s S265 . 1 `uc 1 LC0 1 0 :1:0 
+]
+[s S267 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LC1 1 0 :1:1 
+]
+[s S270 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LC2 1 0 :1:2 
+]
+[s S273 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LC3 1 0 :1:3 
+]
+[s S276 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LC4 1 0 :1:4 
+]
+[s S279 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LC5 1 0 :1:5 
+]
+[s S282 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LC6 1 0 :1:6 
+]
+[s S285 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LC7 1 0 :1:7 
+]
+[u S288 . 1 `S256 1 . 1 0 `S265 1 . 1 0 `S267 1 . 1 0 `S270 1 . 1 0 `S273 1 . 1 0 `S276 1 . 1 0 `S279 1 . 1 0 `S282 1 . 1 0 `S285 1 . 1 0 ]
+[v _LATCbits LATCbits `VES288  1 e 1 @3979 ]
+"7733
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"7954
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"8175
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"8416
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+[s S26 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"8862
+[s S34 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+]
+[u S39 . 1 `S26 1 . 1 0 `S34 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES39  1 e 1 @3998 ]
+"15328
+[v _T1GCON T1GCON `VEuc  1 e 1 @4044 ]
+"15422
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S60 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+]
+"15455
+[s S63 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 T1RD16 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1SOSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+[s S70 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RD16 1 0 :1:1 
+`uc 1 T1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+[s S79 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN 1 0 :1:3 
+]
+[u S82 . 1 `S60 1 . 1 0 `S63 1 . 1 0 `S70 1 . 1 0 `S79 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES82  1 e 1 @4045 ]
+"15534
+[v _TMR1 TMR1 `VEus  1 e 2 @4046 ]
+"15540
+[v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
+"15559
+[v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+[s S360 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"15621
+[s S362 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S365 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S368 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S371 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S374 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 SBOREN 1 0 :1:6 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S383 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+]
+[u S389 . 1 `S360 1 . 1 0 `S362 1 . 1 0 `S365 1 . 1 0 `S368 1 . 1 0 `S371 1 . 1 0 `S374 1 . 1 0 `S383 1 . 1 0 ]
+[v _RCONbits RCONbits `VES389  1 e 1 @4048 ]
+"15737
+[v _OSCCON2 OSCCON2 `VEuc  1 e 1 @4050 ]
+"15793
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+[s S443 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"16603
+[s S446 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+[s S455 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RBPU 1 0 :1:7 
+]
+[u S458 . 1 `S443 1 . 1 0 `S446 1 . 1 0 `S455 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES458  1 e 1 @4081 ]
+[s S493 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"16679
+[s S502 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S511 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S515 . 1 `S493 1 . 1 0 `S502 1 . 1 0 `S511 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES515  1 e 1 @4082 ]
+"17890
+[v _IOCB4 IOCB4 `VEb  1 e 0 @31508 ]
+"18360
+[v _RBIF RBIF `VEb  1 e 0 @32656 ]
+"63 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/LEDLogic.h
+[v LEDLogic@greenPixels greenPixels `[24]uc  1 s 24 greenPixels ]
+"64
+[v LEDLogic@redPixels redPixels `[24]uc  1 s 24 redPixels ]
+"65
+[v LEDLogic@bluePixels bluePixels `[24]uc  1 s 24 bluePixels ]
+"57 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/tmr1.c
+[v _timer1ReloadVal timer1ReloadVal `VEui  1 e 2 0 ]
+"53 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"92
+} 0
+"112 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"120
+} 0
+"63 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+{
+"87
+} 0
+"89
+[v _TMR1_StartTimer TMR1_StartTimer `(v  1 e 1 0 ]
+{
+"93
+} 0
+"50 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"70
+} 0
+"122 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"132
+} 0
+"52 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+{
+"63
+} 0
+"58 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/ccp4.c
+[v _CCP4_Initialize CCP4_Initialize `(v  1 e 1 0 ]
+{
+"79
+} 0
+"65 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+{
+"83
+} 0
+"73 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_IOC PIN_MANAGER_IOC `(v  1 e 1 0 ]
+{
+"84
+} 0
+"265 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/LEDLogic.c
+[v _playPattern playPattern `(v  1 e 1 0 ]
+{
+[v playPattern@pattern pattern `E7440  1 a 1 wreg ]
+[v playPattern@pattern pattern `E7440  1 a 1 wreg ]
+[v playPattern@pattern pattern `E7440  1 a 1 5 ]
+"289
+} 0
+"241
+[v _pulse pulse `(v  1 e 1 0 ]
+{
+"245
+[v pulse@i i `uc  1 a 1 4 ]
+"243
+[v pulse@pixel pixel `uc  1 a 1 3 ]
+"263
+} 0
+"300
+[v _draw draw `(v  1 e 1 0 ]
+{
+"303
+[v draw@bitCount bitCount `c  1 a 1 1 ]
+"302
+[v draw@pixel pixel `uc  1 a 1 0 ]
+"348
+} 0
+"7
+[v _delay_25ms_n_times delay_25ms_n_times `(v  1 e 1 0 ]
+{
+[v delay_25ms_n_times@n n `ui  1 p 2 0 ]
+"13
+} 0
+"215
+[v _playStun playStun `(v  1 e 1 0 ]
+{
+"217
+[v playStun@i i `i  1 a 2 1 ]
+"238
+} 0
+"111
+[v _colorYellow colorYellow `(v  1 s 1 colorYellow ]
+{
+"136
+} 0
+"195
+[v _playHeal playHeal `(v  1 e 1 0 ]
+{
+"198
+[v playHeal@i i `i  1 a 2 1 ]
+"213
+} 0
+"84
+[v _colorGreen colorGreen `(v  1 s 1 colorGreen ]
+{
+"109
+} 0
+"176
+[v _playDamage playDamage `(v  1 e 1 0 ]
+{
+"179
+[v playDamage@i i `i  1 a 2 1 ]
+"193
+} 0
+"57
+[v _colorRed colorRed `(v  1 s 1 colorRed ]
+{
+"82
+} 0
+"15
+[v _LEDOne LEDOne `T(v  1 s 1 LEDOne ]
+{
+"21
+} 0
+"170
+[v _clearPattern clearPattern `(v  1 e 1 0 ]
+{
+"171
+[v clearPattern@i i `i  1 a 2 0 ]
+"174
+} 0
+"30
+[v _colorBlack colorBlack `(v  1 s 1 colorBlack ]
+{
+"55
+} 0
+"23
+[v _LEDZero LEDZero `T(v  1 s 1 LEDZero ]
+{
+"28
+} 0
+"81 /Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/Tyler Testing.X/mcc_generated_files/ccp4.c
+[v _CCP4_CaptureISR CCP4_CaptureISR `(v  1 e 1 0 ]
+{
+[s S243 . 2 `uc 1 ccpr4l 1 0 `uc 1 ccpr4h 1 1 ]
+"83
+[s S246 . 2 `ui 1 ccpr4_16Bit 2 0 ]
+[u S248 CCPR4Reg_tag 2 `S243 1 . 2 0 `S246 1 . 2 0 ]
+[v CCP4_CaptureISR@module module `S248  1 a 2 3 ]
+"94
+} 0
+"96
+[v _CCP4_CallBack CCP4_CallBack `(v  1 e 1 0 ]
+{
+[v CCP4_CallBack@capturedValue capturedValue `ui  1 p 2 0 ]
+"104
+} 0
