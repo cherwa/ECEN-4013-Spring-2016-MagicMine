@@ -77,7 +77,7 @@ extern "C" {
      *  driver this function <b>is not interruptible</b> and will disable
      *  peripheral interrupts to prevent timing skew.
      */
-    void playPattern(LED_Pattern pattern);
+    void LED_play_pattern(LED_Pattern pattern);
     
     /**
      * Fills the pixels buffers with color passed in grb. The order of the values
