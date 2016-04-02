@@ -74,10 +74,10 @@ void main(void) {
     //INTERRUPT_GlobalInterruptLowDisable();
 
     // Enable the Global Interrupts
-//    INTERRUPT_GlobalInterruptEnable();
+    INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
-//    INTERRUPT_PeripheralInterruptEnable();
+    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
 //    INTERRUPT_GlobalInterruptDisable();
@@ -107,64 +107,13 @@ void main(void) {
     
 //    reset();
     
-    TX1REG = 'H';
-    __delay_us (10);
-    TX1REG = 'I';
-    __delay_us (10);
-    TX1REG = '\n';
     
-    bt_packet_t to_send;
-    
-    to_send.start = 0x3C;
-    to_send.func = PIU_BT_FUNC_CONNECT;
-    to_send.data1 = 0x00;
-    to_send.data2 = 0x00;
-    to_send.data3 = PIU_COLOR_RED;
-    
-    TX1REG = 'T';
-    __delay_us (10);
-    TX1REG = 'R';
-    __delay_us (10);
-    TX1REG = '\n';
-    
-    PIU_bt_transmit_packet(to_send);
-    
-    uint8_t char_buff[15];
-    uint8_t read_byte;
     
     while (1) {
-////        dout[0] = 0xFF;
-////        dout[1] = 0xF7;
-////        SPI1_Exchange8bitBuffer(din, 1, dout);
-////        dout[0] = 0xFF;
-////        dout[1] = 0xFE;
-////        SPI1_Exchange8bitBuffer(din, 1, dout);
-//        
-////        reset();
-//        playVoice(0);
-//        unmute();
-        do {
-
-            if (EUSART2_DataReady) {
-
-                for (uint8_t i = 0; i < 15; i++) {
-                    read_byte = EUSART1_Read();
-                    char_buff[i] = read_byte;
-
-                    if (read_byte == '\n' || read_byte == '\0') {
-                        break;
-                    }
-                    
-                }
-                
-                TX1REG = 'A';
-                __delay_us (10);
-                TX1REG = 'T';
-                __delay_us (10);
-                TX1REG = '\n';
-                memcpy(char_buff, '\0', sizeof(char_buff));
-            }
-        } while (!EUSART2_DataReady);
+        
+        playPattern(LED_DAMAGE);
+        
+        delay_25ms_n_times(40);
     }
     
 }

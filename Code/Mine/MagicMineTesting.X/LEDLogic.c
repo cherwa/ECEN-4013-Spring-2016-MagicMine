@@ -6,17 +6,17 @@ uint8_t bit_to_test;
 uint8_t to_return;
 
 static inline void LEDOne() {
-    LATBbits.LATB5 = 1;   
+    LED_PIN = 1;   
     Nop();
     Nop();
-    LATBbits.LATB5 = 0;
+    LED_PIN = 0;
     Nop();
 }
 
 static inline void LEDZero() {
-    LATBbits.LATB5 = 1;
+    LED_PIN = 1;
     Nop();
-    LATBbits.LATB5 = 0;
+    LED_PIN = 0;
     Nop();
 }
 
@@ -191,18 +191,8 @@ void playHeal(){
 	for (int i = 0; i < 24; i++) {
 		colorGreen();
 	}
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
     
+    delay_25ms_n_times(11);
 }
 
 void playStun(void) {
@@ -217,17 +207,7 @@ void playStun(void) {
         colorGreen();
     }
     
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
-    __delay_ms(25);
+    delay_25ms_n_times(11);
 }
 
 // Experimental!  
@@ -337,7 +317,7 @@ void draw(void) {
         }
     }
     
-    LATBbits.LATB5 = 0;
+    LED_PIN = 0;
 }
 
 /** @todo This function needs to be tested extensively for timing.*/
@@ -345,14 +325,14 @@ void draw(void) {
 static void send_bit(int8_t val) {
     
     if (val == 0) {
-        LATBbits.LATB5 = 1;
+        LED_PIN = 1;
         Nop();
-        LATBbits.LATB5 = 0;
+        LED_PIN = 0;
     } else {
-        LATBbits.LATB5 = 1;
+        LED_PIN = 1;
         Nop();
         Nop();
-        LATBbits.LATB5 = 0;
+        LED_PIN = 0;
     }
 }
 

@@ -1,7 +1,10 @@
 /** 
  * @file LEDLogic.h
  * @author Matthew Atkins
+ * @author Tyler Sekine
  * @date Created on March 9, 2016, 10:02 PM
+ * 
+ * @detail
  */
 
 #ifndef LEDLOGIC_H
@@ -31,7 +34,8 @@ extern "C" {
  */
 //#define bit_test(var, pos) ((var) & (1 << pos))
 #define PIXEL_COUNT 24
-    
+#define LED_PIN LATBbits.LATB0
+   
     /**
      * Enumerators specify predefined sequences for the LED ring to display.
      */
