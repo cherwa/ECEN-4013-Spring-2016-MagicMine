@@ -41,10 +41,11 @@ extern "C" {
      */
     typedef enum patterns {
         LED_ARMED,              /**< Indicates the mine has been armed.*/
-        LED_DAMAGE,             /**< Indicates a damage spell has been cast.*/
-        LED_HEAL,               /**< Indicates a healing spell has been cast.*/
-        LED_STUN_CAST,          /**< Indicates that the mine has cast a stun spell <b>not that it has been stunned</b>.*/
-        LED_STUN_SELF,          /**< Indicates that the mine itself is currently stunned.*/
+        LED_DAMAGE,             /**< Indicates a Damage spell has been cast.*/
+        LED_ELEMENT_DAMAGE,    /**< Indicates a Element Damage spell has been cast.*/
+        LED_HEAL,               /**< Indicates a Healing spell has been cast.*/
+        LED_STUN_CAST,          /**< Indicates that the mine has cast a Stun spell <b>not that it has been stunned</b>.*/
+        LED_STUN_SELF,          /**< Indicates that the mine itself is currently Stunned.*/
         LED_SELF_TEST_PASSED,   /**< Indicates that all self tests have passed.*/
         LED_SELF_TEST_FAILED    /**< Indicates that one of the self tests have failed.*/
     } LED_Pattern;
@@ -81,7 +82,7 @@ extern "C" {
      *  driver this function <b>is not interruptible</b> and will disable
      *  peripheral interrupts to prevent timing skew.
      */
-    void playPattern(LED_Pattern pattern);
+    void LED_play_pattern(LED_Pattern pattern);
     
     /**
      * Fills the pixels buffers with color passed in grb. The order of the values
@@ -132,4 +133,3 @@ extern "C" {
 #endif
 
 #endif	/* LEDLOGIC_H */
-
