@@ -56,13 +56,11 @@ void PIN_MANAGER_Initialize(void)
     ANSELC = 0x0;
     TRISB = 0xCE;
     TRISC = 0xD1;
-    WPUB = 0x6;
+    WPUB = 0x16;
     TRISA = 0xEF;
 
-    INTCON2bits.nRBPU = 0x1;
+    INTCON2bits.nRBPU = 0x0;
 
-    // enable interrupt-on-change individually
-    IOCB4 = 1;
     // enable interrupt-on-change globally
     // interrupts-on-change are globally disabled
     INTCONbits.RBIE = 0;

@@ -1,12 +1,12 @@
 #include "LEDLogic.h"
 #include "util_functions.h"
-
 uint8_t byte_to_test;
 uint8_t bit_to_test;
 uint8_t to_return;
 
 //Sending time specific HIGH bit
 static inline void LEDOne() {
+   
     LED_PIN = 1;
     Nop();
     Nop();
@@ -16,6 +16,7 @@ static inline void LEDOne() {
 
 //Sending time specific LOW bit
 static inline void LEDZero() {
+
     LED_PIN = 1;
     Nop();
     LED_PIN = 0;
@@ -41,7 +42,7 @@ static void colorBlack() {
     LEDZero();
     LEDZero();
     LEDZero();
-    //Green    
+    //Blue    
     LEDZero();
     LEDZero();
     LEDZero();
@@ -64,6 +65,36 @@ static void colorRed() {
 	LEDZero();
     //Red
 	LEDOne();
+	LEDOne();
+	LEDOne();
+	LEDOne();
+	LEDOne();
+	LEDOne();
+	LEDOne();
+	LEDOne();
+    //Blue	
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();	
+}
+
+static void colorRedTwo() {
+    //Green
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+	LEDZero();
+    //Red
+	LEDZero();
 	LEDOne();
 	LEDOne();
 	LEDOne();
@@ -238,100 +269,233 @@ static void colorBlueTwo() {
     LEDOne();
 }
 
+static void colorPink() {
+    //Green
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    LEDZero();
+    //Red    
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    //Blue   
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+    LEDOne();
+}
 void clearPattern() {
     for (int i = 0; i < 24; i++) {
         colorBlack();
     }
+    
+    __delay_ms (10);
 }
-
-void playArmed(){
-	//Setting all 24 LED's to Red and blinking 4 times
-    for(int i = 0; i<4; i++){
-	for (int i = 0; i < 24; i++) {
-		colorRed();
-    }
-	delay_25ms_n_times(11);
-	clearPattern();
-	delay_25ms_n_times(11);	
-    }
-}
-
 
 void playDamage(){
-	//Setting all 24 LED's to Red and blinking rapidly
-    for(int i = 0; i<10; i++){
-	for (int i = 0; i < 24; i++) {
+	//Setting all 24 LED's to Red and blinking 5 times
+	
+    for (uint8_t i = 0; i < 24; i++) {
 		colorRed();
     }
+    
 	delay_25ms_n_times(5);
-	clearPattern();
-	delay_25ms_n_times(5);	
-    }
+    clearPattern();
+    delay_25ms_n_times(5);
+}
+
+
+void playArmed(){
+	
+    //Setting all 24 LED's to Red and blinking rapidly
+    int8_t j = 0;
+    int8_t i;
+    
+	while (j < 5) {	
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2) {
+				colorRed();
+			} else {
+				colorRedTwo();
+			}
+		}
+		
+        delay_25ms_n_times(11);
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2){
+				colorRedTwo();
+			} else {
+				colorRed();
+			}
+		}	
+		
+        delay_25ms_n_times(11);
+        
+        j++;
+	}
 }
 
 void playElementDamage(){
 	//Alternates shades of blue, switches 4 times
-	for(int j=0; j < 4; j++){	
-		for (int i = 0; i < 24; i++) {
-			if(i%2){
+    
+    int8_t j = 0;
+    int8_t i;
+    
+	while (j < 10) {	
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2) {
 				colorBlue();
-			}
-			else(){
+			} else {
 				colorBlueTwo();
 			}
 		}
-		delay_25ms_n_times(11);
-		for (int i = 0; i < 24; i++) {
-			if(i%2){
+		
+        delay_25ms_n_times(11);
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2){
 				colorBlueTwo();
-			}
-			else(){
+			} else {
 				colorBlue();
 			}
 		}	
-		delay_25ms_n_times(11);
+		
+        delay_25ms_n_times(11);
+        
+        j++;
 	}
 }
 
 void playHeal(){
-	//Setting all 24 LED's to Green & keeping them on
-	for (int i = 0; i < 24; i++) {
+	
+    //Setting all 24 LED's to Green & keeping them on
+    
+    int8_t i;
+    
+	for (i = 0; i < 24; i++) {
 		colorGreen();
 	}
     
-    delay_25ms_n_times(11);
+    delay_25ms_n_times(360);
 }
 
 void playStun() {
-    int i;
-    for (i = 0; i < 12; i++) {
-        colorYellow();
-    }
-    for (i = 0; i < 12; i++) {
-        colorGreen();
-    }
-	delay_25ms_n_times(11);
+    
+    int8_t j = 0;
+    int8_t i;
+    
+	while (j < 10) {	
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2) {
+				colorRed();
+			} else {
+				colorYellow();
+			}
+		}
+		
+        delay_25ms_n_times(11);
+		
+        for (i = 0; i < 24; i++) {
+			
+            if(i % 2){
+				colorYellow();
+			} else {
+				colorRed();
+			}
+		}	
+		
+        delay_25ms_n_times(11);
+        
+        j++;
+	}
 }
 
 void playStunSelf() {
-
+   
+    int8_t i;
+    for (i = 0; i < 24; i++) {
+		colorYellow();
+    }
+    
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        clearPattern();
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
 }
 
 void playTestPassed() {
-	
+    int i;
+    for ( i = 0; i < 6; i++) {
+		colorRed();
+    }
+	for (i = 0; i < 6; i++) {
+		colorYellow();
+    }
+    for (i = 0; i < 6; i++) {
+		colorGreen();
+    }
+    for (i = 0; i < 6; i++) {
+		colorBlue();
+    }
+    delay_25ms_n_times(200);
+    
 }
 
 void playTestFailed() {
-	
+    int i;
+    for (i = 0; i < 24; i++) {
+		colorPink();
+    }
+    delay_25ms_n_times(200);	
 }
 
 
 // Experimental!  
 void pulse(void) {
     
-    uint8_t pixel;
+    int8_t pixel;
     
-    for (uint8_t i = 0; i < 64; i++) {
+    for (int8_t i = 0; i < 64; i++) {
         
         for (pixel = 0; pixel < PIXEL_COUNT; pixel++) {
             
@@ -353,20 +517,20 @@ void pulse(void) {
 
 void LED_play_pattern(LED_Pattern pattern) {
     
-    // Disable interrupts
-    PIE4bits.CCP4IE = 0;
+    // Disable interrupt
+    INTERRUPT_GlobalInterruptDisable();
     
     switch(pattern) {
-    	case LED_ARMED:
-    	    playArmed();
-    	    break;
-        case LED_DAMAGE:
+    	case LED_DAMAGE:
             
-            for (uint8_t i = 0; i <= 5; i++) {
+            for (int8_t i = 0; i < 20; i++) {
                 playDamage();
-            }
+            }    	    
+    	    break;
+        case LED_ARMED:
+                playArmed();
             break;
-        case LED_ELEMENT_DAMAGE():
+        case LED_ELEMENT_DAMAGE:
             playElementDamage();
             break;    
         case LED_HEAL:
@@ -376,7 +540,10 @@ void LED_play_pattern(LED_Pattern pattern) {
             playStun();
             break;
         case LED_STUN_SELF:
-            playStunSelf();
+            for (int8_t i = 0; i < 5; i++) {
+                clearPattern();
+                playStunSelf();
+            }
             break;
         case LED_SELF_TEST_PASSED:
             playTestPassed();
@@ -390,7 +557,7 @@ void LED_play_pattern(LED_Pattern pattern) {
     clearPattern();
     
     // Re-enable interrupts
-    PIE4bits.CCP4IE = 1;
+    INTERRUPT_GlobalInterruptEnable();
 }
 
 void fill_color(uint8_t grb[]) {

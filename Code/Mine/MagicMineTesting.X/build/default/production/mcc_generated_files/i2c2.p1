@@ -20,7 +20,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "187
 [c E7463 0 1 2 3 4 5 6 7 8 9 10 11 .. ]
 [n E7463 . S_MASTER_IDLE S_MASTER_RESTART S_MASTER_SEND_ADDR S_MASTER_SEND_DATA S_MASTER_SEND_STOP S_MASTER_ACK_ADDR S_MASTER_RCV_DATA S_MASTER_RCV_STOP S_MASTER_ACK_RCV_DATA S_MASTER_NOACK_STOP S_MASTER_SEND_ADDR_10BIT_LSB S_MASTER_10BIT_RESTART  ]
-"3732 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"3732 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [v _SSP2STAT `Vuc ~T0 @X0 0 e@3949 ]
 "3592
 [v _SSP2CON1 `Vuc ~T0 @X0 0 e@3948 ]
@@ -155,7 +155,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SSP2CON2bits `VS178 ~T0 @X0 0 e@3947 ]
 "179 mcc_generated_files/i2c2.c
 [v _I2C2_Stop `(v ~T0 @X0 0 ef1`E7395 ]
-"4214 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"4214 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [v _SSP2BUF `Vuc ~T0 @X0 0 e@3951 ]
 "178 mcc_generated_files/i2c2.c
 [v _I2C2_FunctionComplete `(v ~T0 @X0 0 ef ]
@@ -200,7 +200,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {

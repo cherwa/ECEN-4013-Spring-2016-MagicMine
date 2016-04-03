@@ -106,14 +106,28 @@ void main(void) {
 //    LATCbits.LATC2 = 1;
     
 //    reset();
-    
+    ANSELAbits.ANSA0 = 0;
+    TRISAbits.RA0 = 0;
+    LATAbits.LA0 = 0;
     delay_25ms_n_times(5);
     
     while (1) {
         
-        playPattern(LED_DAMAGE);
+        LED_play_pattern(LED_ARMED);
+        LED_play_pattern(LED_DAMAGE);
+        LED_play_pattern(LED_ELEMENT_DAMAGE);
+        LED_play_pattern(LED_HEAL);
+        LED_play_pattern(LED_STUN_CAST);
+        LED_play_pattern(LED_STUN_SELF);
+        LED_play_pattern(LED_SELF_TEST_PASSED);
+        LED_play_pattern(LED_SELF_TEST_FAILED);
         
-        delay_25ms_n_times(40);
+        
+//        delay_25ms_n_times(40);
+        
+        //LED_play_pattern(LED_ELEMENT_DAMAGE);
+        
+//        delay_25ms_n_times(40);
     }
     
 }
@@ -165,12 +179,12 @@ void stunned(void) {
     
     // i should be a value that causes delay for 10 sec.
     for (uint8_t i = 0; i < 200; i++) {
-        playPattern(LED_STUN_SELF);
+        LED_play_pattern(LED_STUN_SELF);
         delay_25ms_n_times(1);
     }
     
     play_audio_file(AUDIO_STUN_END);
-    playPattern(LED_ARMED);
+    LED_play_pattern(LED_ARMED);
     //@todo Re-enable non-essential interrupts
 }
 
@@ -183,7 +197,7 @@ void detonate(void) {
     
     transmit_ir_packet(IR_SPELL_DAMAGE);
     play_audio_file(AUDIO_DAMAGE_CAST);
-    playPattern(LED_DAMAGE);
+    LED_play_pattern(LED_DAMAGE);
     
     
     

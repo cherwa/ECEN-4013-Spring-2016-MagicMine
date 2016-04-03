@@ -106,10 +106,10 @@ void CCP4_CallBack(uint16_t capturedValue)
     // Add your code here
     if (last_pattern_was_heal) {
         last_pattern_was_heal = 0;
-        playPattern(LED_DAMAGE);
+//        LED_play_pattern(LED_DAMAGE);
     } else {
         last_pattern_was_heal = 1;
-        playPattern(LED_HEAL);
+//        LED_play_pattern(LED_HEAL);
     }
     
     // REMOVE AFTER PROTOTYPING

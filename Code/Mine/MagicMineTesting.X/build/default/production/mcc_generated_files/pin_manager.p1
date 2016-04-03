@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"7469 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"7469 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [v _LATB `Vuc ~T0 @X0 0 e@3978 ]
 "7337
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
@@ -33,8 +33,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1051 . . . . ]
 "16603
 [v _INTCON2bits `VS1051 ~T0 @X0 0 e@4081 ]
-"17890
-[v _IOCB4 `Vb ~T0 @X0 0 e@31508 ]
 "16653
 [s S1056 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1056 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -49,13 +47,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1055 . . . . ]
 "16679
 [v _INTCONbits `VS1055 ~T0 @X0 0 e@4082 ]
+"17890
+[v _IOCB4 `Vb ~T0 @X0 0 e@31508 ]
 "18360
 [v _RBIF `Vb ~T0 @X0 0 e@32656 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {
@@ -7104,53 +7104,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pin_manager.c: 56: ANSELC = 0x0;
 "56
 [e = _ANSELC -> -> 0 `i `uc ]
-[; ;pin_manager.c: 57: TRISB = 0x9F;
+[; ;pin_manager.c: 57: TRISB = 0xCE;
 "57
-[e = _TRISB -> -> 159 `i `uc ]
-[; ;pin_manager.c: 58: TRISC = 0x91;
+[e = _TRISB -> -> 206 `i `uc ]
+[; ;pin_manager.c: 58: TRISC = 0xD1;
 "58
-[e = _TRISC -> -> 145 `i `uc ]
-[; ;pin_manager.c: 59: WPUB = 0x6;
+[e = _TRISC -> -> 209 `i `uc ]
+[; ;pin_manager.c: 59: WPUB = 0x16;
 "59
-[e = _WPUB -> -> 6 `i `uc ]
+[e = _WPUB -> -> 22 `i `uc ]
 [; ;pin_manager.c: 60: TRISA = 0xEF;
 "60
 [e = _TRISA -> -> 239 `i `uc ]
-[; ;pin_manager.c: 62: INTCON2bits.nRBPU = 0x1;
+[; ;pin_manager.c: 62: INTCON2bits.nRBPU = 0x0;
 "62
-[e = . . _INTCON2bits 1 7 -> -> 1 `i `uc ]
-[; ;pin_manager.c: 65: IOCB4 = 1;
-"65
-[e = _IOCB4 -> -> 1 `i `b ]
-[; ;pin_manager.c: 68: INTCONbits.RBIE = 0;
-"68
+[e = . . _INTCON2bits 1 7 -> -> 0 `i `uc ]
+[; ;pin_manager.c: 66: INTCONbits.RBIE = 0;
+"66
 [e = . . _INTCONbits 0 3 -> -> 0 `i `uc ]
-[; ;pin_manager.c: 69: }
-"69
+[; ;pin_manager.c: 67: }
+"67
 [e :UE 1084 ]
 }
-"72
+"70
 [v _PIN_MANAGER_IOC `(v ~T0 @X0 1 ef ]
-"73
+"71
 {
-[; ;pin_manager.c: 72: void PIN_MANAGER_IOC(void)
-[; ;pin_manager.c: 73: {
+[; ;pin_manager.c: 70: void PIN_MANAGER_IOC(void)
+[; ;pin_manager.c: 71: {
 [e :U _PIN_MANAGER_IOC ]
 [f ]
-[; ;pin_manager.c: 74: if((IOCB4 == 1) && (RBIF == 1))
-"74
+[; ;pin_manager.c: 72: if((IOCB4 == 1) && (RBIF == 1))
+"72
 [e $ ! && == -> _IOCB4 `i -> 1 `i == -> _RBIF `i -> 1 `i 1086  ]
-[; ;pin_manager.c: 75: {
-"75
+[; ;pin_manager.c: 73: {
+"73
 {
-[; ;pin_manager.c: 79: RBIF = 0;
-"79
+[; ;pin_manager.c: 77: RBIF = 0;
+"77
 [e = _RBIF -> -> 0 `i `b ]
-"80
+"78
 }
 [e :U 1086 ]
-[; ;pin_manager.c: 80: }
-[; ;pin_manager.c: 81: }
-"81
+[; ;pin_manager.c: 78: }
+[; ;pin_manager.c: 79: }
+"79
 [e :UE 1085 ]
 }

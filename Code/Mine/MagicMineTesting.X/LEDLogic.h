@@ -42,7 +42,7 @@ extern "C" {
     typedef enum patterns {
         LED_ARMED,              /**< Indicates the mine has been armed.*/
         LED_DAMAGE,             /**< Indicates a Damage spell has been cast.*/
-        LED_ELEMENT_DAMAGE,    /**< Indicates a Element Damage spell has been cast.*/
+        LED_ELEMENT_DAMAGE,     /**< Indicates a Element Damage spell has been cast.*/
         LED_HEAL,               /**< Indicates a Healing spell has been cast.*/
         LED_STUN_CAST,          /**< Indicates that the mine has cast a Stun spell <b>not that it has been stunned</b>.*/
         LED_STUN_SELF,          /**< Indicates that the mine itself is currently Stunned.*/

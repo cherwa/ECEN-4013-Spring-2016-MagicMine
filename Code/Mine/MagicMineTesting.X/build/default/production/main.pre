@@ -1,17 +1,17 @@
 
 # 1 "main.c"
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\htc.h"
+# 26 "/Applications/microchip/xc8/v1.36/include/htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\xc8debug.h"
+# 13 "/Applications/microchip/xc8/v1.36/include/xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 49 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h"
+# 49 "/Applications/microchip/xc8/v1.36/include/pic18f26k22.h"
 extern volatile unsigned char ANSELA @ 0xF38;
 
 asm("ANSELA equ 0F38h");
@@ -8795,7 +8795,7 @@ extern volatile __bit nW2 @ (((unsigned) &SSP2STAT)*8) + 2;
 
 extern volatile __bit nWRITE2 @ (((unsigned) &SSP2STAT)*8) + 2;
 
-# 18 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h"
+# 18 "/Applications/microchip/xc8/v1.36/include/pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 
@@ -8819,7 +8819,7 @@ void PIN_MANAGER_Initialize (void);
 # 222
 void PIN_MANAGER_IOC(void);
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
+# 13 "/Applications/microchip/xc8/v1.36/include/stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -8909,7 +8909,7 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdbool.h"
+# 12 "/Applications/microchip/xc8/v1.36/include/stdbool.h"
 typedef unsigned char bool;
 
 # 110 "mcc_generated_files/interrupt_manager.h"
@@ -8985,10 +8985,10 @@ void EUSART2_Transmit_ISR(void);
 # 222
 void EUSART2_Receive_ISR(void);
 
-# 4 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\__size_t.h"
+# 4 "/Applications/microchip/xc8/v1.36/include/__size_t.h"
 typedef unsigned size_t;
 
-# 6 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stddef.h"
+# 6 "/Applications/microchip/xc8/v1.36/include/stddef.h"
 typedef int ptrdiff_t;
 
 # 117 "mcc_generated_files/spi1.h"
@@ -9193,13 +9193,14 @@ void OSCILLATOR_Initialize(void);
 # 16 "util_functions.h"
 void delay_25ms_n_times(uint16_t n);
 
-# 16 "LEDLogic.h"
+# 19 "LEDLogic.h"
 bool last_pattern_was_heal = 0;
 
-# 38
+# 42
 typedef enum patterns {
 LED_ARMED,
 LED_DAMAGE,
+LED_ELEMENT_DAMAGE,
 LED_HEAL,
 LED_STUN_CAST,
 LED_STUN_SELF,
@@ -9214,7 +9215,7 @@ extern uint8_t byte_to_test;
 extern uint8_t bit_to_test;
 extern uint8_t to_return;
 
-# 63
+# 68
 uint8_t greenPixels[24];
 uint8_t redPixels[24];
 uint8_t bluePixels[24];
@@ -9223,16 +9224,16 @@ uint8_t bluePixels[24];
 uint8_t bit_test_result;
 unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
 
-# 80
-void playPattern(LED_Pattern pattern);
+# 85
+void LED_play_pattern(LED_Pattern pattern);
 
-# 97
+# 102
 void fill_color(uint8_t* grb);
 
-# 110
+# 115
 void draw(void);
 
-# 120
+# 125
 static void send_bit(int8_t val);
 
 static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
@@ -9372,33 +9373,7 @@ uint8_t data3;
 uint8_t crc;
 } bt_packet_t;
 
-# 36 "bt_to_PIU.h"
-static uint8_t piu_buff[13];
-
-static bt_device_state_t piu_bt_state = BT_STATE_DISCONECTED;
-
-# 46
-static inline void PIU_bt_clear_data_buff(void);
-
-# 52
-bool PIU_bt_enter_command_mode(void);
-
-# 58
-bool PIU_bt_exit_command_mode(void);
-
-# 65
-void PIU_bt_send_command(bt_cmnd_t cmnd);
-
-# 71
-bt_device_state_t PIU_bt_get_device_state(void);
-
-# 79
-void PIU_bt_transmit_packet(bt_packet_t packet);
-
-# 87
-void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read);
-
-# 14 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\string.h"
+# 14 "/Applications/microchip/xc8/v1.36/include/string.h"
 extern void * memcpy(void *, const void *, size_t);
 extern void * memmove(void *, const void *, size_t);
 extern void * memset(void *, int, size_t);
@@ -9430,7 +9405,39 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdarg.h"
+# 39 "bt_to_PIU.h"
+static const uint8_t PIU_ACK_PACKET[] = {0x3C, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+static const uint8_t PIU_HEARTBEAT_PACKET[] = {0x3C, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF};
+
+
+
+static uint8_t piu_buff[13];
+static uint8_t read_byte;
+static uint8_t byte_counter;
+static bt_device_state_t piu_bt_state = BT_STATE_DISCONECTED;
+
+# 55
+static inline void PIU_bt_clear_data_buff(void);
+
+# 61
+bool PIU_bt_enter_command_mode(void);
+
+# 67
+bool PIU_bt_exit_command_mode(void);
+
+# 74
+void PIU_bt_send_command(bt_cmnd_t cmnd);
+
+# 80
+bt_device_state_t PIU_bt_get_device_state(void);
+
+# 88
+bool PIU_bt_transmit_packet(bt_packet_t packet);
+
+# 96
+void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read);
+
+# 7 "/Applications/microchip/xc8/v1.36/include/stdarg.h"
 typedef void * va_list[1];
 
 #pragma intrinsic(__va_start)
@@ -9439,17 +9446,17 @@ extern void * __va_start(void);
 #pragma intrinsic(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 43 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdio.h"
+# 43 "/Applications/microchip/xc8/v1.36/include/stdio.h"
 struct __prbuf
 {
 char * ptr;
 void (* func)(char);
 };
 
-# 29 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\errno.h"
+# 29 "/Applications/microchip/xc8/v1.36/include/errno.h"
 extern int errno;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\conio.h"
+# 12 "/Applications/microchip/xc8/v1.36/include/conio.h"
 extern void init_uart(void);
 
 extern char getch(void);
@@ -9463,7 +9470,7 @@ extern __bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 88 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdio.h"
+# 88 "/Applications/microchip/xc8/v1.36/include/stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -9490,62 +9497,35 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 57 "main.c"
+# 56 "main.c"
 void main(void) {
 
 SYSTEM_Initialize();
 
-# 111
-TX1REG = 'H';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = 'I';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = '\n';
+# 77
+(INTCONbits.GIE = 1);
 
-bt_packet_t to_send;
 
-to_send.start = 0x3C;
-to_send.func = 0x01;
-to_send.data1 = 0x00;
-to_send.data2 = 0x00;
-to_send.data3 = 0x00;
+(INTCONbits.PEIE = 1);
 
-TX1REG = 'T';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = 'R';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = '\n';
-
-PIU_bt_transmit_packet(to_send);
-
-uint8_t char_buff[15];
-uint8_t read_byte;
+# 109
+ANSELAbits.ANSA0 = 0;
+TRISAbits.RA0 = 0;
+LATAbits.LA0 = 0;
+delay_25ms_n_times(5);
 
 while (1) {
 
-# 147
-do {
+LED_play_pattern(LED_ARMED);
+LED_play_pattern(LED_DAMAGE);
+LED_play_pattern(LED_ELEMENT_DAMAGE);
+LED_play_pattern(LED_HEAL);
+LED_play_pattern(LED_STUN_CAST);
+LED_play_pattern(LED_STUN_SELF);
+LED_play_pattern(LED_SELF_TEST_PASSED);
+LED_play_pattern(LED_SELF_TEST_FAILED);
 
-if ((eusart2RxCount)) {
-
-for (uint8_t i = 0; i < 15; i++) {
-read_byte = EUSART1_Read();
-char_buff[i] = read_byte;
-
-if (read_byte == '\n' || read_byte == '\0') {
-break;
-}
-
-}
-
-TX1REG = 'A';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = 'T';
-_delay((unsigned long)((10)*(16000000/4000000.0)));
-TX1REG = '\n';
-memcpy(char_buff, '\0', sizeof(char_buff));
-}
-} while (!(eusart2RxCount));
+# 131
 }
 
 }
@@ -9597,12 +9577,12 @@ play_audio_file(AUDIO_STUN_HIT);
 
 
 for (uint8_t i = 0; i < 200; i++) {
-playPattern(LED_STUN_SELF);
+LED_play_pattern(LED_STUN_SELF);
 delay_25ms_n_times(1);
 }
 
 play_audio_file(AUDIO_STUN_END);
-playPattern(LED_ARMED);
+LED_play_pattern(LED_ARMED);
 
 }
 
@@ -9615,8 +9595,8 @@ delay_25ms_n_times(80);
 
 transmit_ir_packet(IR_SPELL_DAMAGE);
 play_audio_file(AUDIO_DAMAGE_CAST);
-playPattern(LED_DAMAGE);
+LED_play_pattern(LED_DAMAGE);
 
-# 244
+# 206
 }
 

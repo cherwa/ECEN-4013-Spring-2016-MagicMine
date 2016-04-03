@@ -1,32 +1,87 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [v F7564 `(v ~T0 @X0 0 tf ]
 "45 main.h
-[c E7681 0 1 2 3 .. ]
-[n E7681 device_state DEV_STATE_DISARMED DEV_STATE_ARMED_AUTO DEV_STATE_ARMED_MANUAL DEV_STATE_STUNNED  ]
-"38 bt_to_PIU.h
-[c E7724 0 1 .. ]
-[n E7724 bt_state BT_STATE_DISCONECTED BT_STATE_CONNECTED  ]
+[c E7682 0 1 2 3 .. ]
+[n E7682 device_state DEV_STATE_DISARMED DEV_STATE_ARMED_AUTO DEV_STATE_ARMED_MANUAL DEV_STATE_STUNNED  ]
+"47 bt_to_PIU.h
+[c E7725 0 1 .. ]
+[n E7725 bt_state BT_STATE_DISCONECTED BT_STATE_CONNECTED  ]
 [p mainexit ]
 "78 mcc_generated_files/mcc.h
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
-"10583 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
-[v _TX1REG `Vuc ~T0 @X0 0 e@4013 ]
-[v F7357 `(v ~T0 @X0 1 tf1`ul ]
-"156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
-[v __delay `JF7357 ~T0 @X0 0 e ]
-[p i __delay ]
-"35 bt_common.h
-[s S1089 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1089 bt_packet start func data1 data2 data3 crc ]
-"79 bt_to_PIU.h
-[v _PIU_bt_transmit_packet `(v ~T0 @X0 0 ef1`S1089 ]
-"78 mcc_generated_files/eusart2.h
-[v _eusart2RxCount `Vuc ~T0 @X0 0 e ]
-"155 mcc_generated_files/eusart1.h
-[v _EUSART1_Read `(uc ~T0 @X0 0 ef ]
-"14 C:\Program Files (x86)\Microchip\xc8\v1.36\include\string.h
-[v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
-"110 LEDLogic.h
+"16653 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+[s S1056 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1056 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"16663
+[s S1057 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1057 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"16673
+[s S1058 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1058 . . GIEL GIEH ]
+"16652
+[u S1055 `S1056 1 `S1057 1 `S1058 1 ]
+[n S1055 . . . . ]
+"16679
+[v _INTCONbits `VS1055 ~T0 @X0 0 e@4082 ]
+"55
+[s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2 . ANSA0 ANSA1 ANSA2 ANSA3 . ANSA5 ]
+"54
+[u S1 `S2 1 ]
+[n S1 . . ]
+"64
+[v _ANSELAbits `VS1 ~T0 @X0 0 e@3896 ]
+"7744
+[s S472 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S472 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 TRISA7 ]
+"7754
+[s S473 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S473 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
+"7743
+[u S471 `S472 1 `S473 1 ]
+[n S471 . . . ]
+"7765
+[v _TRISAbits `VS471 ~T0 @X0 0 e@3986 ]
+"7343
+[s S442 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S442 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
+"7353
+[s S443 :1 `uc 1 ]
+[n S443 . LA0 ]
+"7356
+[s S444 :1 `uc 1 :1 `uc 1 ]
+[n S444 . . LA1 ]
+"7360
+[s S445 :2 `uc 1 :1 `uc 1 ]
+[n S445 . . LA2 ]
+"7364
+[s S446 :3 `uc 1 :1 `uc 1 ]
+[n S446 . . LA3 ]
+"7368
+[s S447 :4 `uc 1 :1 `uc 1 ]
+[n S447 . . LA4 ]
+"7372
+[s S448 :5 `uc 1 :1 `uc 1 ]
+[n S448 . . LA5 ]
+"7376
+[s S449 :6 `uc 1 :1 `uc 1 ]
+[n S449 . . LA6 ]
+"7380
+[s S450 :7 `uc 1 :1 `uc 1 ]
+[n S450 . . LA7 ]
+"7342
+[u S441 `S442 1 `S443 1 `S444 1 `S445 1 `S446 1 `S447 1 `S448 1 `S449 1 `S450 1 ]
+[n S441 . . . . . . . . . . ]
+"7385
+[v _LATAbits `VS441 ~T0 @X0 0 e@3977 ]
+"16 util_functions.h
+[v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
+"116 main.c
+[c E7589 0 1 2 3 4 5 6 7 .. ]
+[n E7589 patterns LED_ARMED LED_DAMAGE LED_ELEMENT_DAMAGE LED_HEAL LED_STUN_CAST LED_STUN_SELF LED_SELF_TEST_PASSED LED_SELF_TEST_FAILED  ]
+"85 LEDLogic.h
+[v _LED_play_pattern `(v ~T0 @X0 0 ef1`E7589 ]
+"115
 [v _draw `(v ~T0 @X0 0 ef ]
 "75 main.h
 [v _init_Bluetooth_to_PIU `(v ~T0 @X0 0 sf ]
@@ -34,28 +89,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _init_Bluetooth_to_remote `(v ~T0 @X0 0 sf ]
 "79
 [v _init_audio_controller `(v ~T0 @X0 0 sf ]
-"215 main.c
-[c E7671 0 1 2 3 4 5 .. ]
-[n E7671 audio_files AUDIO_DAMAGE_CAST AUDIO_HEAL_CAST AUDIO_STUN_CAST AUDIO_STUN_HIT AUDIO_STUN_END AUDIO_CUSTOM_CAST  ]
+"177 main.c
+[c E7672 0 1 2 3 4 5 .. ]
+[n E7672 audio_files AUDIO_DAMAGE_CAST AUDIO_HEAL_CAST AUDIO_STUN_CAST AUDIO_STUN_HIT AUDIO_STUN_END AUDIO_CUSTOM_CAST  ]
 "25 audio.h
-[v _play_audio_file `(v ~T0 @X0 0 ef1`E7671 ]
-"220 main.c
-[c E7589 0 1 2 3 4 5 6 .. ]
-[n E7589 patterns LED_ARMED LED_DAMAGE LED_HEAL LED_STUN_CAST LED_STUN_SELF LED_SELF_TEST_PASSED LED_SELF_TEST_FAILED  ]
-"80 LEDLogic.h
-[v _playPattern `(v ~T0 @X0 0 ef1`E7589 ]
-"16 util_functions.h
-[v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
-"236 main.c
-[c E7625 0 2 4 .. ]
-[n E7625 spell_type IR_SPELL_DAMAGE IR_SPELL_STUN IR_SPELL_HEAL  ]
+[v _play_audio_file `(v ~T0 @X0 0 ef1`E7672 ]
+"198 main.c
+[c E7626 0 2 4 .. ]
+[n E7626 spell_type IR_SPELL_DAMAGE IR_SPELL_STUN IR_SPELL_HEAL  ]
 "45 ir_common.h
-[v _transmit_ir_packet `(v ~T0 @X0 0 ef1`E7625 ]
+[v _transmit_ir_packet `(v ~T0 @X0 0 ef1`E7626 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {
@@ -7234,39 +7282,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.h: 78: void SYSTEM_Initialize(void);
 [; ;mcc.h: 91: void OSCILLATOR_Initialize(void);
 [; ;util_functions.h: 16: void delay_25ms_n_times(uint16_t n);
-"16 LEDLogic.h
+"19 LEDLogic.h
 [v _last_pattern_was_heal `uc ~T0 @X0 1 e ]
 [i _last_pattern_was_heal
 -> -> 0 `i `uc
 ]
-[; ;LEDLogic.h: 16: bool last_pattern_was_heal = 0;
-[; ;LEDLogic.h: 38: typedef enum patterns {
-[; ;LEDLogic.h: 39: LED_ARMED,
-[; ;LEDLogic.h: 40: LED_DAMAGE,
-[; ;LEDLogic.h: 41: LED_HEAL,
-[; ;LEDLogic.h: 42: LED_STUN_CAST,
-[; ;LEDLogic.h: 43: LED_STUN_SELF,
-[; ;LEDLogic.h: 44: LED_SELF_TEST_PASSED,
-[; ;LEDLogic.h: 45: LED_SELF_TEST_FAILED
-[; ;LEDLogic.h: 46: } LED_Pattern;
-[; ;LEDLogic.h: 48: static inline void LEDOne();
-[; ;LEDLogic.h: 49: static inline void LEDZero();
-[; ;LEDLogic.h: 51: extern uint8_t byte_to_test;
-[; ;LEDLogic.h: 52: extern uint8_t bit_to_test;
-[; ;LEDLogic.h: 53: extern uint8_t to_return;
-"63
-[v _greenPixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 63: uint8_t greenPixels[24];
-"64
-[v _redPixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 64: uint8_t redPixels[24];
-"65
-[v _bluePixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 65: uint8_t bluePixels[24];
+[; ;LEDLogic.h: 19: bool last_pattern_was_heal = 0;
+[; ;LEDLogic.h: 42: typedef enum patterns {
+[; ;LEDLogic.h: 43: LED_ARMED,
+[; ;LEDLogic.h: 44: LED_DAMAGE,
+[; ;LEDLogic.h: 45: LED_ELEMENT_DAMAGE,
+[; ;LEDLogic.h: 46: LED_HEAL,
+[; ;LEDLogic.h: 47: LED_STUN_CAST,
+[; ;LEDLogic.h: 48: LED_STUN_SELF,
+[; ;LEDLogic.h: 49: LED_SELF_TEST_PASSED,
+[; ;LEDLogic.h: 50: LED_SELF_TEST_FAILED
+[; ;LEDLogic.h: 51: } LED_Pattern;
+[; ;LEDLogic.h: 53: static inline void LEDOne();
+[; ;LEDLogic.h: 54: static inline void LEDZero();
+[; ;LEDLogic.h: 56: extern uint8_t byte_to_test;
+[; ;LEDLogic.h: 57: extern uint8_t bit_to_test;
+[; ;LEDLogic.h: 58: extern uint8_t to_return;
 "68
-[v _bit_test_result `uc ~T0 @X0 1 e ]
-[; ;LEDLogic.h: 68: uint8_t bit_test_result;
+[v _greenPixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 68: uint8_t greenPixels[24];
 "69
+[v _redPixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 69: uint8_t redPixels[24];
+"70
+[v _bluePixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 70: uint8_t bluePixels[24];
+"73
+[v _bit_test_result `uc ~T0 @X0 1 e ]
+[; ;LEDLogic.h: 73: uint8_t bit_test_result;
+"74
 [v _mask `uc ~T0 @X0 -> 0 `x e ]
 [i _mask
 :U ..
@@ -7280,13 +7329,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;LEDLogic.h: 69: unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
-[; ;LEDLogic.h: 80: void playPattern(LED_Pattern pattern);
-[; ;LEDLogic.h: 97: void fill_color(uint8_t* grb);
-[; ;LEDLogic.h: 110: void draw(void);
-[; ;LEDLogic.h: 120: static void send_bit(int8_t val);
-[; ;LEDLogic.h: 122: static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
-[; ;LEDLogic.h: 124: int8_t bit_test(uint8_t* byte_to_test, uint8_t* bit_to_test);
+[; ;LEDLogic.h: 74: unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
+[; ;LEDLogic.h: 85: void LED_play_pattern(LED_Pattern pattern);
+[; ;LEDLogic.h: 102: void fill_color(uint8_t* grb);
+[; ;LEDLogic.h: 115: void draw(void);
+[; ;LEDLogic.h: 125: static void send_bit(int8_t val);
+[; ;LEDLogic.h: 127: static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
+[; ;LEDLogic.h: 129: int8_t bit_test(uint8_t* byte_to_test, uint8_t* bit_to_test);
 [; ;ir_common.h: 15: typedef enum spell_type {
 [; ;ir_common.h: 16: IR_SPELL_DAMAGE = 0,
 [; ;ir_common.h: 17: IR_SPELL_STUN = 2,
@@ -7372,9 +7421,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;main.h: 42: bool self_test_passed = 0;
 "45
-[v _device_state `E7681 ~T0 @X0 1 e ]
+[v _device_state `E7682 ~T0 @X0 1 e ]
 [i _device_state
-. `E7681 0
+. `E7682 0
 ]
 [; ;main.h: 45: device_state_t device_state = DEV_STATE_DISARMED;
 [; ;main.h: 53: static void init_logic(void);
@@ -7445,22 +7494,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bt_common.h: 40: uint8_t data3;
 [; ;bt_common.h: 41: uint8_t crc;
 [; ;bt_common.h: 42: } bt_packet_t;
-"36 bt_to_PIU.h
-[v _piu_buff `uc ~T0 @X0 -> 13 `i s ]
-[; ;bt_to_PIU.h: 36: static uint8_t piu_buff[13];
-"38
-[v _piu_bt_state `E7724 ~T0 @X0 1 s ]
-[i _piu_bt_state
-. `E7724 0
-]
-[; ;bt_to_PIU.h: 38: static bt_device_state_t piu_bt_state = BT_STATE_DISCONECTED;
-[; ;bt_to_PIU.h: 46: static inline void PIU_bt_clear_data_buff(void);
-[; ;bt_to_PIU.h: 52: bool PIU_bt_enter_command_mode(void);
-[; ;bt_to_PIU.h: 58: bool PIU_bt_exit_command_mode(void);
-[; ;bt_to_PIU.h: 65: void PIU_bt_send_command(bt_cmnd_t cmnd);
-[; ;bt_to_PIU.h: 71: bt_device_state_t PIU_bt_get_device_state(void);
-[; ;bt_to_PIU.h: 79: void PIU_bt_transmit_packet(bt_packet_t packet);
-[; ;bt_to_PIU.h: 87: void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read);
 [; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
 [; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
 [; ;string.h: 16: extern void * memset(void *, int, size_t);
@@ -7487,6 +7520,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 56: extern char * strichr(const char *, int);
 [; ;string.h: 57: extern char * strrchr(const char *, int);
 [; ;string.h: 58: extern char * strrichr(const char *, int);
+"39 bt_to_PIU.h
+[v _PIU_ACK_PACKET `Cuc ~T0 @X0 -> 0 `x s ]
+[i _PIU_ACK_PACKET
+:U ..
+-> -> 60 `i `uc
+-> -> 255 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+[; ;bt_to_PIU.h: 39: static const uint8_t PIU_ACK_PACKET[] = {0x3C, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+"40
+[v _PIU_HEARTBEAT_PACKET `Cuc ~T0 @X0 -> 0 `x s ]
+[i _PIU_HEARTBEAT_PACKET
+:U ..
+-> -> 60 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 255 `i `uc
+..
+]
+[; ;bt_to_PIU.h: 40: static const uint8_t PIU_HEARTBEAT_PACKET[] = {0x3C, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF};
+"44
+[v _piu_buff `uc ~T0 @X0 -> 13 `i s ]
+[; ;bt_to_PIU.h: 44: static uint8_t piu_buff[13];
+"45
+[v _read_byte `uc ~T0 @X0 1 s ]
+[; ;bt_to_PIU.h: 45: static uint8_t read_byte;
+"46
+[v _byte_counter `uc ~T0 @X0 1 s ]
+[; ;bt_to_PIU.h: 46: static uint8_t byte_counter;
+"47
+[v _piu_bt_state `E7725 ~T0 @X0 1 s ]
+[i _piu_bt_state
+. `E7725 0
+]
+[; ;bt_to_PIU.h: 47: static bt_device_state_t piu_bt_state = BT_STATE_DISCONECTED;
+[; ;bt_to_PIU.h: 55: static inline void PIU_bt_clear_data_buff(void);
+[; ;bt_to_PIU.h: 61: bool PIU_bt_enter_command_mode(void);
+[; ;bt_to_PIU.h: 67: bool PIU_bt_exit_command_mode(void);
+[; ;bt_to_PIU.h: 74: void PIU_bt_send_command(bt_cmnd_t cmnd);
+[; ;bt_to_PIU.h: 80: bt_device_state_t PIU_bt_get_device_state(void);
+[; ;bt_to_PIU.h: 88: bool PIU_bt_transmit_packet(bt_packet_t packet);
+[; ;bt_to_PIU.h: 96: void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -7516,313 +7600,228 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-"57 main.c
+"56 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 57: void main(void) {
+[; ;main.c: 56: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 59: SYSTEM_Initialize();
-"59
+[; ;main.c: 58: SYSTEM_Initialize();
+"58
 [e ( _SYSTEM_Initialize ..  ]
-[; ;main.c: 111: TX1REG = 'H';
+[; ;main.c: 77: (INTCONbits.GIE = 1);
+"77
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 80: (INTCONbits.PEIE = 1);
+"80
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;main.c: 109: ANSELAbits.ANSA0 = 0;
+"109
+[e = . . _ANSELAbits 0 0 -> -> 0 `i `uc ]
+[; ;main.c: 110: TRISAbits.RA0 = 0;
+"110
+[e = . . _TRISAbits 1 0 -> -> 0 `i `uc ]
+[; ;main.c: 111: LATAbits.LA0 = 0;
 "111
-[e = _TX1REG -> -> 72 `ui `uc ]
-[; ;main.c: 112: _delay((unsigned long)((10)*(16000000/4000000.0)));
+[e = . . _LATAbits 1 0 -> -> 0 `i `uc ]
+[; ;main.c: 112: delay_25ms_n_times(5);
 "112
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 113: TX1REG = 'I';
-"113
-[e = _TX1REG -> -> 73 `ui `uc ]
-[; ;main.c: 114: _delay((unsigned long)((10)*(16000000/4000000.0)));
+[e ( _delay_25ms_n_times (1 -> -> 5 `i `ui ]
+[; ;main.c: 114: while (1) {
 "114
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 115: TX1REG = '\n';
-"115
-[e = _TX1REG -> -> 10 `ui `uc ]
-"117
-[v _to_send `S1089 ~T0 @X0 1 a ]
-[; ;main.c: 117: bt_packet_t to_send;
-[; ;main.c: 119: to_send.start = 0x3C;
-"119
-[e = . _to_send 0 -> -> 60 `i `uc ]
-[; ;main.c: 120: to_send.func = 0x01;
-"120
-[e = . _to_send 1 -> -> 1 `i `uc ]
-[; ;main.c: 121: to_send.data1 = 0x00;
-"121
-[e = . _to_send 2 -> -> 0 `i `uc ]
-[; ;main.c: 122: to_send.data2 = 0x00;
-"122
-[e = . _to_send 3 -> -> 0 `i `uc ]
-[; ;main.c: 123: to_send.data3 = 0x00;
-"123
-[e = . _to_send 4 -> -> 0 `i `uc ]
-[; ;main.c: 125: TX1REG = 'T';
-"125
-[e = _TX1REG -> -> 84 `ui `uc ]
-[; ;main.c: 126: _delay((unsigned long)((10)*(16000000/4000000.0)));
-"126
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 127: TX1REG = 'R';
-"127
-[e = _TX1REG -> -> 82 `ui `uc ]
-[; ;main.c: 128: _delay((unsigned long)((10)*(16000000/4000000.0)));
-"128
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 129: TX1REG = '\n';
-"129
-[e = _TX1REG -> -> 10 `ui `uc ]
-[; ;main.c: 131: PIU_bt_transmit_packet(to_send);
-"131
-[e ( _PIU_bt_transmit_packet (1 _to_send ]
-"133
-[v _char_buff `uc ~T0 @X0 -> 15 `i a ]
-"134
-[v _read_byte `uc ~T0 @X0 1 a ]
-[; ;main.c: 133: uint8_t char_buff[15];
-[; ;main.c: 134: uint8_t read_byte;
-[; ;main.c: 136: while (1) {
-"136
 [e :U 1093 ]
 {
-[; ;main.c: 147: do {
-"147
-[e :U 1097 ]
-{
-[; ;main.c: 149: if ((eusart2RxCount)) {
-"149
-[e $ ! != -> _eusart2RxCount `i -> -> -> 0 `i `Vuc `i 1098  ]
-{
-[; ;main.c: 151: for (uint8_t i = 0; i < 15; i++) {
-"151
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 15 `i 1099  ]
-[e $U 1100  ]
-[e :U 1099 ]
-{
-[; ;main.c: 152: read_byte = EUSART1_Read();
-"152
-[e = _read_byte ( _EUSART1_Read ..  ]
-[; ;main.c: 153: char_buff[i] = read_byte;
-"153
-[e = *U + &U _char_buff * -> _i `ux -> -> # *U &U _char_buff `ui `ux _read_byte ]
-[; ;main.c: 155: if (read_byte == '\n' || read_byte == '\0') {
-"155
-[e $ ! || == -> _read_byte `ui -> 10 `ui == -> _read_byte `ui -> 0 `ui 1102  ]
-{
-[; ;main.c: 156: break;
-"156
-[e $U 1100  ]
-"157
-}
-[e :U 1102 ]
-"159
-}
-"151
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 15 `i 1099  ]
-[e :U 1100 ]
-"159
-}
-[; ;main.c: 157: }
-[; ;main.c: 159: }
-[; ;main.c: 161: TX1REG = 'A';
-"161
-[e = _TX1REG -> -> 65 `ui `uc ]
-[; ;main.c: 162: _delay((unsigned long)((10)*(16000000/4000000.0)));
-"162
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 163: TX1REG = 'T';
-"163
-[e = _TX1REG -> -> 84 `ui `uc ]
-[; ;main.c: 164: _delay((unsigned long)((10)*(16000000/4000000.0)));
-"164
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 165: TX1REG = '\n';
-"165
-[e = _TX1REG -> -> 10 `ui `uc ]
-[; ;main.c: 166: memcpy(char_buff, '\0', sizeof(char_buff));
-"166
-[e ( _memcpy (3 , , -> &U _char_buff `*v -> -> 0 `ui `*Cv -> # _char_buff `ui ]
-"167
-}
-[e :U 1098 ]
-"168
-}
-[; ;main.c: 167: }
-[; ;main.c: 168: } while (!(eusart2RxCount));
-[e $ ! != -> _eusart2RxCount `i -> -> -> 0 `i `Vuc `i 1097  ]
-[e :U 1096 ]
-"169
+[; ;main.c: 116: LED_play_pattern(LED_ARMED);
+"116
+[e ( _LED_play_pattern (1 . `E7589 0 ]
+[; ;main.c: 117: LED_play_pattern(LED_DAMAGE);
+"117
+[e ( _LED_play_pattern (1 . `E7589 1 ]
+[; ;main.c: 118: LED_play_pattern(LED_ELEMENT_DAMAGE);
+"118
+[e ( _LED_play_pattern (1 . `E7589 2 ]
+[; ;main.c: 119: LED_play_pattern(LED_HEAL);
+"119
+[e ( _LED_play_pattern (1 . `E7589 3 ]
+[; ;main.c: 120: LED_play_pattern(LED_STUN_CAST);
+"120
+[e ( _LED_play_pattern (1 . `E7589 4 ]
+[; ;main.c: 121: LED_play_pattern(LED_STUN_SELF);
+"121
+[e ( _LED_play_pattern (1 . `E7589 5 ]
+[; ;main.c: 122: LED_play_pattern(LED_SELF_TEST_PASSED);
+"122
+[e ( _LED_play_pattern (1 . `E7589 6 ]
+[; ;main.c: 123: LED_play_pattern(LED_SELF_TEST_FAILED);
+"123
+[e ( _LED_play_pattern (1 . `E7589 7 ]
+"131
 }
 [e :U 1092 ]
-"136
+"114
 [e $U 1093  ]
 [e :U 1094 ]
-[; ;main.c: 169: }
-[; ;main.c: 171: }
-"171
+[; ;main.c: 131: }
+[; ;main.c: 133: }
+"133
 [e :UE 1091 ]
 }
-"173
+"135
 [v _init_logic `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 173: static void init_logic(void) {
+[; ;main.c: 135: static void init_logic(void) {
 [e :U _init_logic ]
 [f ]
-[; ;main.c: 174: draw();
-"174
+[; ;main.c: 136: draw();
+"136
 [e ( _draw ..  ]
-[; ;main.c: 175: }
-"175
-[e :UE 1103 ]
+[; ;main.c: 137: }
+"137
+[e :UE 1095 ]
 }
-"177
+"139
 [v _connect_to_peripherals `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 177: static void connect_to_peripherals(void) {
+[; ;main.c: 139: static void connect_to_peripherals(void) {
 [e :U _connect_to_peripherals ]
 [f ]
-[; ;main.c: 178: init_Bluetooth_to_PIU();
-"178
+[; ;main.c: 140: init_Bluetooth_to_PIU();
+"140
 [e ( _init_Bluetooth_to_PIU ..  ]
-[; ;main.c: 180: self_test_passed = bluetooth_to_PIU_online;
-"180
+[; ;main.c: 142: self_test_passed = bluetooth_to_PIU_online;
+"142
 [e = _self_test_passed _bluetooth_to_PIU_online ]
-[; ;main.c: 182: init_Bluetooth_to_remote();
-"182
+[; ;main.c: 144: init_Bluetooth_to_remote();
+"144
 [e ( _init_Bluetooth_to_remote ..  ]
-[; ;main.c: 184: self_test_passed = (self_test_passed & bluetooth_to_remote_online);
-"184
+[; ;main.c: 146: self_test_passed = (self_test_passed & bluetooth_to_remote_online);
+"146
 [e = _self_test_passed -> & -> _self_test_passed `i -> _bluetooth_to_remote_online `i `uc ]
-[; ;main.c: 186: init_audio_controller();
-"186
+[; ;main.c: 148: init_audio_controller();
+"148
 [e ( _init_audio_controller ..  ]
-[; ;main.c: 188: self_test_passed = (self_test_passed & audio_controller_online);
-"188
+[; ;main.c: 150: self_test_passed = (self_test_passed & audio_controller_online);
+"150
 [e = _self_test_passed -> & -> _self_test_passed `i -> _audio_controller_online `i `uc ]
-[; ;main.c: 191: if (self_test_passed) {
-"191
-[e $ ! != -> _self_test_passed `i -> -> -> 0 `i `uc `i 1105  ]
+[; ;main.c: 153: if (self_test_passed) {
+"153
+[e $ ! != -> _self_test_passed `i -> -> -> 0 `i `uc `i 1097  ]
 {
-"193
+"155
 }
-[; ;main.c: 193: } else {
-[e $U 1106  ]
-[e :U 1105 ]
+[; ;main.c: 155: } else {
+[e $U 1098  ]
+[e :U 1097 ]
 {
-"195
+"157
 }
-[e :U 1106 ]
-[; ;main.c: 195: }
-[; ;main.c: 196: }
-"196
-[e :UE 1104 ]
+[e :U 1098 ]
+[; ;main.c: 157: }
+[; ;main.c: 158: }
+"158
+[e :UE 1096 ]
 }
-"198
+"160
 [v _init_Bluetooth_to_PIU `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 198: static void init_Bluetooth_to_PIU(void) {
+[; ;main.c: 160: static void init_Bluetooth_to_PIU(void) {
 [e :U _init_Bluetooth_to_PIU ]
 [f ]
-[; ;main.c: 200: bluetooth_to_PIU_online = 1;
-"200
+[; ;main.c: 162: bluetooth_to_PIU_online = 1;
+"162
 [e = _bluetooth_to_PIU_online -> -> 1 `i `uc ]
-[; ;main.c: 201: }
-"201
-[e :UE 1107 ]
+[; ;main.c: 163: }
+"163
+[e :UE 1099 ]
 }
-"203
+"165
 [v _init_Bluetooth_to_remote `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 203: static void init_Bluetooth_to_remote(void) {
+[; ;main.c: 165: static void init_Bluetooth_to_remote(void) {
 [e :U _init_Bluetooth_to_remote ]
 [f ]
-[; ;main.c: 205: bluetooth_to_remote_online = 1;
-"205
+[; ;main.c: 167: bluetooth_to_remote_online = 1;
+"167
 [e = _bluetooth_to_remote_online -> -> 1 `i `uc ]
-[; ;main.c: 206: }
-"206
-[e :UE 1108 ]
+[; ;main.c: 168: }
+"168
+[e :UE 1100 ]
 }
-"208
+"170
 [v _init_audio_controller `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 208: static void init_audio_controller(void) {
+[; ;main.c: 170: static void init_audio_controller(void) {
 [e :U _init_audio_controller ]
 [f ]
-[; ;main.c: 210: audio_controller_online = 1;
-"210
+[; ;main.c: 172: audio_controller_online = 1;
+"172
 [e = _audio_controller_online -> -> 1 `i `uc ]
-[; ;main.c: 211: }
-"211
-[e :UE 1109 ]
+[; ;main.c: 173: }
+"173
+[e :UE 1101 ]
 }
-"213
+"175
 [v _stunned `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 213: void stunned(void) {
+[; ;main.c: 175: void stunned(void) {
 [e :U _stunned ]
 [f ]
-[; ;main.c: 215: play_audio_file(AUDIO_STUN_HIT);
-"215
-[e ( _play_audio_file (1 . `E7671 3 ]
-[; ;main.c: 219: for (uint8_t i = 0; i < 200; i++) {
-"219
+[; ;main.c: 177: play_audio_file(AUDIO_STUN_HIT);
+"177
+[e ( _play_audio_file (1 . `E7672 3 ]
+[; ;main.c: 181: for (uint8_t i = 0; i < 200; i++) {
+"181
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 200 `i 1111  ]
-[e $U 1112  ]
-[e :U 1111 ]
+[e $ < -> _i `i -> 200 `i 1103  ]
+[e $U 1104  ]
+[e :U 1103 ]
 {
-[; ;main.c: 220: playPattern(LED_STUN_SELF);
-"220
-[e ( _playPattern (1 . `E7589 4 ]
-[; ;main.c: 221: delay_25ms_n_times(1);
-"221
+[; ;main.c: 182: LED_play_pattern(LED_STUN_SELF);
+"182
+[e ( _LED_play_pattern (1 . `E7589 5 ]
+[; ;main.c: 183: delay_25ms_n_times(1);
+"183
 [e ( _delay_25ms_n_times (1 -> -> 1 `i `ui ]
-"222
+"184
 }
-"219
+"181
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 200 `i 1111  ]
-[e :U 1112 ]
-"222
+[e $ < -> _i `i -> 200 `i 1103  ]
+[e :U 1104 ]
+"184
 }
-[; ;main.c: 222: }
-[; ;main.c: 224: play_audio_file(AUDIO_STUN_END);
-"224
-[e ( _play_audio_file (1 . `E7671 4 ]
-[; ;main.c: 225: playPattern(LED_ARMED);
-"225
-[e ( _playPattern (1 . `E7589 0 ]
-[; ;main.c: 227: }
-"227
-[e :UE 1110 ]
+[; ;main.c: 184: }
+[; ;main.c: 186: play_audio_file(AUDIO_STUN_END);
+"186
+[e ( _play_audio_file (1 . `E7672 4 ]
+[; ;main.c: 187: LED_play_pattern(LED_ARMED);
+"187
+[e ( _LED_play_pattern (1 . `E7589 0 ]
+[; ;main.c: 189: }
+"189
+[e :UE 1102 ]
 }
-"229
+"191
 [v _detonate `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 229: void detonate(void) {
+[; ;main.c: 191: void detonate(void) {
 [e :U _detonate ]
 [f ]
-[; ;main.c: 234: delay_25ms_n_times(80);
-"234
+[; ;main.c: 196: delay_25ms_n_times(80);
+"196
 [e ( _delay_25ms_n_times (1 -> -> 80 `i `ui ]
-[; ;main.c: 236: transmit_ir_packet(IR_SPELL_DAMAGE);
-"236
-[e ( _transmit_ir_packet (1 . `E7625 0 ]
-[; ;main.c: 237: play_audio_file(AUDIO_DAMAGE_CAST);
-"237
-[e ( _play_audio_file (1 . `E7671 0 ]
-[; ;main.c: 238: playPattern(LED_DAMAGE);
-"238
-[e ( _playPattern (1 . `E7589 1 ]
-[; ;main.c: 244: }
-"244
-[e :UE 1114 ]
+[; ;main.c: 198: transmit_ir_packet(IR_SPELL_DAMAGE);
+"198
+[e ( _transmit_ir_packet (1 . `E7626 0 ]
+[; ;main.c: 199: play_audio_file(AUDIO_DAMAGE_CAST);
+"199
+[e ( _play_audio_file (1 . `E7672 0 ]
+[; ;main.c: 200: LED_play_pattern(LED_DAMAGE);
+"200
+[e ( _LED_play_pattern (1 . `E7589 1 ]
+[; ;main.c: 206: }
+"206
+[e :UE 1106 ]
 }

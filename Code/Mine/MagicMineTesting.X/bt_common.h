@@ -33,12 +33,12 @@ extern "C" {
     } bt_cmnd_t;
     
     typedef struct bt_packet {
-        uint8_t start; //= 0x3C;
-        uint8_t func;//= 0x00;
-        uint8_t data1;//= 0x00;
-        uint8_t data2;//= 0x00;
-        uint8_t data3;//= 0x00;
-        uint8_t crc;//= 0xFF;
+        uint8_t start;  //= 0x3C;
+        uint8_t func;   //= 0x00;
+        uint8_t data1;  //= 0x00;
+        uint8_t data2;  //= 0x00;
+        uint8_t data3;  //= 0x00;
+        uint8_t crc;    //= 0xFF;
     } bt_packet_t;
     
 #ifdef	__cplusplus

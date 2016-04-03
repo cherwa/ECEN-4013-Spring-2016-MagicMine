@@ -5,8 +5,7 @@
  */
 
 #include "bt_to_PIU.h"
-#include "main.h"
-#include <string.h>
+//#include "main.h"
 
 static inline void PIU_bt_clear_data_buff(void) {
     memcpy(piu_buff, '\0', sizeof(piu_buff));
@@ -14,7 +13,7 @@ static inline void PIU_bt_clear_data_buff(void) {
 
 bool PIU_bt_enter_command_mode(void) {
     
-    TX2REG = '$'; TX2REG = '$'; TX2REG  = '$';
+    TX1REG = '$'; TX1REG = '$'; TX1REG  = '$';
     
     PIU_bt_read_cmnd_to_buffer(3);
     
@@ -29,11 +28,11 @@ bool PIU_bt_enter_command_mode(void) {
     
 bool PIU_bt_exit_command_mode(void) {
     
-    TX2REG = '-'; TX2REG = '-'; TX2REG = '-'; TX2REG = '\n';
+    TX1REG = '-'; TX1REG = '-'; TX1REG = '-'; TX1REG = '\n';
     
     return true;
 }
-    
+/** @deprecated */
 void PIU_bt_send_command(bt_cmnd_t cmnd) {
 
     switch (cmnd) {
@@ -41,7 +40,7 @@ void PIU_bt_send_command(bt_cmnd_t cmnd) {
             
             PIU_bt_enter_command_mode();
             
-            TX2REG = 'G'; TX2REG = 'R'; TX2REG = '\n';
+            TX1REG = 'G'; TX1REG = 'R'; TX1REG = '\n';
             
             PIU_bt_read_cmnd_to_buffer(12);
             
@@ -61,17 +60,39 @@ bt_device_state_t PIU_bt_get_device_state(void) {
     return piu_bt_state;
 }
 
-void PIU_bt_transmit_packet(bt_packet_t packet) {
+bool PIU_bt_transmit_packet(bt_packet_t packet) {
     
     // Compute the CRC byte
     packet.crc = 0xFF - (packet.func + packet.data1 + packet.data2 + packet.data3);
     
-    TX2REG = packet.start;
-    TX2REG = packet.func;
-    TX2REG = packet.data1;
-    TX2REG = packet.data2;
-    TX2REG = packet.data3;
-    TX2REG = packet.crc;
+    TX1REG = packet.start;
+    __delay_us(100);
+    TX1REG = packet.func;
+    __delay_us(100);
+    TX1REG = packet.data1;
+    __delay_us(100);
+    TX1REG = packet.data2;
+    __delay_us(100);
+    TX1REG = packet.data3;
+    __delay_us(100);
+    TX1REG = packet.crc;
+    __delay_us(100);
+    
+    byte_counter = 0;
+    
+    do {
+        if (EUSART1_DataReady) {
+            read_byte = EUSART1_Read();
+            piu_buff[byte_counter] = read_byte;
+            byte_counter++;
+        }
+    } while(byte_counter < 6);
+    
+    if ( strncmp(piu_buff, PIU_HEARTBEAT_PACKET, 6) ){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read) {
@@ -82,7 +103,7 @@ void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read) {
     
     do {
         
-        if (EUSART2_DataReady) {
+        if (EUSART1_DataReady) {
             
             for (uint8_t i = 0; i <= size_to_read; i++) {
                 read_byte = EUSART1_Read();

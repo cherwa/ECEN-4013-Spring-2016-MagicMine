@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [v F7564 `(v ~T0 @X0 0 tf ]
-"1924 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"1924 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [v _CCP4CON `Vuc ~T0 @X0 0 e@3927 ]
 "1993
 [v _CCPR4L `Vuc ~T0 @X0 0 e@3928 ]
@@ -44,18 +44,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1084 CCPR4Reg_tag . . ]
 "155
 [v _CCP4_CallBack `(v ~T0 @X0 0 ef1`ui ]
-"109 mcc_generated_files/ccp4.c
-[c E7587 0 1 2 3 4 5 6 .. ]
-[n E7587 patterns LED_ARMED LED_DAMAGE LED_HEAL LED_STUN_CAST LED_STUN_SELF LED_SELF_TEST_PASSED LED_SELF_TEST_FAILED  ]
-"80 mcc_generated_files/../LEDLogic.h
-[v _playPattern `(v ~T0 @X0 0 ef1`E7587 ]
 "16 mcc_generated_files/../util_functions.h
 [v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {
@@ -7233,39 +7228,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr4.h: 325: bool TMR4_HasOverflowOccured(void);
 [; ;mcc.h: 78: void SYSTEM_Initialize(void);
 [; ;mcc.h: 91: void OSCILLATOR_Initialize(void);
-"16 mcc_generated_files/../LEDLogic.h
+"19 mcc_generated_files/../LEDLogic.h
 [v _last_pattern_was_heal `uc ~T0 @X0 1 e ]
 [i _last_pattern_was_heal
 -> -> 0 `i `uc
 ]
-[; ;LEDLogic.h: 16: bool last_pattern_was_heal = 0;
-[; ;LEDLogic.h: 38: typedef enum patterns {
-[; ;LEDLogic.h: 39: LED_ARMED,
-[; ;LEDLogic.h: 40: LED_DAMAGE,
-[; ;LEDLogic.h: 41: LED_HEAL,
-[; ;LEDLogic.h: 42: LED_STUN_CAST,
-[; ;LEDLogic.h: 43: LED_STUN_SELF,
-[; ;LEDLogic.h: 44: LED_SELF_TEST_PASSED,
-[; ;LEDLogic.h: 45: LED_SELF_TEST_FAILED
-[; ;LEDLogic.h: 46: } LED_Pattern;
-[; ;LEDLogic.h: 48: static inline void LEDOne();
-[; ;LEDLogic.h: 49: static inline void LEDZero();
-[; ;LEDLogic.h: 51: extern uint8_t byte_to_test;
-[; ;LEDLogic.h: 52: extern uint8_t bit_to_test;
-[; ;LEDLogic.h: 53: extern uint8_t to_return;
-"63
-[v _greenPixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 63: uint8_t greenPixels[24];
-"64
-[v _redPixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 64: uint8_t redPixels[24];
-"65
-[v _bluePixels `uc ~T0 @X0 -> 24 `i e ]
-[; ;LEDLogic.h: 65: uint8_t bluePixels[24];
+[; ;LEDLogic.h: 19: bool last_pattern_was_heal = 0;
+[; ;LEDLogic.h: 42: typedef enum patterns {
+[; ;LEDLogic.h: 43: LED_ARMED,
+[; ;LEDLogic.h: 44: LED_DAMAGE,
+[; ;LEDLogic.h: 45: LED_ELEMENT_DAMAGE,
+[; ;LEDLogic.h: 46: LED_HEAL,
+[; ;LEDLogic.h: 47: LED_STUN_CAST,
+[; ;LEDLogic.h: 48: LED_STUN_SELF,
+[; ;LEDLogic.h: 49: LED_SELF_TEST_PASSED,
+[; ;LEDLogic.h: 50: LED_SELF_TEST_FAILED
+[; ;LEDLogic.h: 51: } LED_Pattern;
+[; ;LEDLogic.h: 53: static inline void LEDOne();
+[; ;LEDLogic.h: 54: static inline void LEDZero();
+[; ;LEDLogic.h: 56: extern uint8_t byte_to_test;
+[; ;LEDLogic.h: 57: extern uint8_t bit_to_test;
+[; ;LEDLogic.h: 58: extern uint8_t to_return;
 "68
-[v _bit_test_result `uc ~T0 @X0 1 e ]
-[; ;LEDLogic.h: 68: uint8_t bit_test_result;
+[v _greenPixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 68: uint8_t greenPixels[24];
 "69
+[v _redPixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 69: uint8_t redPixels[24];
+"70
+[v _bluePixels `uc ~T0 @X0 -> 24 `i e ]
+[; ;LEDLogic.h: 70: uint8_t bluePixels[24];
+"73
+[v _bit_test_result `uc ~T0 @X0 1 e ]
+[; ;LEDLogic.h: 73: uint8_t bit_test_result;
+"74
 [v _mask `uc ~T0 @X0 -> 0 `x e ]
 [i _mask
 :U ..
@@ -7279,13 +7275,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;LEDLogic.h: 69: unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
-[; ;LEDLogic.h: 80: void playPattern(LED_Pattern pattern);
-[; ;LEDLogic.h: 97: void fill_color(uint8_t* grb);
-[; ;LEDLogic.h: 110: void draw(void);
-[; ;LEDLogic.h: 120: static void send_bit(int8_t val);
-[; ;LEDLogic.h: 122: static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
-[; ;LEDLogic.h: 124: int8_t bit_test(uint8_t* byte_to_test, uint8_t* bit_to_test);
+[; ;LEDLogic.h: 74: unsigned char mask[] = {128, 64, 32, 16, 8, 4, 2, 1};
+[; ;LEDLogic.h: 85: void LED_play_pattern(LED_Pattern pattern);
+[; ;LEDLogic.h: 102: void fill_color(uint8_t* grb);
+[; ;LEDLogic.h: 115: void draw(void);
+[; ;LEDLogic.h: 125: static void send_bit(int8_t val);
+[; ;LEDLogic.h: 127: static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
+[; ;LEDLogic.h: 129: int8_t bit_test(uint8_t* byte_to_test, uint8_t* bit_to_test);
 [; ;util_functions.h: 16: void delay_25ms_n_times(uint16_t n);
 "60 mcc_generated_files/ccp4.c
 [v _CCP4_Initialize `(v ~T0 @X0 1 ef ]
@@ -7373,9 +7369,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ccp4.c: 108: last_pattern_was_heal = 0;
 "108
 [e = _last_pattern_was_heal -> -> 0 `i `uc ]
-[; ;ccp4.c: 109: playPattern(LED_DAMAGE);
-"109
-[e ( _playPattern (1 . `E7587 1 ]
 "110
 }
 [; ;ccp4.c: 110: } else {
@@ -7385,9 +7378,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ccp4.c: 111: last_pattern_was_heal = 1;
 "111
 [e = _last_pattern_was_heal -> -> 1 `i `uc ]
-[; ;ccp4.c: 112: playPattern(LED_HEAL);
-"112
-[e ( _playPattern (1 . `E7587 2 ]
 "113
 }
 [e :U 1093 ]

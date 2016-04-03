@@ -1,18 +1,18 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [v F7564 `(v ~T0 @X0 0 tf ]
-"17990 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"17990 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [v _LATC3 `Vb ~T0 @X0 0 e@31835 ]
 "17988
 [v _LATC2 `Vb ~T0 @X0 0 e@31834 ]
 [v F7357 `(v ~T0 @X0 1 tf1`ul ]
-"156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
+"156 /Applications/microchip/xc8/v1.36/include/pic18.h
 [v __delay `JF7357 ~T0 @X0 0 e ]
 [p i __delay ]
 "16 util_functions.h
 [v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
 "34 Wtv020sd16p.h
 [v _sendCommand `(v ~T0 @X0 0 ef1`ui ]
-"6936 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"6936 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [s S423 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S423 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
 "6946
@@ -53,7 +53,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
+"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {

@@ -23,18 +23,27 @@
 #define PIU_COLOR_WHITE 0x07
 #define PIU_COLOR_BLACK 0xFF
 
-#define PIU_BT_MAC 0x0006667C62F5
-#define PIU_BT_PIU_MAC 0x98D3318060F1
+#define PIU_team_ID 0x00
+
+#define PIU_BT_MAC "0x0006667C62F5"
+#define PIU_BT_PIU_MAC "0x98D3318060F1"
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-#include "mcc_generated_files/mcc.h"
+//#include "mcc_generated_files/mcc.h"
+#include <string.h>
 #include "bt_common.h"
     
-    static uint8_t piu_buff[13];
+    static const uint8_t PIU_ACK_PACKET[] = {0x3C, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    static const uint8_t PIU_HEARTBEAT_PACKET[] = {0x3C, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF};
     
+    // byte sized buffer for bluetooth 2.0 MBT(MAGE bluetooth protocol)
+    // read from eusart bluetooth into a buffer for use by MCU
+    static uint8_t piu_buff[13];
+    static uint8_t read_byte;
+    static uint8_t byte_counter;
     static bt_device_state_t piu_bt_state = BT_STATE_DISCONECTED;
     
     /**
@@ -71,12 +80,12 @@ extern "C" {
     bt_device_state_t PIU_bt_get_device_state(void);
     
     /**
-     * Send the configured Bluetooth packet to the PIU interface.
+     * Send the configured Bluetooth packet as specified by to the PIU interface.
      * @param packet The packet to send.
      * @warning Make sure that you have configured the fields of the [packet](@ref bt_packet_t)
      * before you send it!
      */
-    void PIU_bt_transmit_packet(bt_packet_t packet);
+    bool PIU_bt_transmit_packet(bt_packet_t packet);
     
     /**
      * Attempts to read the result of a command send to the microcontroller.
