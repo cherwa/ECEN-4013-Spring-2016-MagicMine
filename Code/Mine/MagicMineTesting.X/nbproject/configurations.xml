@@ -70,6 +70,7 @@
       </logicalFolder>
       <logicalFolder name="f4" displayName="IR" projectFiles="true">
         <itemPath>ir_tx.c</itemPath>
+        <itemPath>ir_rx.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="LEDs" projectFiles="true">
         <itemPath>LEDLogic.c</itemPath>
@@ -114,7 +115,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.36</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <compileType>
         <linkerTool>

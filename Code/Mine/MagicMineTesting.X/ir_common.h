@@ -16,7 +16,9 @@ extern "C" {
 
 #define Cycles15 390UL//394UL//390UL reduced delay by 5 us to get better mirp
 #define Cycles30 785UL//789UL//780UL
-    
+#define cycleMid 589L//591L//587L //591, use 5 less
+#define cycleEnd 195L//197L//183L//192L //197, use 5 less
+
     //Need CCP4 on Pin 21!!!
     //pwm4.c needed
     
@@ -70,10 +72,26 @@ extern "C" {
     void bangBitsSoftly(uint8_t mirp[]);
     uint8_t getCRC(uint8_t mirp0[]);
     void IR_Start(void);
+    
+    //IR RX
+    void waitTillMid(void);
+    void waitTillEnd(void);
+    bool checkStart(void);
+    bool checkCRC();
+    uint8_t decodeByte(); //uses shorter delays than IR START to compensate 
+    bool decode(void);
+    
+    uint8_t counter_rx;
+    struct ir_packet mirpRx;
+//    uint8_t IDH,IDL,SPELL,STR,UID,CRC;
+    uint8_t byteFromCount_rx;
+    uint8_t decodedByte_rx;
+    uint8_t calculatedCRC_rx;
+    bool validMIRP_rx = 0;
+
 
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* IR_COMMON_H */
-
