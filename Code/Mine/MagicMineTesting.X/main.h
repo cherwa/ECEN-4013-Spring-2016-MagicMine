@@ -12,8 +12,12 @@ extern "C" {
 #endif
 
 #include "mcc_generated_files/mcc.h"
+#include <string.h>
+#include <stdio.h>
+#include "bt_to_PIU.h"
+#include "bt_to_remote.h"
+#include "bt_common.h"
 #include "util_functions.h"
-#include "NeoCol.h"
 #include "LEDLogic.h"
 #include "ir_common.h"
 #include "audio.h"
