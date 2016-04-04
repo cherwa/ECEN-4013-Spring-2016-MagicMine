@@ -1,7 +1,6 @@
 /Code/Mine/Magic_Mine.X/nbproject/private/
 /Code/Mine/Magic_Mine.X/build/default/
 /Code/Mine/Magic_Mine.X/dist/default/
-/Code/Mine/MagicMineTesting.X/nbproject/private/
 /Code/Mine/MagicMineTesting.X/build/default/
 /Code/Mine/MagicMineTesting.X/dist/default/
 /Code/Remote/Remote Testing.X/build/default/
@@ -157,6 +156,5 @@ Code/Mine/MagicMineTesting.X/main.c
 
 Code/Mine/MagicMineTesting.X/nbproject/Makefile-genesis.properties
 
-Code/Mine/MagicMineTesting.X/nbproject/configurations.xml
 
 Code/Mine/MagicMineTesting.X/nbproject/private/configurations.xml
