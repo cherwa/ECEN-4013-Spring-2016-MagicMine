@@ -42,12 +42,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  */
 
 #include "main.h"
-#include "Wtv020sd16p.h"
-#include "bt_common.h"
-#include "bt_to_PIU.h"
-
-#include <string.h>
-#include <stdio.h>
 
 /*
     Main application
@@ -85,6 +79,9 @@ void main(void) {
     // Disable the Peripheral Interrupts
 //    INTERRUPT_PeripheralInterruptDisable();
     
+    init_logic();
+    connect_to_peripherals();
+    
     while (1) {
         
         LED_play_pattern(LED_ARMED);
@@ -95,12 +92,11 @@ void main(void) {
         LED_play_pattern(LED_STUN_SELF);
         LED_play_pattern(LED_SELF_TEST_PASSED);
         LED_play_pattern(LED_SELF_TEST_FAILED);
-    }
-    
+    }    
 }
 
 static void init_logic(void) {
-    draw();
+    
 }
 
 static void connect_to_peripherals(void) {

@@ -1,17 +1,17 @@
 
 # 1 "audio.c"
 
-# 26 "/Applications/microchip/xc8/v1.36/include/htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "/Applications/microchip/xc8/v1.36/include/xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 49 "/Applications/microchip/xc8/v1.36/include/pic18f26k22.h"
+# 49 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h"
 extern volatile unsigned char ANSELA @ 0xF38;
 
 asm("ANSELA equ 0F38h");
@@ -8795,7 +8795,7 @@ extern volatile __bit nW2 @ (((unsigned) &SSP2STAT)*8) + 2;
 
 extern volatile __bit nWRITE2 @ (((unsigned) &SSP2STAT)*8) + 2;
 
-# 18 "/Applications/microchip/xc8/v1.36/include/pic18.h"
+# 18 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 
@@ -8819,7 +8819,7 @@ void PIN_MANAGER_Initialize (void);
 # 222
 void PIN_MANAGER_IOC(void);
 
-# 13 "/Applications/microchip/xc8/v1.36/include/stdint.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -8909,7 +8909,7 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 12 "/Applications/microchip/xc8/v1.36/include/stdbool.h"
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdbool.h"
 typedef unsigned char bool;
 
 # 110 "mcc_generated_files/interrupt_manager.h"
@@ -8985,10 +8985,10 @@ void EUSART2_Transmit_ISR(void);
 # 222
 void EUSART2_Receive_ISR(void);
 
-# 4 "/Applications/microchip/xc8/v1.36/include/__size_t.h"
+# 4 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\__size_t.h"
 typedef unsigned size_t;
 
-# 6 "/Applications/microchip/xc8/v1.36/include/stddef.h"
+# 6 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stddef.h"
 typedef int ptrdiff_t;
 
 # 117 "mcc_generated_files/spi1.h"
@@ -9192,73 +9192,18 @@ void OSCILLATOR_Initialize(void);
 
 # 16 "audio.h"
 typedef enum audio_files {
-AUDIO_DAMAGE_CAST,
-AUDIO_HEAL_CAST,
-AUDIO_STUN_CAST,
-AUDIO_STUN_HIT,
-AUDIO_STUN_END,
-AUDIO_CUSTOM_CAST
+AUDIO_DAMAGE_CAST = 0x0000,
+AUDIO_HEAL_CAST = 0x0001,
+AUDIO_STUN_CAST = 0x0002,
+AUDIO_STUN_HIT = 0x0003,
+AUDIO_STUN_END = 0x0004,
+AUDIO_CUSTOM_CAST = 0x0005
 } audio_file_t;
 
-void play_audio_file(audio_file_t file);
+void audio_play(audio_file_t file);
 
-# 15 "ir_common.h"
-typedef enum spell_type {
-IR_SPELL_DAMAGE = 0,
-IR_SPELL_STUN = 2,
-IR_SPELL_HEAL = 4
-} ir_spell_id_t;
-
-# 28
-struct ir_packet {
-const uint8_t id_h;
-const uint8_t id_l;
-const uint8_t spell_id;
-const uint8_t uuid;
-const uint8_t crc;
-};
-
-const uint8_t id_h = 0;
-const uint8_t id_l = 1;
-
-uint8_t packet_uuid = 0;
-
-# 45
-void transmit_ir_packet(ir_spell_id_t spell_id);
-void wait1Sec(void);
-void modulate_us(int time);
-void waitLow_us(int time);
-void waitLow30Cycles(void);
-void waitLow15Cycles(void);
-void modulate30Cycles(void);
-void modulate15Cycles(void);
-void bangBitsHard(uint8_t mirp0[], bool toTransmit[]);
-void sendZero(void);
-void sendOne(void);
-void bangBitsSoftly(uint8_t mirp[]);
-void getBitStream(uint8_t mirp0[], bool toTransmit[]);
-uint8_t getCRC(uint8_t mirp0[]);
-void IR_Start(void);
-
-# 10 "audio.c"
+# 9 "audio.c"
 void play_audio_file(audio_file_t file) {
 
-
-
-switch (file) {
-case AUDIO_DAMAGE_CAST:
-break;
-case AUDIO_HEAL_CAST:
-break;
-case AUDIO_STUN_CAST:
-break;
-case AUDIO_STUN_HIT:
-break;
-case AUDIO_STUN_END:
-break;
-case AUDIO_CUSTOM_CAST:
-break;
-default:
-break;
-}
+# 15
 }

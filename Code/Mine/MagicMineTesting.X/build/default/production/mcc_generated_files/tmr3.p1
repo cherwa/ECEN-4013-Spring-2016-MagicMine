@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [v F7416 `(v ~T0 @X0 0 tf ]
-"10882 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"10882 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
 "11035
 [v _T3GCON `Vuc ~T0 @X0 0 e@4020 ]
@@ -44,7 +44,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3_DefaultInterruptHandler `(v ~T0 @X0 0 ef ]
 "126
 [v _TMR3_StartTimer `(v ~T0 @X0 0 ef ]
-"10888 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"10888 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [s S631 :2 `uc 1 :1 `uc 1 ]
 [n S631 . . NOT_T3SYNC ]
 "10892
@@ -87,7 +87,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {

@@ -3,13 +3,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "47 bt_to_PIU.h
 [c E7670 0 1 .. ]
 [n E7670 bt_state BT_STATE_DISCONECTED BT_STATE_CONNECTED  ]
-"14 /Applications/microchip/xc8/v1.36/include/string.h
+"14 C:\Program Files (x86)\Microchip\xc8\v1.36\include\string.h
 [v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
-"10583 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"10583 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [v _TX1REG `Vuc ~T0 @X0 0 e@4013 ]
 "96 bt_to_PIU.h
 [v _PIU_bt_read_cmnd_to_buffer `(v ~T0 @X0 0 ef1`uc ]
-"45 /Applications/microchip/xc8/v1.36/include/string.h
+"45 C:\Program Files (x86)\Microchip\xc8\v1.36\include\string.h
 [v _strncmp `(i ~T0 @X0 0 ef3`*Cuc`*Cuc`ui ]
 "36 bt_to_PIU.c
 [c E7674 0 1 2 3 4 5 6 7 .. ]
@@ -18,7 +18,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [s S1088 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S1088 bt_packet start func data1 data2 data3 crc ]
 [v F7442 `(v ~T0 @X0 1 tf1`ul ]
-"156 /Applications/microchip/xc8/v1.36/include/pic18.h
+"156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
 [v __delay `JF7442 ~T0 @X0 0 e ]
 [p i __delay ]
 "78 mcc_generated_files/eusart1.h
@@ -56,7 +56,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {

@@ -114,5 +114,5 @@ void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read) {
                 }
             }
         }
-    } while (sizeof(piu_buff) < size_to_read);
+    } while (byte_counter < size_to_read);
 }

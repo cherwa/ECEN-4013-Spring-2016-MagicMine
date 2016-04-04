@@ -7,7 +7,6 @@ mcc_generated_files/eusart1.h  \
 mcc_generated_files/eusart2.h  \
 audio.h  \
 mcc_generated_files/ccp4.h  \
-ir_common.h  \
 mcc_generated_files/spi1.h  \
 mcc_generated_files/i2c2.h  \
 mcc_generated_files/interrupt_manager.h  \

@@ -9,7 +9,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
 "78 mcc_generated_files/mcc.h
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
-"16653 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"16653 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [s S1056 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1056 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
 "16663
@@ -23,60 +23,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1055 . . . . ]
 "16679
 [v _INTCONbits `VS1055 ~T0 @X0 0 e@4082 ]
-"55
-[s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S2 . ANSA0 ANSA1 ANSA2 ANSA3 . ANSA5 ]
-"54
-[u S1 `S2 1 ]
-[n S1 . . ]
-"64
-[v _ANSELAbits `VS1 ~T0 @X0 0 e@3896 ]
-"7744
-[s S472 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S472 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 TRISA7 ]
-"7754
-[s S473 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S473 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
-"7743
-[u S471 `S472 1 `S473 1 ]
-[n S471 . . . ]
-"7765
-[v _TRISAbits `VS471 ~T0 @X0 0 e@3986 ]
-"7343
-[s S442 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S442 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
-"7353
-[s S443 :1 `uc 1 ]
-[n S443 . LA0 ]
-"7356
-[s S444 :1 `uc 1 :1 `uc 1 ]
-[n S444 . . LA1 ]
-"7360
-[s S445 :2 `uc 1 :1 `uc 1 ]
-[n S445 . . LA2 ]
-"7364
-[s S446 :3 `uc 1 :1 `uc 1 ]
-[n S446 . . LA3 ]
-"7368
-[s S447 :4 `uc 1 :1 `uc 1 ]
-[n S447 . . LA4 ]
-"7372
-[s S448 :5 `uc 1 :1 `uc 1 ]
-[n S448 . . LA5 ]
-"7376
-[s S449 :6 `uc 1 :1 `uc 1 ]
-[n S449 . . LA6 ]
-"7380
-[s S450 :7 `uc 1 :1 `uc 1 ]
-[n S450 . . LA7 ]
-"7342
-[u S441 `S442 1 `S443 1 `S444 1 `S445 1 `S446 1 `S447 1 `S448 1 `S449 1 `S450 1 ]
-[n S441 . . . . . . . . . . ]
-"7385
-[v _LATAbits `VS441 ~T0 @X0 0 e@3977 ]
-"16 util_functions.h
-[v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
-"116 main.c
+"90 main.c
 [c E7589 0 1 2 3 4 5 6 7 .. ]
 [n E7589 patterns LED_ARMED LED_DAMAGE LED_ELEMENT_DAMAGE LED_HEAL LED_STUN_CAST LED_STUN_SELF LED_SELF_TEST_PASSED LED_SELF_TEST_FAILED  ]
 "85 LEDLogic.h
@@ -89,12 +36,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _init_Bluetooth_to_remote `(v ~T0 @X0 0 sf ]
 "79
 [v _init_audio_controller `(v ~T0 @X0 0 sf ]
-"177 main.c
+"144 main.c
+[v _play_audio_file `(i ~T0 @X0 0 ef ]
 [c E7672 0 1 2 3 4 5 .. ]
 [n E7672 audio_files AUDIO_DAMAGE_CAST AUDIO_HEAL_CAST AUDIO_STUN_CAST AUDIO_STUN_HIT AUDIO_STUN_END AUDIO_CUSTOM_CAST  ]
-"25 audio.h
-[v _play_audio_file `(v ~T0 @X0 0 ef1`E7672 ]
-"198 main.c
+"16 util_functions.h
+[v _delay_25ms_n_times `(v ~T0 @X0 0 ef1`ui ]
+"165 main.c
 [c E7626 0 2 4 .. ]
 [n E7626 spell_type IR_SPELL_DAMAGE IR_SPELL_STUN IR_SPELL_HEAL  ]
 "45 ir_common.h
@@ -103,7 +51,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {
@@ -7382,14 +7330,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ir_common.h: 58: uint8_t getCRC(uint8_t mirp0[]);
 [; ;ir_common.h: 59: void IR_Start(void);
 [; ;audio.h: 16: typedef enum audio_files {
-[; ;audio.h: 17: AUDIO_DAMAGE_CAST,
-[; ;audio.h: 18: AUDIO_HEAL_CAST,
-[; ;audio.h: 19: AUDIO_STUN_CAST,
-[; ;audio.h: 20: AUDIO_STUN_HIT,
-[; ;audio.h: 21: AUDIO_STUN_END,
-[; ;audio.h: 22: AUDIO_CUSTOM_CAST
+[; ;audio.h: 17: AUDIO_DAMAGE_CAST = 0x0000,
+[; ;audio.h: 18: AUDIO_HEAL_CAST = 0x0001,
+[; ;audio.h: 19: AUDIO_STUN_CAST = 0x0002,
+[; ;audio.h: 20: AUDIO_STUN_HIT = 0x0003,
+[; ;audio.h: 21: AUDIO_STUN_END = 0x0004,
+[; ;audio.h: 22: AUDIO_CUSTOM_CAST = 0x0005
 [; ;audio.h: 23: } audio_file_t;
-[; ;audio.h: 25: void play_audio_file(audio_file_t file);
+[; ;audio.h: 25: void audio_play(audio_file_t file);
 [; ;main.h: 27: typedef enum device_state {
 [; ;main.h: 28: DEV_STATE_DISARMED,
 [; ;main.h: 29: DEV_STATE_ARMED_AUTO,
@@ -7615,162 +7563,150 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 80: (INTCONbits.PEIE = 1);
 "80
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;main.c: 109: ANSELAbits.ANSA0 = 0;
-"109
-[e = . . _ANSELAbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 110: TRISAbits.RA0 = 0;
-"110
-[e = . . _TRISAbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 111: LATAbits.LA0 = 0;
-"111
-[e = . . _LATAbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 112: delay_25ms_n_times(5);
-"112
-[e ( _delay_25ms_n_times (1 -> -> 5 `i `ui ]
-[; ;main.c: 114: while (1) {
-"114
+[; ;main.c: 88: while (1) {
+"88
 [e :U 1093 ]
 {
-[; ;main.c: 116: LED_play_pattern(LED_ARMED);
-"116
+[; ;main.c: 90: LED_play_pattern(LED_ARMED);
+"90
 [e ( _LED_play_pattern (1 . `E7589 0 ]
-[; ;main.c: 117: LED_play_pattern(LED_DAMAGE);
-"117
+[; ;main.c: 91: LED_play_pattern(LED_DAMAGE);
+"91
 [e ( _LED_play_pattern (1 . `E7589 1 ]
-[; ;main.c: 118: LED_play_pattern(LED_ELEMENT_DAMAGE);
-"118
+[; ;main.c: 92: LED_play_pattern(LED_ELEMENT_DAMAGE);
+"92
 [e ( _LED_play_pattern (1 . `E7589 2 ]
-[; ;main.c: 119: LED_play_pattern(LED_HEAL);
-"119
+[; ;main.c: 93: LED_play_pattern(LED_HEAL);
+"93
 [e ( _LED_play_pattern (1 . `E7589 3 ]
-[; ;main.c: 120: LED_play_pattern(LED_STUN_CAST);
-"120
+[; ;main.c: 94: LED_play_pattern(LED_STUN_CAST);
+"94
 [e ( _LED_play_pattern (1 . `E7589 4 ]
-[; ;main.c: 121: LED_play_pattern(LED_STUN_SELF);
-"121
+[; ;main.c: 95: LED_play_pattern(LED_STUN_SELF);
+"95
 [e ( _LED_play_pattern (1 . `E7589 5 ]
-[; ;main.c: 122: LED_play_pattern(LED_SELF_TEST_PASSED);
-"122
+[; ;main.c: 96: LED_play_pattern(LED_SELF_TEST_PASSED);
+"96
 [e ( _LED_play_pattern (1 . `E7589 6 ]
-[; ;main.c: 123: LED_play_pattern(LED_SELF_TEST_FAILED);
-"123
+[; ;main.c: 97: LED_play_pattern(LED_SELF_TEST_FAILED);
+"97
 [e ( _LED_play_pattern (1 . `E7589 7 ]
-"131
+"98
 }
 [e :U 1092 ]
-"114
+"88
 [e $U 1093  ]
 [e :U 1094 ]
-[; ;main.c: 131: }
-[; ;main.c: 133: }
-"133
+[; ;main.c: 98: }
+[; ;main.c: 100: }
+"100
 [e :UE 1091 ]
 }
-"135
+"102
 [v _init_logic `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 135: static void init_logic(void) {
+[; ;main.c: 102: static void init_logic(void) {
 [e :U _init_logic ]
 [f ]
-[; ;main.c: 136: draw();
-"136
+[; ;main.c: 103: draw();
+"103
 [e ( _draw ..  ]
-[; ;main.c: 137: }
-"137
+[; ;main.c: 104: }
+"104
 [e :UE 1095 ]
 }
-"139
+"106
 [v _connect_to_peripherals `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 139: static void connect_to_peripherals(void) {
+[; ;main.c: 106: static void connect_to_peripherals(void) {
 [e :U _connect_to_peripherals ]
 [f ]
-[; ;main.c: 140: init_Bluetooth_to_PIU();
-"140
+[; ;main.c: 107: init_Bluetooth_to_PIU();
+"107
 [e ( _init_Bluetooth_to_PIU ..  ]
-[; ;main.c: 142: self_test_passed = bluetooth_to_PIU_online;
-"142
+[; ;main.c: 109: self_test_passed = bluetooth_to_PIU_online;
+"109
 [e = _self_test_passed _bluetooth_to_PIU_online ]
-[; ;main.c: 144: init_Bluetooth_to_remote();
-"144
+[; ;main.c: 111: init_Bluetooth_to_remote();
+"111
 [e ( _init_Bluetooth_to_remote ..  ]
-[; ;main.c: 146: self_test_passed = (self_test_passed & bluetooth_to_remote_online);
-"146
+[; ;main.c: 113: self_test_passed = (self_test_passed & bluetooth_to_remote_online);
+"113
 [e = _self_test_passed -> & -> _self_test_passed `i -> _bluetooth_to_remote_online `i `uc ]
-[; ;main.c: 148: init_audio_controller();
-"148
+[; ;main.c: 115: init_audio_controller();
+"115
 [e ( _init_audio_controller ..  ]
-[; ;main.c: 150: self_test_passed = (self_test_passed & audio_controller_online);
-"150
+[; ;main.c: 117: self_test_passed = (self_test_passed & audio_controller_online);
+"117
 [e = _self_test_passed -> & -> _self_test_passed `i -> _audio_controller_online `i `uc ]
-[; ;main.c: 153: if (self_test_passed) {
-"153
+[; ;main.c: 120: if (self_test_passed) {
+"120
 [e $ ! != -> _self_test_passed `i -> -> -> 0 `i `uc `i 1097  ]
 {
-"155
+"122
 }
-[; ;main.c: 155: } else {
+[; ;main.c: 122: } else {
 [e $U 1098  ]
 [e :U 1097 ]
 {
-"157
+"124
 }
 [e :U 1098 ]
-[; ;main.c: 157: }
-[; ;main.c: 158: }
-"158
+[; ;main.c: 124: }
+[; ;main.c: 125: }
+"125
 [e :UE 1096 ]
 }
-"160
+"127
 [v _init_Bluetooth_to_PIU `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 160: static void init_Bluetooth_to_PIU(void) {
+[; ;main.c: 127: static void init_Bluetooth_to_PIU(void) {
 [e :U _init_Bluetooth_to_PIU ]
 [f ]
-[; ;main.c: 162: bluetooth_to_PIU_online = 1;
-"162
+[; ;main.c: 129: bluetooth_to_PIU_online = 1;
+"129
 [e = _bluetooth_to_PIU_online -> -> 1 `i `uc ]
-[; ;main.c: 163: }
-"163
+[; ;main.c: 130: }
+"130
 [e :UE 1099 ]
 }
-"165
+"132
 [v _init_Bluetooth_to_remote `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 165: static void init_Bluetooth_to_remote(void) {
+[; ;main.c: 132: static void init_Bluetooth_to_remote(void) {
 [e :U _init_Bluetooth_to_remote ]
 [f ]
-[; ;main.c: 167: bluetooth_to_remote_online = 1;
-"167
+[; ;main.c: 134: bluetooth_to_remote_online = 1;
+"134
 [e = _bluetooth_to_remote_online -> -> 1 `i `uc ]
-[; ;main.c: 168: }
-"168
+[; ;main.c: 135: }
+"135
 [e :UE 1100 ]
 }
-"170
+"137
 [v _init_audio_controller `(v ~T0 @X0 1 sf ]
 {
-[; ;main.c: 170: static void init_audio_controller(void) {
+[; ;main.c: 137: static void init_audio_controller(void) {
 [e :U _init_audio_controller ]
 [f ]
-[; ;main.c: 172: audio_controller_online = 1;
-"172
+[; ;main.c: 139: audio_controller_online = 1;
+"139
 [e = _audio_controller_online -> -> 1 `i `uc ]
-[; ;main.c: 173: }
-"173
+[; ;main.c: 140: }
+"140
 [e :UE 1101 ]
 }
-"175
+"142
 [v _stunned `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 175: void stunned(void) {
+[; ;main.c: 142: void stunned(void) {
 [e :U _stunned ]
 [f ]
-[; ;main.c: 177: play_audio_file(AUDIO_STUN_HIT);
-"177
-[e ( _play_audio_file (1 . `E7672 3 ]
-[; ;main.c: 181: for (uint8_t i = 0; i < 200; i++) {
-"181
+[; ;main.c: 144: play_audio_file(AUDIO_STUN_HIT);
+"144
+[e ( _play_audio_file -> . `E7672 3 `i ]
+[; ;main.c: 148: for (uint8_t i = 0; i < 200; i++) {
+"148
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -7778,50 +7714,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1104  ]
 [e :U 1103 ]
 {
-[; ;main.c: 182: LED_play_pattern(LED_STUN_SELF);
-"182
+[; ;main.c: 149: LED_play_pattern(LED_STUN_SELF);
+"149
 [e ( _LED_play_pattern (1 . `E7589 5 ]
-[; ;main.c: 183: delay_25ms_n_times(1);
-"183
+[; ;main.c: 150: delay_25ms_n_times(1);
+"150
 [e ( _delay_25ms_n_times (1 -> -> 1 `i `ui ]
-"184
+"151
 }
-"181
+"148
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 200 `i 1103  ]
 [e :U 1104 ]
-"184
+"151
 }
-[; ;main.c: 184: }
-[; ;main.c: 186: play_audio_file(AUDIO_STUN_END);
-"186
-[e ( _play_audio_file (1 . `E7672 4 ]
-[; ;main.c: 187: LED_play_pattern(LED_ARMED);
-"187
+[; ;main.c: 151: }
+[; ;main.c: 153: play_audio_file(AUDIO_STUN_END);
+"153
+[e ( _play_audio_file -> . `E7672 4 `i ]
+[; ;main.c: 154: LED_play_pattern(LED_ARMED);
+"154
 [e ( _LED_play_pattern (1 . `E7589 0 ]
-[; ;main.c: 189: }
-"189
+[; ;main.c: 156: }
+"156
 [e :UE 1102 ]
 }
-"191
+"158
 [v _detonate `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 191: void detonate(void) {
+[; ;main.c: 158: void detonate(void) {
 [e :U _detonate ]
 [f ]
-[; ;main.c: 196: delay_25ms_n_times(80);
-"196
+[; ;main.c: 163: delay_25ms_n_times(80);
+"163
 [e ( _delay_25ms_n_times (1 -> -> 80 `i `ui ]
-[; ;main.c: 198: transmit_ir_packet(IR_SPELL_DAMAGE);
-"198
+[; ;main.c: 165: transmit_ir_packet(IR_SPELL_DAMAGE);
+"165
 [e ( _transmit_ir_packet (1 . `E7626 0 ]
-[; ;main.c: 199: play_audio_file(AUDIO_DAMAGE_CAST);
-"199
-[e ( _play_audio_file (1 . `E7672 0 ]
-[; ;main.c: 200: LED_play_pattern(LED_DAMAGE);
-"200
+[; ;main.c: 166: play_audio_file(AUDIO_DAMAGE_CAST);
+"166
+[e ( _play_audio_file -> . `E7672 0 `i ]
+[; ;main.c: 167: LED_play_pattern(LED_DAMAGE);
+"167
 [e ( _LED_play_pattern (1 . `E7589 1 ]
-[; ;main.c: 206: }
-"206
+[; ;main.c: 173: }
+"173
 [e :UE 1106 ]
 }

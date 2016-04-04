@@ -1,13 +1,13 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [v F7564 `(v ~T0 @X0 0 tf ]
-"10 audio.c
+"9 audio.c
 [c E7586 0 1 2 3 4 5 .. ]
 [n E7586 audio_files AUDIO_DAMAGE_CAST AUDIO_HEAL_CAST AUDIO_STUN_CAST AUDIO_STUN_HIT AUDIO_STUN_END AUDIO_CUSTOM_CAST  ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f26k22.h: 49: extern volatile unsigned char ANSELA @ 0xF38;
-"51 /Applications/microchip/xc8/v1.36/include/pic18f26k22.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f26k22.h
 [; ;pic18f26k22.h: 51: asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
 [; ;pic18f26k22.h: 54: typedef union {
@@ -7186,128 +7186,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.h: 78: void SYSTEM_Initialize(void);
 [; ;mcc.h: 91: void OSCILLATOR_Initialize(void);
 [; ;audio.h: 16: typedef enum audio_files {
-[; ;audio.h: 17: AUDIO_DAMAGE_CAST,
-[; ;audio.h: 18: AUDIO_HEAL_CAST,
-[; ;audio.h: 19: AUDIO_STUN_CAST,
-[; ;audio.h: 20: AUDIO_STUN_HIT,
-[; ;audio.h: 21: AUDIO_STUN_END,
-[; ;audio.h: 22: AUDIO_CUSTOM_CAST
+[; ;audio.h: 17: AUDIO_DAMAGE_CAST = 0x0000,
+[; ;audio.h: 18: AUDIO_HEAL_CAST = 0x0001,
+[; ;audio.h: 19: AUDIO_STUN_CAST = 0x0002,
+[; ;audio.h: 20: AUDIO_STUN_HIT = 0x0003,
+[; ;audio.h: 21: AUDIO_STUN_END = 0x0004,
+[; ;audio.h: 22: AUDIO_CUSTOM_CAST = 0x0005
 [; ;audio.h: 23: } audio_file_t;
-[; ;audio.h: 25: void play_audio_file(audio_file_t file);
-[; ;ir_common.h: 15: typedef enum spell_type {
-[; ;ir_common.h: 16: IR_SPELL_DAMAGE = 0,
-[; ;ir_common.h: 17: IR_SPELL_STUN = 2,
-[; ;ir_common.h: 18: IR_SPELL_HEAL = 4
-[; ;ir_common.h: 19: } ir_spell_id_t;
-[; ;ir_common.h: 28: struct ir_packet {
-[; ;ir_common.h: 29: const uint8_t id_h;
-[; ;ir_common.h: 30: const uint8_t id_l;
-[; ;ir_common.h: 31: const uint8_t spell_id;
-[; ;ir_common.h: 32: const uint8_t uuid;
-[; ;ir_common.h: 33: const uint8_t crc;
-[; ;ir_common.h: 34: };
-"36 ir_common.h
-[v _id_h `Cuc ~T0 @X0 1 e ]
-[i _id_h
--> -> 0 `i `uc
-]
-[; ;ir_common.h: 36: const uint8_t id_h = 0;
-"37
-[v _id_l `Cuc ~T0 @X0 1 e ]
-[i _id_l
--> -> 1 `i `uc
-]
-[; ;ir_common.h: 37: const uint8_t id_l = 1;
-"39
-[v _packet_uuid `uc ~T0 @X0 1 e ]
-[i _packet_uuid
--> -> 0 `i `uc
-]
-[; ;ir_common.h: 39: uint8_t packet_uuid = 0;
-[; ;ir_common.h: 45: void transmit_ir_packet(ir_spell_id_t spell_id);
-[; ;ir_common.h: 46: void wait1Sec(void);
-[; ;ir_common.h: 47: void modulate_us(int time);
-[; ;ir_common.h: 48: void waitLow_us(int time);
-[; ;ir_common.h: 49: void waitLow30Cycles(void);
-[; ;ir_common.h: 50: void waitLow15Cycles(void);
-[; ;ir_common.h: 51: void modulate30Cycles(void);
-[; ;ir_common.h: 52: void modulate15Cycles(void);
-[; ;ir_common.h: 53: void bangBitsHard(uint8_t mirp0[], bool toTransmit[]);
-[; ;ir_common.h: 54: void sendZero(void);
-[; ;ir_common.h: 55: void sendOne(void);
-[; ;ir_common.h: 56: void bangBitsSoftly(uint8_t mirp[]);
-[; ;ir_common.h: 57: void getBitStream(uint8_t mirp0[], bool toTransmit[]);
-[; ;ir_common.h: 58: uint8_t getCRC(uint8_t mirp0[]);
-[; ;ir_common.h: 59: void IR_Start(void);
-"10 audio.c
+[; ;audio.h: 25: void audio_play(audio_file_t file);
+"9 audio.c
 [v _play_audio_file `(v ~T0 @X0 1 ef1`E7586 ]
 {
-[; ;audio.c: 10: void play_audio_file(audio_file_t file) {
+[; ;audio.c: 9: void play_audio_file(audio_file_t file) {
 [e :U _play_audio_file ]
 [v _file `E7586 ~T0 @X0 1 r1 ]
 [f ]
-[; ;audio.c: 14: switch (file) {
-"14
-[e $U 1091  ]
-{
-[; ;audio.c: 15: case AUDIO_DAMAGE_CAST:
+[; ;audio.c: 15: }
 "15
-[e :U 1092 ]
-[; ;audio.c: 16: break;
-"16
-[e $U 1090  ]
-[; ;audio.c: 17: case AUDIO_HEAL_CAST:
-"17
-[e :U 1093 ]
-[; ;audio.c: 18: break;
-"18
-[e $U 1090  ]
-[; ;audio.c: 19: case AUDIO_STUN_CAST:
-"19
-[e :U 1094 ]
-[; ;audio.c: 20: break;
-"20
-[e $U 1090  ]
-[; ;audio.c: 21: case AUDIO_STUN_HIT:
-"21
-[e :U 1095 ]
-[; ;audio.c: 22: break;
-"22
-[e $U 1090  ]
-[; ;audio.c: 23: case AUDIO_STUN_END:
-"23
-[e :U 1096 ]
-[; ;audio.c: 24: break;
-"24
-[e $U 1090  ]
-[; ;audio.c: 25: case AUDIO_CUSTOM_CAST:
-"25
-[e :U 1097 ]
-[; ;audio.c: 26: break;
-"26
-[e $U 1090  ]
-[; ;audio.c: 27: default:
-"27
-[e :U 1098 ]
-[; ;audio.c: 28: break;
-"28
-[e $U 1090  ]
-"29
-}
-[; ;audio.c: 29: }
-[e $U 1090  ]
-"14
-[e :U 1091 ]
-[e [\ _file , $ . `E7586 0 1092
- , $ . `E7586 1 1093
- , $ . `E7586 2 1094
- , $ . `E7586 3 1095
- , $ . `E7586 4 1096
- , $ . `E7586 5 1097
- 1098 ]
-"29
-[e :U 1090 ]
-[; ;audio.c: 30: }
-"30
-[e :UE 1089 ]
+[e :UE 1088 ]
 }
