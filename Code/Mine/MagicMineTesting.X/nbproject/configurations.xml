@@ -41,6 +41,7 @@
         <itemPath>mcc_generated_files/tmr2.h</itemPath>
         <itemPath>mcc_generated_files/tmr3.h</itemPath>
         <itemPath>mcc_generated_files/tmr4.h</itemPath>
+        <itemPath>pwm4.h</itemPath>
       </logicalFolder>
       <itemPath>config.h</itemPath>
       <itemPath>main.h</itemPath>
@@ -89,6 +90,7 @@
         <itemPath>mcc_generated_files/tmr2.c</itemPath>
         <itemPath>mcc_generated_files/tmr3.c</itemPath>
         <itemPath>mcc_generated_files/tmr4.c</itemPath>
+        <itemPath>pw4.c</itemPath>
       </logicalFolder>
       <itemPath>util_functions.c</itemPath>
       <itemPath>main.c</itemPath>

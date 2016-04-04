@@ -1,71 +1,46 @@
 #include "ir_common.h"
-#define Cycles15 390UL//394UL
-#define Cycles30 780UL//780UL
 
-uint8_t num = 0;
-int length = 47; //one less than the bits for forloop
-int i=0,j=0,k=0,p=0,counter=0;
-bool previousBit, nextBit;
-uint8_t selector = 0b10000000;
-uint8_t mirp0[6];
-
-void IR_Start(void)
+//Matt, only need to call this method, rest are internal
+//@TODO did not use ir_packet struct because code already written for array
+//uses the global constants of id_h,id_l, and strength to transmit MIRP
+//@param spell_id   takes in 0,2, or 4 for spell id
+//@return   void
+void transmit_ir_packet(ir_spell_id_t spell_id)
 {
-    /*
-    //----__----__
-    modulate30Cycles();  //on 30 cycles
-
-    waitLow15Cycles();  //off 15 cycles
-
-    modulate30Cycles();  //on 30 cycles
+    //disable interrupts
+    INTCONbits.GIE = 0;
+    INTCONbits.PEIE = 0;
     
-    waitLow15Cycles();  //off 15 cycles
-    */
+    mirp[0] = id_h;
+    mirp[1] = id_l;
+    mirp[2] = spell_id;
+    mirp[3] = str;
+    mirp[4] = packet_uuid;
+    mirp[5] = crc;
+        
+    IR_Start();
+    bangBitsSoftly(mirp);
     
-    //----___
-    modulate30Cycles();  //on 30 cycles
-
-    waitLow30Cycles();  //off 30 cycles
+    //delay so packets do not overlap if called more than once
+    __delay_ms(40);
     
+    //enable interrupts
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
 }
 
-
-
-uint8_t getCRC(uint8_t mirp0[])
-{
-        num = 0;
-        for(k=0; k<5; k++) //6th byte is CRC
-        {
-                num += mirp0[k];
-        }
-        return (0xFF - num);
-}
-
-void getBitStream(uint8_t mirp0[], bool toTransmit[])
-{
-    counter = 0;
-    for(k=0; k<6; k++)
-    {
-        selector = 0b10000000;
-        for(p=7; p>=0; --p)
-        {
-            toTransmit[counter] = ((mirp0[k] & selector) >> p) ; //gets the bit
-            selector = selector>>1; //sets up for next bit
-        }
-    }
-}
-
-bool currentBit;
+//iterates through mirp[] array and masks each bit, then sends it in Manchester Encoding
+//@param mirp[]     takes in a size 6 array and iterates through it
+//@return void
 void bangBitsSoftly(uint8_t mirp[])
 {
-    counter = 0;
-    for(k=0; k<6; k++)
+    for(k_tx=0; k_tx<6; k_tx++)
     {
-        selector = 0b10000000;
-        for(p=7; p>=0; --p)
+        selector_tx = 0b10000000;
+        for(p_tx=7; p_tx>=0; --p_tx)
         {
-            currentBit = ((mirp0[k] & selector) >> p) ; //gets the bit
-            if(currentBit)
+            currentBit_tx = ((mirp[k_tx] & selector_tx) >> p_tx) ; //gets the bit
+            if(currentBit_tx)
             {
                 sendOne();
             }
@@ -73,160 +48,72 @@ void bangBitsSoftly(uint8_t mirp[])
             {
                 sendZero();
             }
-            selector = selector>>1; //sets up for next bit
+            selector_tx = selector_tx>>1; //sets up for next bit
         }
     }
     TMR2_StopTimer();
-    mirp[4] = mirp[4]++; //increment UID
+    mirp[4] = mirp[4]+1; //increment UID
     mirp[5] = getCRC(mirp); //recalculate CRC
 }
 
-void sendOne(void)
+//
+uint8_t getCRC(uint8_t mirp0[])
 {
-    modulate15Cycles();
-    waitLow15Cycles();
+        num_tx = 0;
+        for(k_tx=0; k_tx<5; k_tx++) //6th byte is CRC
+        {
+                num_tx += mirp0[k_tx];
+        }
+        return (0xFF - num_tx);
 }
 
-void sendZero(void)
-{
-    waitLow15Cycles();
-    modulate15Cycles();
-}
-
-void bangBitsHard(uint8_t mirp0[], bool toTransmit[])
-{
-    if(toTransmit[0] == 1)
-    {
-        //start bit ends with a low
-        //__--
-        waitLow15Cycles(); //15 cycles which is midpoint of cycle
-        //turn high here after 15 cycles!
-        modulate15Cycles();
-    }
-    else
-    {
-        //__----__
-        //turn high here
-        modulate15Cycles(); //wait 15 cycles
-        //turn off here
-        waitLow15Cycles();
-    }
-   
-    for(i=1; i<length; i++)
-    {
-        previousBit = toTransmit[i-1];
-        nextBit = toTransmit[i];
-        //if(previousBit == 0 && nextBit == 0)
-        if(!previousBit && !nextBit)
-        {
-            //__--__--
-            waitLow15Cycles(); //394.7 us is 15 cycles which is midpoint of cycle
-            modulate15Cycles();
-        }
-        //else if(previousBit == 0 && nextBit == 1)
-        else if(!previousBit && nextBit)
-        {
-            //__----__
-            modulate15Cycles(); 
-            //modulate_us(370); //less modulation 
-            waitLow15Cycles();
-        }
-        //else if(previousBit == 1 && nextBit == 0)
-        else if(previousBit && !nextBit)
-        {
-            //--____--
-            waitLow15Cycles();
-            modulate15Cycles(); 
- 
-        }
-//        else if(previousBit == 1 && nextBit == 1)
-        else
-        {
-            //--__--__
-            modulate15Cycles();
-            waitLow15Cycles();
-        }
-    }
-
-    //for last bit
-    previousBit = toTransmit[46];
-    nextBit = toTransmit[47];
-    if(previousBit == 0 && nextBit == 0)
-    {
-        //__--__--
-        waitLow15Cycles();
-        modulate15Cycles();
-    }
-    else if(previousBit == 0 && nextBit == 1)
-    {
-        //__----__
-        modulate15Cycles();
-        waitLow15Cycles();
-    }
-    else if(previousBit == 1 && nextBit == 0)
-    {
-        //--____--
-        waitLow15Cycles();
-        modulate15Cycles();
-
-    }
-    else if(previousBit == 1 && nextBit == 1)
-    {
-        //--__--__
-        modulate15Cycles();
-        waitLow15Cycles();
-    }
-
-    //end it by setting PWM off
-    TMR2_StopTimer();
-    mirp0[4] = mirp0[4]++; //increment UID
-    mirp0[5] = getCRC(mirp0); //recalculate CRC
-    
-    getBitStream(mirp0,toTransmit); //recalculate bit stream
-}
-
+//modulates PWM at 38kHz for 15 cycles
 void modulate15Cycles(void) 
 {
     TMR2_StartTimer(); //turns on PWM
     __delay_us(Cycles15); //394
 }
 
+//modulates PWM at 38kHz for 30 cycles
 void modulate30Cycles(void) 
 {
     TMR2_StartTimer(); //turns on PWM
     __delay_us(Cycles30); //790, 800 
 }
 
-int b=0;
+//keeps PWM low for 15 cycles
 void waitLow15Cycles(void)
 {
     TMR2_StopTimer(); //turns off PWM and sets output low
     __delay_us(Cycles15); //394.7 us = 15 cycles
 }
 
+//keeps PWM low for 30 cycles
 void waitLow30Cycles(void)
 {
     TMR2_StopTimer(); //turns off PWM and sets output low
     __delay_us(Cycles30); //790
 }
 
-void waitLow_us(int time)
+//the starting MIRP protocol of 30 cycles high then 30 cycles low
+void IR_Start(void)
 {
-    TMR2_StopTimer(); //turns off PWM and sets output low
-    __delay_us(time); //790
+    //____|----
+    modulate30Cycles();  //on 30 cycles
+    //____|----___
+    waitLow30Cycles();  //off 30 cycles
 }
 
-void modulate_us(int time)
+//sends a Manchester Encoded bit '1' (falling edge)
+void sendOne(void)
 {
-    TMR2_StartTimer(); //turns on PWM
-    __delay_us(time); //790, 800 
+    modulate15Cycles();
+    waitLow15Cycles();
 }
 
-int a=0;
-void wait1Sec(void)
+//sends a Manchester Encoded bit '0' (rising edge)
+void sendZero(void)
 {
-    for(a=0; a<20; a++)
-    {
-        __delay_ms(20);
-    }
+    waitLow15Cycles();
+    modulate15Cycles();
 }
