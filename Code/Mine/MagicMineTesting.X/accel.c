@@ -4,8 +4,9 @@
  */
 #include "accel.h"
 
-/*EXPECTING MSSP1/i2c1 module!!!
+/**EXPECTING MSSP1/i2c1 module!!!
  * example usage
+ * @code(.c)
  * if(initializeMPU())
     {
         if(testConnection())
@@ -34,9 +35,28 @@
 
         }
     }
+ * @endcode
  * 
  * 
  */
+
+/**
+ * Sets up the registers on the MPU6050 in order to read raw x,y,z accelerometer values
+ * @return   true if initialization is successful
+ */
+bool initializeMPU()
+{
+    //Reset disabled, sleep disabled,cycle disabled, temp disabled, clk_sel 000 (internal)
+    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,PWR_MGMT_1_REG,1,PWR_MGMT_1_BITS);
+    
+    //self tests x,y,z off,range +-2000 degrees/s
+    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,GYRO_CONFIG_REG,1,GYRO_CONFIG_BITS);
+    
+    //self tests x,y,z off,range +-16g
+    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,ACCEL_CONFIG_REG,1,ACCEL_CONFIG_BITS);
+    
+    return initializeSuccess;
+}
 
 //combines high and low 8 bit number from _H and _L registers into one 16 bit unsigned number
 //@param high   high byte
@@ -219,22 +239,6 @@ int8_t I2C1dev_readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8
     StopI2C1();
 
     return count_accel;
-}
-
-//sets up the registers on the MPU6050 in order to read raw x,y,z accelerometer values
-//@return   true if initialization is successful
-bool initializeMPU()
-{
-    //Reset disabled, sleep disabled,cycle disabled, temp disabled, clk_sel 000 (internal)
-    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,PWR_MGMT_1_REG,1,PWR_MGMT_1_BITS);
-    
-    //self tests x,y,z off,range +-2000 degrees/s
-    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,GYRO_CONFIG_REG,1,GYRO_CONFIG_BITS);
-    
-    //self tests x,y,z off,range +-16g
-    initializeSuccess &= I2C1dev_writeBytes(mpuAddress,ACCEL_CONFIG_REG,1,ACCEL_CONFIG_BITS);
-    
-    return initializeSuccess;
 }
 
 //v1, there is an i2c v4 version that does not work
