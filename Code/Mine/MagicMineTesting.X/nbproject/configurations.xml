@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f5" displayName="Accelerometer" projectFiles="true">
+        <itemPath>accel.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f4" displayName="Audio" projectFiles="true">
         <itemPath>audio.h</itemPath>
       </logicalFolder>
@@ -51,6 +54,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="Accelerometer" projectFiles="true">
+        <itemPath>accel.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f5" displayName="Audio" projectFiles="true">
         <itemPath>audio.c</itemPath>
