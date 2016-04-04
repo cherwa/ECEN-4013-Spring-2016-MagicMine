@@ -42,7 +42,6 @@
       <itemPath>config.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>util_functions.h</itemPath>
-      <itemPath>Wtv020sd16p.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -89,7 +88,6 @@
       </logicalFolder>
       <itemPath>util_functions.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>Wtv020sd16p.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
