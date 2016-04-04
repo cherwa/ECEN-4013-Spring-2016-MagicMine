@@ -85,32 +85,6 @@ void main(void) {
     // Disable the Peripheral Interrupts
 //    INTERRUPT_PeripheralInterruptDisable();
     
-//    ANSELBbits.ANSB5 = 0;
-//    TRISBbits.TRISB5 = 0;
-//    LATBbits.LATB5 = 0;
-    
-//    playPattern(LED_DAMAGE);
-//    delay_25ms_n_times(80);
-//    playPattern(LED_HEAL);
-//    delay_25ms_n_times(10);
-//    playPattern(LED_HEAL);
-    
-//    uint8_t grb[3];
-//    grb[0] = 128;
-//    grb[1] = 128;
-//    grb[2] = 128;
-//    
-//    fill_color(grb);
-//    draw();
-    
-//    LATCbits.LATC2 = 1;
-    
-//    reset();
-    ANSELAbits.ANSA0 = 0;
-    TRISAbits.RA0 = 0;
-    LATAbits.LA0 = 0;
-    delay_25ms_n_times(5);
-    
     while (1) {
         
         LED_play_pattern(LED_ARMED);
@@ -121,13 +95,6 @@ void main(void) {
         LED_play_pattern(LED_STUN_SELF);
         LED_play_pattern(LED_SELF_TEST_PASSED);
         LED_play_pattern(LED_SELF_TEST_FAILED);
-        
-        
-//        delay_25ms_n_times(40);
-        
-        //LED_play_pattern(LED_ELEMENT_DAMAGE);
-        
-//        delay_25ms_n_times(40);
     }
     
 }
