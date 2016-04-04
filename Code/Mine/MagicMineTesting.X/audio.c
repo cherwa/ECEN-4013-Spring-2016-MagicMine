@@ -6,7 +6,12 @@
 
 #include "audio.h"
 
-void play_audio_file(audio_file_t file) {
+void audio_init() {
+    
+    
+}
+
+void audio_play(audio_file_t file) {
  
     ///@todo Actually play the file
     

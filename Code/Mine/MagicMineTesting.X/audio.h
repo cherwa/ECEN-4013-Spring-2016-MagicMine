@@ -10,7 +10,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
+#define AUDIO_PAM_SD LATBbits.LATB0;
+    
 #include "mcc_generated_files/mcc.h"
     
     typedef enum audio_files {
@@ -21,6 +23,8 @@ extern "C" {
         AUDIO_STUN_END = 0x0004,
         AUDIO_CUSTOM_CAST = 0x0005
     } audio_file_t;
+    
+    void audio_init(void);
     
     void audio_play(audio_file_t file);
     
