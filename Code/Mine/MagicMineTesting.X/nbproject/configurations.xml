@@ -96,6 +96,7 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
       <itemPath>/Users/matthew/MPLABXProjects/ECEN-4013-Spring-2016-MagicMine/Code/Mine/MagicMineTesting.X/MagicMineTesting.mc3</itemPath>
+      <itemPath>device_config.mcc</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -109,7 +110,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.36</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
