@@ -1,3 +1,9 @@
+/* 
+ * @file   ir_tx.c
+ * @author: Rahul Chidurala
+ * @date Modified April 3, 2016, 11:52 PM
+ */
+
 #include "ir_common.h"
 
 //Matt, only need to call this method, rest are internal
