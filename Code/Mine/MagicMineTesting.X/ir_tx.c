@@ -6,11 +6,6 @@
 
 #include "ir_common.h"
 
-//Matt, only need to call this method, rest are internal
-//@TODO did not use ir_packet struct because code already written for array
-//uses the global constants of id_h,id_l, and strength to transmit MIRP
-//@param spell_id   takes in 0,2, or 4 for spell id
-//@return   void
 void transmit_ir_packet(ir_spell_id_t spell_id)
 {
     //disable interrupts
