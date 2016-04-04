@@ -6,28 +6,6 @@
 
 #include "ir_common.h"
 
-/*
- * example usage, put the decode() in a Interrupt On Change or Interrupt on Falling Edge ISR
- * void PIN_MANAGER_IOC(void) {
-    if ((IOCB4 == 1) && (RBIF == 1)) {
-        //@TODO Add handling code for IOC on pin RB4
-        INTCONbits.GIE = 0;
-        INTCONbits.PEIE = 0;
-        decode();
-        // clear interrupt-on-change flag
-        RBIF = 0;
-        counter = 0;
-        INTCONbits.GIE = 1;
-        INTCONbits.PEIE = 1;
-    }
-    
-}
- * 
- */
-
-//decodes received IR packet
-//The decoded MIRP is in the struct instance of ir_packet, mirpRx
-//@return   true if validMIRP
 bool decode(void)
 {
     validMIRP_rx = 0;
@@ -56,8 +34,7 @@ bool decode(void)
 }
 
 
-//@return   returns the decoded byte of MIRP packet
-uint8_t decodeByte() //uses shorter delays than IR START to compensate 
+uint8_t decodeByte() 
 {
     counter_rx = 0;
     decodedByte_rx = 0;
@@ -78,7 +55,6 @@ uint8_t decodeByte() //uses shorter delays than IR START to compensate
     return decodedByte_rx;
 }
 
-//@return   true if start is valid
 bool checkStart(void)
 {
     waitTillMid();//__delay_us(cycleMid);
@@ -103,7 +79,6 @@ bool checkStart(void)
     }
 }
 
-//@return   true if CRC calculated is correct
 bool checkCRC()
 {
     calculatedCRC_rx = (0xFF - (mirpRx.id_h+mirpRx.id_l+mirpRx.spell_id+mirpRx.str+mirpRx.uuid));
@@ -117,13 +92,12 @@ bool checkCRC()
     }
 }
 
-//waits till middle of MIRP encoding to sample
+
 void waitTillMid(void)
 {
     __delay_us(cycleMid);    
 }
 
-//waits till end of MIRP encoding
 void waitTillEnd(void)
 {
     __delay_us(cycleEnd);

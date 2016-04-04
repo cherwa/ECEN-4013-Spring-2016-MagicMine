@@ -59,7 +59,7 @@ extern "C" {
     uint8_t mirp[6];
 
     /**
-     * Attempts to transmit a MIRP packet with the given [spell_id](@ref spell_id).
+     * 
      * @param spell_id The type of spell to send.
      */
     
@@ -67,26 +67,107 @@ extern "C" {
      * Matt, only need to call this method, rest are internal
      * @TODO did not use ir_packet struct because code already written for array
      * uses the global constants of id_h,id_l, and strength to transmit MIRP
+     * Attempts to transmit a MIRP packet with the given [spell_id](@ref spell_id).
      * @param spell_id   takes in 0,2, or 4 for spell id
      * @return   void
      */
     void transmit_ir_packet(ir_spell_id_t spell_id);
+    
+    
+    /**
+     * keeps PWM low for 30 cycles
+     */
     void waitLow30Cycles(void);
+    
+    /**
+     * keeps PWM low for 15 cycles
+     */
     void waitLow15Cycles(void);
+    
+    /**
+     * modulates PWM at 38kHz for 30 cycles
+     */
     void modulate30Cycles(void);
+    
+    /**
+     * modulates PWM at 38kHz for 15 cycles
+     */
     void modulate15Cycles(void);
+    
+    /**
+     * sends a Manchester Encoded bit '0' (rising edge)
+     */
     void sendZero(void);
+    
+    /**
+     * sends a Manchester Encoded bit '1' (falling edge)
+     */
     void sendOne(void);
+    
+    /**
+     * iterates through mirp[] array and masks each bit, then sends it in Manchester Encoding 
+     * @param mirp  array of size 6 containing id_h,id_l,spell,str,uuid, and crc
+     * @return void
+     */
     void bangBitsSoftly(uint8_t mirp[]);
     uint8_t getCRC(uint8_t mirp0[]);
+    
+    /**
+     * the starting MIRP protocol of 30 cycles high then 30 cycles low
+     */
     void IR_Start(void);
     
     //IR RX
+    /**
+      * @example usage, put the decode() in a Interrupt On Change or Interrupt on Falling Edge ISR
+       void PIN_MANAGER_IOC(void) {
+            if ((IOCB4 == 1) && (RBIF == 1)) {
+                //@TODO Add handling code for IOC on pin RB4
+                INTCONbits.GIE = 0;
+                INTCONbits.PEIE = 0;
+                decode();
+                // clear interrupt-on-change flag
+                RBIF = 0;
+                counter = 0;
+                INTCONbits.GIE = 1;
+                INTCONbits.PEIE = 1;
+            }
+        }
+    */
+    
+    /**
+     * waits till middle of MIRP encoding to sample
+     */
     void waitTillMid(void);
+    
+    /**
+     * waits till end of MIRP encoding
+     */
     void waitTillEnd(void);
+    
+    /**
+     * @return true if start is valid/MIRP compliant
+     */
     bool checkStart(void);
+    
+    /**
+     * @return  true if CRC calculated is correct
+     */
     bool checkCRC();
-    uint8_t decodeByte(); //uses shorter delays than IR START to compensate 
+    
+    
+    /**
+     * uses shorter delays than IR_Start to compensate
+     * @return returns 1 decoded byte of MIRP packet
+     */
+    uint8_t decodeByte(); 
+    
+    
+    /**
+     * decodes received IR packet
+     * the decoded MIRP is in the struct instance of ir_packet, mirpRx
+     * @return true if received a valid MIRP packet (bool validMIRP)
+     */
     bool decode(void);
     
     uint8_t counter_rx;

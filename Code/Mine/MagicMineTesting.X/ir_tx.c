@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file   ir_tx.c
  * @author: Rahul Chidurala
  * @date Modified April 3, 2016, 11:52 PM
@@ -30,9 +30,6 @@ void transmit_ir_packet(ir_spell_id_t spell_id)
     INTCONbits.PEIE = 1;
 }
 
-//iterates through mirp[] array and masks each bit, then sends it in Manchester Encoding
-//@param mirp[]     takes in a size 6 array and iterates through it
-//@return void
 void bangBitsSoftly(uint8_t mirp[])
 {
     for(k_tx=0; k_tx<6; k_tx++)
@@ -57,7 +54,6 @@ void bangBitsSoftly(uint8_t mirp[])
     mirp[5] = getCRC(mirp); //recalculate CRC
 }
 
-//
 uint8_t getCRC(uint8_t mirp0[])
 {
         num_tx = 0;
@@ -68,35 +64,34 @@ uint8_t getCRC(uint8_t mirp0[])
         return (0xFF - num_tx);
 }
 
-//modulates PWM at 38kHz for 15 cycles
+
 void modulate15Cycles(void) 
 {
     TMR2_StartTimer(); //turns on PWM
     __delay_us(Cycles15); //394
 }
 
-//modulates PWM at 38kHz for 30 cycles
 void modulate30Cycles(void) 
 {
     TMR2_StartTimer(); //turns on PWM
     __delay_us(Cycles30); //790, 800 
 }
 
-//keeps PWM low for 15 cycles
+
 void waitLow15Cycles(void)
 {
     TMR2_StopTimer(); //turns off PWM and sets output low
     __delay_us(Cycles15); //394.7 us = 15 cycles
 }
 
-//keeps PWM low for 30 cycles
+
 void waitLow30Cycles(void)
 {
     TMR2_StopTimer(); //turns off PWM and sets output low
     __delay_us(Cycles30); //790
 }
 
-//the starting MIRP protocol of 30 cycles high then 30 cycles low
+
 void IR_Start(void)
 {
     //____|----
@@ -105,14 +100,12 @@ void IR_Start(void)
     waitLow30Cycles();  //off 30 cycles
 }
 
-//sends a Manchester Encoded bit '1' (falling edge)
 void sendOne(void)
 {
     modulate15Cycles();
     waitLow15Cycles();
 }
 
-//sends a Manchester Encoded bit '0' (rising edge)
 void sendZero(void)
 {
     waitLow15Cycles();
