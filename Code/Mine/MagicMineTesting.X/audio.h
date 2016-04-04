@@ -14,16 +14,16 @@ extern "C" {
 #include "mcc_generated_files/mcc.h"
     
     typedef enum audio_files {
-        AUDIO_DAMAGE_CAST,
-        AUDIO_HEAL_CAST,
-        AUDIO_STUN_CAST,
-        AUDIO_STUN_HIT,
-        AUDIO_STUN_END,
-        AUDIO_CUSTOM_CAST
+        AUDIO_DAMAGE_CAST = 0x0000,
+        AUDIO_HEAL_CAST = 0x0001,
+        AUDIO_STUN_CAST = 0x0002,
+        AUDIO_STUN_HIT = 0x0003,
+        AUDIO_STUN_END = 0x0004,
+        AUDIO_CUSTOM_CAST = 0x0005
     } audio_file_t;
     
-    void play_audio_file(audio_file_t file);
-
+    void audio_play(audio_file_t file);
+    
 #ifdef	__cplusplus
 }
 #endif
