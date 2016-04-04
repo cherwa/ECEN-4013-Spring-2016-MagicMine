@@ -4,7 +4,6 @@
 /Code/Mine/MagicMineTesting.X/nbproject/private/
 /Code/Mine/MagicMineTesting.X/build/default/
 /Code/Mine/MagicMineTesting.X/dist/default/
-/Code/Remote/Remote Testing.X/nbproject/private/
 /Code/Remote/Remote Testing.X/build/default/
 /Code/Remote/Remote Testing.X/dist/default/
 /Code/Remote/Remote Testing.X/doc/latex/
@@ -23,3 +22,21 @@
 /Code/Mine/MagicMineTesting.X/build/
 /Code/Mine/MagicMineTesting.X/debug/
 /Code/Mine/MagicMineTesting.X/dist/
+/Code/Remote/Remote Testing.X/build/
+/Code/Remote/Remote Testing.X/debug/
+/Code/Remote/Remote Testing.X/dist/
+Code/Remote/Remote Testing.X/nbproject/Makefile-genesis.properties
+
+Code/Mine/MagicMineTesting.X/nbproject/Makefile-default.mk
+
+Code/Remote/Remote Testing.X/nbproject/Makefile-variables.mk
+
+Code/Mine/MagicMineTesting.X/nbproject/Makefile-default.mk
+
+Code/Mine/MagicMineTesting.X/nbproject/Makefile-genesis.properties
+
+Code/Remote/Remote Testing.X/nbproject/private/configurations.xml
+
+Code/Remote/Remote Testing.X/nbproject/private/private.xml
+
+Code/Remote/Remote Testing.X/nbproject/private/SuppressibleMessageMemo.properties
