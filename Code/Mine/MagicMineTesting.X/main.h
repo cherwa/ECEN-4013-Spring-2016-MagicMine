@@ -14,6 +14,7 @@ extern "C" {
 #include "mcc_generated_files/mcc.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "bt_to_PIU.h"
 #include "bt_to_remote.h"
 #include "bt_common.h"
