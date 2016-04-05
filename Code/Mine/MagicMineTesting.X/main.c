@@ -93,6 +93,8 @@ static void init_logic() {
 
 static void connect_to_peripherals() {
     
+    /** @todo Finalize start up sequence and define better self tests for each peripheral.*/
+    
     init_Bluetooth_to_PIU();
     
     self_test_passed = bluetooth_to_PIU_online;
@@ -143,12 +145,12 @@ void stunned() {
     
     audio_play(AUDIO_STUN_END);
     LED_play_pattern(LED_ARMED);
-    //@todo Re-enable non-essential interrupts
+    /** @todo Re-enable non-essential interrupts */
 }
 
 void detonate() {
     
-    //@todo Disable non-essential interrupts (i.e. motion, IR)
+    /** @todo Disable non-essential interrupts (i.e. motion, IR) */
     
     // Delay 2 seconds
     delay_25ms_n_times(80);
@@ -157,20 +159,16 @@ void detonate() {
     audio_play(AUDIO_DAMAGE_CAST);
     LED_play_pattern(LED_DAMAGE);
     
-    
-    
-    // @todo inform player that the mine has detonated
-    //@todo Re-enable non-essential interrupts
+    /** @todo inform player that the mine has detonated
+     *  @todo Re-enable non-essential interrupts
+     */
 }
 
 void BT4M_process_packet(uint8_t* packet) {
     
     if (strncmp(packet, "-", 1) == 0) {
         
-        BT4M_cur_rssi[0] = packet[1];
-        BT4M_cur_rssi[1] = packet[2];
-        
-        BT4M_average_rssi += strtol(BT4M_cur_rssi, NULL ,16);
+        BT4M_average_rssi += strtol(packet, NULL ,16);
     
     } else if (strncmp(packet, "CMD", 3) == 0) {
         
@@ -178,10 +176,15 @@ void BT4M_process_packet(uint8_t* packet) {
         
     } else if (strncmp(packet, "ERR", 3) == 0) {
         
+        BT4M_device_state = BT_STATE_ERROR;
+        
     } else if (strncmp(packet, "Connected", 9) == 0) {
+        
+        BT4M_device_state = BT_STATE_CONNECTED;
         
     } else if (strncmp(packet, "Not Connected", 13) == 0) {
         
+        BT4M_device_state = BT_STATE_DISCONECTED;
     }
 }
 

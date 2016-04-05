@@ -15,6 +15,8 @@ extern "C" {
     
     typedef enum bt_state {
         BT_STATE_DISCONECTED,
+        BT_STATE_CONNECTED,
+        BT_STATE_ERROR,
         BT_STATE_CMD_MODE,
         BT_STATE_MLDP_MODE
     } bt_device_state_t;
@@ -30,7 +32,8 @@ extern "C" {
         BT_CMND_FAILURE = 4,
         BT_CMND_CONNECT = 5,
         BT_CMND_DISCONECT = 6,
-        BT_CMND_IS_CONNECTED = 7
+        BT_CMND_IS_CONNECTED = 7,
+        BT_CMND_ENTER_MLDP = 8
     } bt_cmnd_t;
     
     typedef struct bt_packet {

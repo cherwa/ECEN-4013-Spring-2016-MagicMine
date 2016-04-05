@@ -15,6 +15,9 @@ extern "C" {
 #include "bt_common.h"
 #include <string.h>
     
+    const uint8_t** BT_MINE_MAC = "001EC0D557";
+    const uint8_t** BT_REMOTE_MAC = "001EC0D541";
+    
     static uint8_t BT4M_byte_counter = 0;
     
     uint8_t BT4M_char_buff[15];
@@ -27,9 +30,9 @@ extern "C" {
     
     extern bt_device_state_t BT4M_device_state;
     
-    bool BT4M_enter_command_mode(void);
+    void BT4M_init(void);
     
-    bool BT4M_exit_command_mode(void);
+    bool BT4M_enter_command_mode(void);
     
     void BT4M_send_command(bt_cmnd_t cmnd);
     
