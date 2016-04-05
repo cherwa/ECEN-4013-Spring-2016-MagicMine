@@ -170,13 +170,15 @@ void BT4M_process_packet(uint8_t* packet) {
         BT4M_cur_rssi[0] = packet[1];
         BT4M_cur_rssi[1] = packet[2];
         
-        BT4M_average_rssi += atoi(BT4M_cur_rssi);
+        BT4M_average_rssi += strtol(BT4M_cur_rssi, 16);
     
     } else if (strncmp(packet, "CMD", 3) == 0) {
         
     } else if (strncmp(packet, "ERR", 3) == 0) {
         
     } else if (strncmp(packet, "Connected", 9) == 0) {
+        
+    } else if (strncmp(packet, "Not Connected", 13) == 0) {
         
     }
 }

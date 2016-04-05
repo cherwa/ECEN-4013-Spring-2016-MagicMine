@@ -56,36 +56,26 @@ void  INTERRUPT_Initialize (void)
 
     // Clear peripheral interrupt priority bits (default reset value)
 
-    // BCLI
-    IPR3bits.BCL2IP = 0;
-    // SSPI
-    IPR3bits.SSP2IP = 0;
     // TXI
     IPR3bits.TX2IP = 0;
     // RCI
     IPR3bits.RC2IP = 0;
-    // CCPI
-    IPR4bits.CCP4IP = 0;
+    // BCLI
+    IPR2bits.BCL1IP = 0;
+    // SSPI
+    IPR1bits.SSP1IP = 0;
     // TXI
     IPR1bits.TX1IP = 0;
     // RCI
     IPR1bits.RC1IP = 0;
-    // TMRI
-    IPR2bits.TMR3IP = 0;
+    // RBI
+    INTCON2bits.RBIP = 0;
 }
 
 void interrupt INTERRUPT_InterruptManager (void)
 {
    // interrupt handler
-    if(PIE3bits.BCL2IE == 1 && PIR3bits.BCL2IF == 1)
-    {
-        I2C2_BusCollisionISR();
-    }
-    else if(PIE3bits.SSP2IE == 1 && PIR3bits.SSP2IF == 1)
-    {
-        I2C2_ISR();
-    }
-    else if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
+    if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
     {
         EUSART2_Transmit_ISR();
     }
@@ -93,9 +83,13 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         EUSART2_Receive_ISR();
     }
-    else if(PIE4bits.CCP4IE == 1 && PIR4bits.CCP4IF == 1)
+    else if(PIE2bits.BCL1IE == 1 && PIR2bits.BCL1IF == 1)
     {
-        CCP4_CaptureISR();
+        I2C1_BusCollisionISR();
+    }
+    else if(PIE1bits.SSP1IE == 1 && PIR1bits.SSP1IF == 1)
+    {
+        I2C1_ISR();
     }
     else if(PIE1bits.TX1IE == 1 && PIR1bits.TX1IF == 1)
     {
@@ -105,9 +99,12 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         EUSART1_Receive_ISR();
     }
-    else if(PIE2bits.TMR3IE == 1 && PIR2bits.TMR3IF == 1)
+    else if(INTCONbits.RBIE == 1 && INTCONbits.RBIF == 1)
     {
-        TMR3_ISR();
+        PIN_MANAGER_IOC();
+                
+        // clear global interrupt-on-change flag
+        INTCONbits.RBIF = 0;
     }
     else
     {

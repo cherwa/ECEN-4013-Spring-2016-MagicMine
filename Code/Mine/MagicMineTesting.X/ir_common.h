@@ -1,8 +1,8 @@
 /* 
  * @file   ir_common.h
- * @author: Matthew Atkins
+ * @author Matthew Atkins
  * @date Created on March 19, 2016, 5:21 PM
- * @author: Rahul Chidurala
+ * @author Rahul Chidurala
  * @date Modified April 3, 2016, 10:21 PM
  */
 #ifndef IR_COMMON_H
@@ -119,8 +119,9 @@ extern "C" {
     
     //IR RX
     /**
-      * @example usage, put the decode() in a Interrupt On Change or Interrupt on Falling Edge ISR
-       void PIN_MANAGER_IOC(void) {
+     * usage, put the decode() in a Interrupt On Change or Interrupt on Falling Edge ISR
+     * @code{.c} 
+        void PIN_MANAGER_IOC(void) {
             if ((IOCB4 == 1) && (RBIF == 1)) {
                 //@TODO Add handling code for IOC on pin RB4
                 INTCONbits.GIE = 0;
@@ -133,6 +134,7 @@ extern "C" {
                 INTCONbits.PEIE = 1;
             }
         }
+     * @endcode
     */
     
     /**
