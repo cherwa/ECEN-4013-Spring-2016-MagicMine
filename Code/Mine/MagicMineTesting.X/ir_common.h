@@ -37,12 +37,12 @@ extern "C" {
      */
     //UNUSED, might implement later -Rahul
     struct ir_packet {
-        const uint8_t id_h;     /**< The hight byte of the packet id number.*/
-        const uint8_t id_l;     /**< The low byte of the packet id number.*/
-        const uint8_t spell_id; /**< The spell id, should be one of the values from the [spell_type](@ref spell_type) enum.*/
-        const uint8_t str;  	/**< The strength of the spell */
-        const uint8_t uuid;     /**< The UUID for this packet. */
-        const uint8_t crc;      /**< The CRC checksum value. This is computed from the other fileds and <b>SHOLD NOT</b> be provided. */
+        uint8_t id_h;     /**< The hight byte of the packet id number.*/
+        uint8_t id_l;     /**< The low byte of the packet id number.*/
+        uint8_t spell_id; /**< The spell id, should be one of the values from the [spell_type](@ref spell_type) enum.*/
+        uint8_t str;      /**< The strength of the spell */
+        uint8_t uuid;     /**< The UUID for this packet. */
+        uint8_t crc;      /**< The CRC checksum value. This is computed from the other fileds and <b>SHOLD NOT</b> be provided. */
     };
     
     const uint8_t id_h = 0;
@@ -57,11 +57,6 @@ extern "C" {
     int num_tx; //used for CRC calculation
     bool currentBit_tx;
     uint8_t mirp[6];
-
-    /**
-     * 
-     * @param spell_id The type of spell to send.
-     */
     
     /**
      * Matt, only need to call this method, rest are internal

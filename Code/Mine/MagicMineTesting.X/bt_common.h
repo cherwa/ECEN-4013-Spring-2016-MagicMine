@@ -15,7 +15,8 @@ extern "C" {
     
     typedef enum bt_state {
         BT_STATE_DISCONECTED,
-        BT_STATE_CONNECTED
+        BT_STATE_CMD_MODE,
+        BT_STATE_MLDP_MODE
     } bt_device_state_t;
     
     /**

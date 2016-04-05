@@ -46,7 +46,7 @@ void PIU_bt_send_command(bt_cmnd_t cmnd) {
             
             if (strncmp(piu_buff, PIU_BT_PIU_MAC, sizeof(PIU_BT_PIU_MAC)) == 0) {
                 PIU_bt_exit_command_mode();
-                piu_bt_state = BT_STATE_CONNECTED;
+                piu_bt_state = BT_STATE_DISCONECTED;
             } else {
                 PIU_bt_exit_command_mode();
                 piu_bt_state = BT_STATE_DISCONECTED;
@@ -98,8 +98,6 @@ bool PIU_bt_transmit_packet(bt_packet_t packet) {
 void PIU_bt_read_cmnd_to_buffer(uint8_t size_to_read) {
     
     memcpy(piu_buff, '\0', sizeof(piu_buff));
-    
-    uint8_t read_byte;
     
     do {
         

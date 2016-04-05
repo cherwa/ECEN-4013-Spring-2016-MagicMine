@@ -21,7 +21,7 @@ void audio_init() {
     WTV_RESET_LAT = 1;
 }
 
-static void audio_play(audio_file_t command) {
+void audio_play(audio_file_t command) {
     
 //    PAM_SD_LAT = 1;
     __delay_ms (20);

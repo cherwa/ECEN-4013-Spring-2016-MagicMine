@@ -170,9 +170,11 @@ void BT4M_process_packet(uint8_t* packet) {
         BT4M_cur_rssi[0] = packet[1];
         BT4M_cur_rssi[1] = packet[2];
         
-        BT4M_average_rssi += strtol(BT4M_cur_rssi, 16);
+        BT4M_average_rssi += strtol(BT4M_cur_rssi, NULL ,16);
     
     } else if (strncmp(packet, "CMD", 3) == 0) {
+        
+        BT4M_device_state = BT_STATE_CMD_MODE;
         
     } else if (strncmp(packet, "ERR", 3) == 0) {
         

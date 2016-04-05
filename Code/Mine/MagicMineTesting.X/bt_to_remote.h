@@ -23,17 +23,15 @@ extern "C" {
     uint8_t BT4M_int_buff[15];
     
     extern int BT4M_average_rssi;
-    extern uint8_t BT4M_cur_rssi[2];
+    extern char BT4M_cur_rssi[2];
     
-    static bt_device_state_t state = BT_STATE_DISCONECTED;
+    extern bt_device_state_t BT4M_device_state;
     
     bool BT4M_enter_command_mode(void);
     
     bool BT4M_exit_command_mode(void);
     
     void BT4M_send_command(bt_cmnd_t cmnd);
-    
-    bt_device_state_t BT4M_get_device_state(void);
     
     void BT4M_process_packet(uint8_t* packet);
     

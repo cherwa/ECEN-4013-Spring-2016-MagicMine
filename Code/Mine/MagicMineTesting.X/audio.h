@@ -36,9 +36,7 @@ extern "C" {
     
     void audio_play(audio_file_t file);
     
-    void audio_send_command(audio_file_t command) {
-        
-    }
+    void audio_send_command(audio_file_t command);
     
 #ifdef	__cplusplus
 }

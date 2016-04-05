@@ -6,6 +6,11 @@
 
 #include "bt_to_remote.h"
 
+//Global variable definitions
+int BT4M_average_rssi = 0;
+uint8_t BT4M_cur_rssi[2] = {0, 0};
+bt_device_state_t BT4M_device_state = BT_STATE_DISCONECTED;
+
 bool BT4M_enter_command_mode(void) {
     
     // Enter command mode
@@ -28,10 +33,6 @@ void BT4M_send_command(bt_cmnd_t cmnd) {
     EUSART2_Write(cmnd);
     __delay_us (100);
     EUSART2_Write('\n');
-}
-    
-bt_device_state_t BT4M_get_device_state(void) {
-    return state;
 }
 
 void BT4M_read_buffer() {
@@ -58,7 +59,8 @@ bool BT4M_get_RSSI() {
     EUSART2_Write('M');
     EUSART2_Write('\n');
     BT4M_average_rssi = 0;
-    BT4M_cur_rssi = "\0\0";
+    BT4M_cur_rssi[0] = '\0';
+    BT4M_cur_rssi[1] = '\0';
     
     __delay_ms (5);
     
