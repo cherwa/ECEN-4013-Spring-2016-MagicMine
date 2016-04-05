@@ -1,6 +1,8 @@
-//Rahul Chidurala
-//PWM needed for IR TX Pin 21 (CCP4 module)
-
+/**
+ * @author modified by Rahul Chidurala
+ * @date April 4,2016
+ * PWM needed for IR TXy
+ */
 /**
   CCP4 Generated Driver File
 
@@ -91,5 +93,4 @@ void PWM4_LoadDutyValue(uint16_t dutyValue) {
 /**
  End of File
  */
-
 

@@ -1,5 +1,9 @@
-//Rahul Chidurala
-//PWM needed for IR TX
+/**
+ * @author modified by Rahul Chidurala
+ * @date April 4,2016
+ * PWM needed for IR TX
+ */
+
 /**
   CCP4 Generated Driver File
 
