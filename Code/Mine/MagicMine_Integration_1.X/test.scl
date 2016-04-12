@@ -1,0 +1,9 @@
+testbench for "pic18f26k22" is
+	begin
+		variable str : String := "Hello";
+		process is
+			begin
+				packetin(str, RCREG1, true);
+				wait 5 sec;
+			end process;
+		end testbench;

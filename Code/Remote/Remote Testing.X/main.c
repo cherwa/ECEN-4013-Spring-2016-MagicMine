@@ -44,7 +44,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  */
 
 #include "remote_main.h"
-#include "mcc_generated_files/mcc.h"
+
+// Global vars
+volatile spell_t selectedSpell = NULL;
+volatile arm_mode_t armedMode = STATE_DISARMED;
+volatile bool armButtonEnabled = false;
+volatile bool connectedToMine = false;
+volatile bool arm_held_for_3_seconds = false;
 
 /**
  * @brief Main application
@@ -73,95 +79,62 @@ void main()
     
     // Connect to all peripherals
     
-    // Flash button LEDs
-    spellButtonsPassed =  btn_test_spell_btns();
+    YELLOW_LED = 1;
+    delay_n_ms(40);
+    WHITE_LED = 1;
+    delay_n_ms(40);
+    ARM_LED = 1;
+    delay_n_ms(40);
+    BLUE_LED = 1;
+    delay_n_ms(40);
+    RED_LED = 1;
+    delay_n_ms(40);
+    
+    connect_to_peripherals();
     
     // Flash indicator LEDs
-    indicatorLEDsPassed = btn_test_LEDs();
+//    indicatorLEDsPassed = btn_test_LEDs();
     
-    if (! (spellButtonsPassed & indicatorLEDsPassed) ) {
+//    if (! (spellButtonsPassed & indicatorLEDsPassed) ) {
 //         We have failed so bad if we get here...
 //         Show failure
-    }
-    
-    // Try to connect to the mine
-    /** @todo Activate Bluetooth module and try to connect to the mine */
+//    }
     
     // Indicate success or failure
     
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    __delay_ms (25);
-    
-    
-    __delay_ms(5);
-    
     while (1)
     {
-        // Add your application code
-        printf("Hello World!\n\r");
-        __delay_ms(5);
+        // Add your application code 
+//        printf("I\n");
+//        printf("%c\n", 0x0A);
+//        delay_n_ms(40);
     }
 }
 
-void setSpellType(const spell_t spellType) {
-    selectedSpell = spellType;
+void connect_to_peripherals() {
+    
+    // Flash button LEDs
+    btn_init();
+//    spellButtonsPassed =  btn_test_spell_btns();
+    
+//    do {
+//        bt_init();
+//    } while(!bt_is_connected);
+    BLUE_LED = 1;
+    WHITE_LED = 1;
+    delay_n_ms(2);
+    BLUE_LED = 0;
+    WHITE_LED = 0;
+    delay_n_ms(2);
+    BLUE_LED = 1;
+    WHITE_LED = 1;
+    delay_n_ms(2);
+    BLUE_LED = 0;
+    WHITE_LED = 0;
+    delay_n_ms(2);
+    BLUE_LED = 1;
+    WHITE_LED = 1;
 }
-
-bool bluetoothEnterCommandMode() {
-    
-    EUSART_Write('$');
-    EUSART_Write('$');
-    EUSART_Write('$');
-    
-    // Twiddle our thumbs while we wait for data from the module...
-    while (!EUSART_DataReady) {}
-    
-    uint8_t buff[3];
-    
-    while (eusartRxCount > 0) {
-        buff[3 - eusartRxCount] = EUSART_Read();
-    }
-    
-    // Module returns CMD if it entered command mode
-    if (buff != "CMD") {
-//        indicateError
-        
-        return false;
-    } else {
-        return true;
-    }
-}
-
 /**
  End of File
 */

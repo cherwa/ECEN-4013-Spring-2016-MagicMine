@@ -22,7 +22,6 @@
 
     Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 
-/*
     Microchip licenses to you the right to use, modify, copy and distribute
     Software only when embedded on a Microchip microcontroller or digital signal
     controller that is integrated into your product or third party product
@@ -45,10 +44,12 @@
 */
 
 #include <xc.h>
-#include <stdint.h>
 #include "pin_manager.h"
 #include <stdbool.h>
+#include <pic16f1579.h>
 #include "../remote_main.h"
+#include "tmr2.h"
+#include "../bt_common.h"
 
 /** 
  * The time that the arm button was first pressed when selecting an arming mode.
@@ -62,27 +63,27 @@ uint16_t armButtonPressedStartTime;
 void PIN_MANAGER_Initialize(void)
 {
     LATB = 0x0;
-    LATA = 0x3;
+    LATA = 0x0;
     LATC = 0x0;
-    WPUA = 0x3F;
+    WPUA = 0x20;
     WPUB = 0x80;
-    WPUC = 0xFF;
-    TRISB = 0x80;
-    TRISC = 0x21;
-    TRISA = 0xC;
+    WPUC = 0xCC;
+    TRISB = 0xF0;
+    TRISC = 0xEC;
+    TRISA = 0x38;
     ANSELA = 0x0;
     ANSELB = 0x0;
-    ANSELC = 0x8;
+    ANSELC = 0xCC;
 
-    OPTION_REGbits.nWPUEN = 0x0;
+    OPTION_REGbits.nWPUEN = 0x1;
 
     // enable interrupt-on-change individually
-    IOCBP7 = 1;
-    IOCBN7 = 1;
-    IOCCN0 = 1;
-    IOCAN2 = 1;
-    IOCAN1 = 1;
-    IOCAN0 = 1;
+    IOCAN4 = 1;
+    IOCAN3 = 1;
+    IOCBP6 = 1;
+    IOCBN6 = 1;
+    IOCBN5 = 1;
+    IOCBN4 = 1;
     // enable interrupt-on-change globally    
     INTCONbits.IOCIE = 1;   
     bool state = GIE;
@@ -103,150 +104,99 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {    
-    if((IOCBP7 == 1) && (IOCBF7 == 1))
+    if((IOCAN4 == 1) && (IOCAF4 == 1))
     {
-        //@TODO Add handling code for IOC on pin RB7
+        //@TODO Add handling code for IOC on pin RA4
+        // BLUE Button
+        YELLOW_LED = 0;
+        WHITE_LED = 0;
+        ARM_LED = armButtonEnabled;
+        BLUE_LED = 1;
+        RED_LED = 0;
         
-//        if (armButtonEnableds) {
-//            //Handling code for IOC on positive edge pin RB7 
-//            uint16_t diff = armButtonPressedStartTime - TMR1_ReadTimer();
-//            // Timer 1 has it's period set to 25ms so, 3s / 25ms = 120
-//            if (diff >= 120) {
-//                // Manual Mode
-//
-//                // Blink to indicate mode selection
-//                for (uint8_t i = 0; i < 3; i++) {
-//                    TRISBbits.TRISB6 = 1;
-//                    delay_n_ms(5);
-//                    TRISBbits.TRISB6 = 0;
-//                    delay_n_ms(20);
-//                }
-//
-//                armedMode = MANUAL_MODE;
-//                armButtonEnabled = true;
-//                TRISBbits.TRISB6 = 1;
-//
-//            } else {
-//                // Auto-mode
-//               
-//                // Blink to indicate mode selection
-//                for (uint8_t i = 0; i < 3; i++) {
-//                    TRISBbits.TRISB6 = 1;
-//                    delay_n_ms(5);
-//                    TRISBbits.TRISB6 = 0;
-//                    delay_n_ms(20);
-//                }
-//                
-//                armedMode = AUTOMATIC_MODE;
-//                armButtonEnabled = false;
-//                TRISBbits.TRISB6 = 0;
-//            }
-//        } else {
-//            // We are already armed, make sure we are in manual mode and try
-//            // to detonate
-//            if (armedMode == MANUAL_MODE) {
-//                // Send the detonate command via Bluetooth.
-//                
-//                sendBluetoothCommand(DETONATE);
-//                
-//                // Did it work?
-//                while (!EUSART_DataReady) {}
-//                    
-//                uint8_t readData = EUSART_Read();
-//
-//                if (readData == 'Y') {
-//                    // Clean up the armed state since we detonated successfully
-//                    armedMode = DISARMED;
-//                    armButtonEnabled = false;
-//                    TRISBbits.TRISB6 = 0;
-//                } else {
-//                    // We did not detonate successfully!
-//
-//                    // Indicate error here
-//                }
-//                    
-//            }
-//        }
-        
-        // clear interrupt-on-change flag
-        IOCBF7 = 0;
-    }
-    else if((IOCBN7 == 1) && (IOCBF7 == 1))
-    {
-        //Handling code for IOC falling edge on pin RB7
-        // Record start time
-        armButtonPressedStartTime = TMR1_ReadTimer();
-        
-        // clear interrupt-on-change flag
-        IOCBF7 = 0;
-    }
-    else if((IOCCN0 == 1) && (IOCCF0 == 1))
-    {
-        //Handling code for IOC on pin RC0 (White Spell)
-        
-        setSpellType(RED_SPELL);
-//        WHITE_LED_LAT = 0;
-//        BLUE_LED_LAT = 0;
-//        YELLOW_LED_LAT = 0;
-//        RED_LED_LAT = 1;
-        LATAbits.LATA0 = 0;
-        LATAbits.LATA1 = 1;
-        LATBbits.LATB5 = 1;
-        LATBbits.LATB4 = 0;
-        // clear interrupt-on-change flag
-        IOCCF0 = 0;
-    }
-    else if((IOCAN2 == 1) && (IOCAF2 == 1))
-    {
-        // Handling code for IOC on pin RA2 (Yellow Spell)
-        
-        setSpellType(BLUE_SPELL);
-//        WHITE_LED_LAT = 0;
-//        BLUE_LED_LAT = 0;
-//        YELLOW_LED_LAT = 1;
-//        RED_LED_LAT = 0;
-        
-        LATAbits.LATA0 = 1;
-        LATAbits.LATA1 = 0;
-        LATBbits.LATB5 = 0;
-        LATBbits.LATB4 = 1;
-        
-        // clear interrupt-on-change flag
-        IOCAF2 = 0;        
-    }
-    else if((IOCAN1 == 1) && (IOCAF1 == 1))
-    {
-        // Handling code for IOC on pin RA1 (Blue Spell)
-        
-        setSpellType(RED_SPELL);
-//        WHITE_LED_LAT = 0;
-//        BLUE_LED_LAT = 1;
-//        YELLOW_LED_LAT = 0;
-//        RED_LED_LAT = 0;
-        
-        // clear interrupt-on-change flag
-        IOCAF1 = 0;        
-    }
-    else if((IOCAN0 == 1) && (IOCAF0 == 1))
-    {
-        // Handling code for IOC on pin RA0 (White Spell)
-        
-        setSpellType(WHITE_SPELL);
-//        WHITE_LED_LAT = 1;
-//        BLUE_LED_LAT = 0;
-//        YELLOW_LED_LAT = 0;
-//        RED_LED_LAT = 0;
-        // clear interrupt-on-change flag
-        IOCAF0 = 0;        
-    }
-    
-    // If a spell was selected, activate the arm button!
-    if (selectedSpell != NO_SELECTION) {
+        selectedSpell = BLUE_SPELL;
         armButtonEnabled = true;
-        LATBbits.LATB6 = 1;
+        
+        bt_send_command(BT_CMND_ACK);
+        
+        // clear interrupt-on-change flag
+        IOCAF4 = 0;
     }
-}
+    else if((IOCAN3 == 1) && (IOCAF3 == 1))
+    {
+        //@TODO Add handling code for IOC on pin RA3
+        // RED Button
+        
+        YELLOW_LED = 0;
+        WHITE_LED = 0;
+        ARM_LED = armButtonEnabled;
+        BLUE_LED = 0;
+        RED_LED = 1;
+        
+        selectedSpell = RED_SPELL;
+        armButtonEnabled = true;
+        
+        // clear interrupt-on-change flag
+        IOCAF3 = 0;        
+    }
+    else if((IOCBN6 == 1) && (IOCBF6 == 1) || (IOCBP6 == 1) && (IOCBF6 == 1))
+    {
+        //@TODO Add handling code for IOC on pin RB6
+        // ARM Button
 
+        if (!armButtonEnabled) {
+            IOCBF6 = 0;
+            return;
+        }
+        
+        TMR2_StartTimer();
+
+            YELLOW_LED = 1;
+            WHITE_LED = 1;
+            ARM_LED = armButtonEnabled;
+            BLUE_LED = 1;
+            RED_LED = 1; 
+            
+            TMR2_StopTimer();
+        // clear interrupt-on-change flag
+        IOCBF6 = 0;        
+    }
+    else if((IOCBN5 == 1) && (IOCBF5 == 1))
+    {
+        //@TODO Add handling code for IOC on pin RB5
+        // WHITE Button
+        
+        YELLOW_LED = 0;
+        WHITE_LED = 1;
+        ARM_LED = armButtonEnabled;
+        BLUE_LED = 0;
+        RED_LED = 0;
+        
+        selectedSpell = WHITE_SPELL;
+        armButtonEnabled = true;
+        
+        // clear interrupt-on-change flag
+        IOCBF5 = 0;        
+    }
+    else if((IOCBN4 == 1) && (IOCBF4 == 1))
+    {
+        //@TODO Add handling code for IOC on pin RB4
+        // YELLOW Button
+        
+        YELLOW_LED = 1;
+        WHITE_LED = 0;
+        ARM_LED = armButtonEnabled;
+        BLUE_LED = 0;
+        RED_LED = 0;
+        
+        selectedSpell = YELLOW_SPELL;
+        armButtonEnabled = true;
+        
+        // clear interrupt-on-change flag
+        IOCBF4 = 0;
+    }
+    }
+        
 /**
  End of File
 */

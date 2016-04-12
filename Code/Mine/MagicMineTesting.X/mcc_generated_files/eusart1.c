@@ -152,7 +152,8 @@ void EUSART1_Write(uint8_t txData)
         }
         eusart1TxBufferRemaining--;
     }
-    PIE1bits.TX1IE = 1;
+//    PIE1bits.TX1IE = 1;
+    PIE1bits.TX1IE = 0;
 }
 
 char getch(void)
@@ -202,22 +203,25 @@ void EUSART1_Receive_ISR(void)
     }
     eusart1RxCount++;
     
+    LED_OUT_LAT ^= 1;
+    count_the_btts++;
+    
     // All commands from the remote MUST be 1 byte value from bt_commands enum
-    if (sizeof(eusart1RxBuffer) == 1) {
-        // See if we have a valid command
-        switch (eusart1RxBuffer[0]) {
-            case BT_CMND_ARM_AUTO:
-                break;
-            case BT_CMND_ARM_MANUAL:
-                break;
-            case BT_CMND_DETONATE:
-                break;
-            case BT_CMND_FAILURE:
-                break;
-            case BT_CMND_SUCCESS:
-                break;
-        }
-    }
+//    if (sizeof(eusart1RxBuffer) == 1) {
+//        // See if we have a valid command
+//        switch (eusart1RxBuffer[0]) {
+//            case BT_CMND_ARM_AUTO:
+//                break;
+//            case BT_CMND_ARM_MANUAL:
+//                break;
+//            case BT_CMND_DETONATE:
+//                break;
+//            case BT_CMND_FAILURE:
+//                break;
+//            case BT_CMND_SUCCESS:
+//                break;
+//        }
+//    }
 }
 /**
   End of File

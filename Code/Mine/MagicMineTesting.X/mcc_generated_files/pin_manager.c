@@ -48,18 +48,18 @@
 
 void PIN_MANAGER_Initialize(void)
 {
-    LATB = 0x1;
+    LATB = 0x0;
     LATA = 0x0;
     LATC = 0x0;
     ANSELA = 0xE;
     ANSELB = 0x0;
     ANSELC = 0x0;
-    TRISB = 0xCE;
-    TRISC = 0xD1;
-    WPUB = 0x16;
+    TRISB = 0xF2;
+    TRISC = 0x98;
+    WPUB = 0x2;
     TRISA = 0xEF;
 
-    INTCON2bits.nRBPU = 0x0;
+    INTCON2bits.nRBPU = 0x1;
 
     // enable interrupt-on-change globally
     // interrupts-on-change are globally disabled
@@ -69,15 +69,8 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {    
-    if((IOCB4 == 1) && (RBIF == 1))
-    {
-        //@TODO Add handling code for IOC on pin RB4
-
-        // clear interrupt-on-change flag
-        RBIF = 0;
     }
-}
-
+        
 /**
  End of File
 */

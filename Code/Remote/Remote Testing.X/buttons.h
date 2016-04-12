@@ -15,6 +15,8 @@ extern "C" {
 #include "mcc_generated_files/mcc.h"
 #include "remote_main.h"
     
+    void btn_init();
+    
     bool btn_test_spell_btns(); /**< Tests the spell buttons by flashing them 3 times.*/
     
     bool btn_test_LEDs(); /**< Tests the indicator LEDs by flashing them 3 times.*/

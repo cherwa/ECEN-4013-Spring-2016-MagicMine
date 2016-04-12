@@ -59,6 +59,25 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
+// get/set IR_TX aliases
+#define IR_TX_TRIS               TRISB0
+#define IR_TX_LAT                LATB0
+#define IR_TX_PORT               RB0
+#define IR_TX_WPU                WPUB0
+#define IR_TX_ANS                ANSB0
+#define IR_TX_SetHigh()    do { LATB0 = 1; } while(0)
+#define IR_TX_SetLow()   do { LATB0 = 0; } while(0)
+#define IR_TX_Toggle()   do { LATB0 = ~LATB0; } while(0)
+#define IR_TX_GetValue()         RB0
+#define IR_TX_SetDigitalInput()    do { TRISB0 = 1; } while(0)
+#define IR_TX_SetDigitalOutput()   do { TRISB0 = 0; } while(0)
+
+#define IR_TX_SetPullup()    do { WPUB0 = 1; } while(0)
+#define IR_TX_ResetPullup()   do { WPUB0 = 0; } while(0)
+#define IR_TX_SetAnalogMode()   do { ANSB0 = 1; } while(0)
+#define IR_TX_SetDigitalMode()   do { ANSB0 = 0; } while(0)
+
+
 // get/set BT4M_CMD aliases
 #define BT4M_CMD_TRIS               TRISB2
 #define BT4M_CMD_LAT                LATB2

@@ -1,20 +1,20 @@
 /**
-  TMR1 Generated Driver File
+  TMR2 Generated Driver File
 
   @Company
     Microchip Technology Inc.
 
   @File Name
-    tmr1.c
+    tmr2.c
 
   @Summary
-    This is the generated driver implementation file for the TMR1 driver using MPLAB(c) Code Configurator
+    This is the generated driver implementation file for the TMR2 driver using MPLAB(c) Code Configurator
 
   @Description
-    This source file provides APIs for TMR1.
+    This source file provides APIs for TMR2.
     Generation Information :
         Product Revision  :  MPLAB(c) Code Configurator - v3.00
-        Device            :  PIC16F1579
+        Device            :  PIC18F26K22
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
@@ -49,107 +49,81 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 #include <xc.h>
-#include "tmr1.h"
+#include "tmr2.h"
 
 /**
-  Section: Global Variables Definitions
-*/
-volatile uint16_t timer1ReloadVal;
-
-/**
-  Section: TMR1 APIs
+  Section: TMR2 APIs
 */
 
-void TMR1_Initialize(void)
+void TMR2_Initialize(void)
 {
-    //Set the Timer to the options selected in the GUI
+    // Set TMR2 to the options selected in the User Interface
 
-    //T1CKPS 1:1; nT1SYNC synchronize; TMR1CS FOSC/4; TMR1ON enabled; 
-    T1CON = 0x00;
+    // T2CKPS 1:1; T2OUTPS 1:1; TMR2ON off; 
+    T2CON = 0x00;
 
-    //T1GSS T1G; TMR1GE disabled; T1GTM disabled; T1GPOL low; T1GGO done; T1GSPM disabled; 
-    T1GCON = 0x00;
+    // PR2 104; 
+    PR2 = 0x68;
 
-    //TMR1H 60; 
-    TMR1H = 0x3C;
-
-    //TMR1L 176; 
-    TMR1L = 0xB0;
-
-    // Load the TMR value to reload variable
-    timer1ReloadVal=(TMR1H << 8) | TMR1L;
+    // TMR2 0; 
+    TMR2 = 0x00;
 
     // Clearing IF flag.
-    PIR1bits.TMR1IF = 0;
+    PIR1bits.TMR2IF = 0;
 
-    // Start TMR1
-    TMR1_StartTimer();
+    // Start TMR2
+//    TMR2_StartTimer();
 }
 
-void TMR1_StartTimer(void)
+void TMR2_StartTimer(void)
 {
     // Start the Timer by writing to TMRxON bit
-    T1CONbits.TMR1ON = 1;
+    // CCP4M PWM; DC4B 48;
+    CCP4CON = 0x3C;
+    T2CONbits.TMR2ON = 1;
 }
 
-void TMR1_StopTimer(void)
+void TMR2_StopTimer(void)
 {
     // Stop the Timer by writing to TMRxON bit
-    T1CONbits.TMR1ON = 0;
+    //Pg 186
+    //Note 2: Clearing the CCPxCON register will
+    //relinquish control of the CCPx pin.
+    CCP4CON = 0; //relinquishes control of PWM
+    LATBbits.LB0 = 0; //drive it low
+    T2CONbits.TMR2ON = 0;
 }
 
-uint16_t TMR1_ReadTimer(void)
+uint8_t TMR2_ReadTimer(void)
 {
-    uint16_t readVal;
+    uint8_t readVal;
 
-    readVal = (TMR1H << 8) | TMR1L;
+    readVal = TMR2;
 
     return readVal;
 }
 
-void TMR1_WriteTimer(uint16_t timerVal)
+void TMR2_WriteTimer(uint8_t timerVal)
 {
-    if (T1CONbits.nT1SYNC == 1)
-    {
-        // Stop the Timer by writing to TMRxON bit
-        T1CONbits.TMR1ON = 0;
-
-        // Write to the Timer1 register
-        TMR1H = (timerVal >> 8);
-        TMR1L = timerVal;
-
-        // Start the Timer after writing to the register
-        T1CONbits.TMR1ON =1;
-    }
-    else
-    {
-        // Write to the Timer1 register
-        TMR1H = (timerVal >> 8);
-        TMR1L = timerVal;
-    }
+    // Write to the Timer2 register
+    TMR2 = timerVal;
 }
 
-void TMR1_Reload(void)
+void TMR2_LoadPeriodRegister(uint8_t periodVal)
 {
-    //Write to the Timer1 register
-    TMR1H = (timer1ReloadVal >> 8);
-    TMR1L = timer1ReloadVal;
+   PR2 = periodVal;
 }
 
-void TMR1_StartSinglePulseAcquisition(void)
-{
-    T1GCONbits.T1GGO = 1;
-}
-
-uint8_t TMR1_CheckGateValueStatus(void)
-{
-    return (T1GCONbits.T1GVAL);
-}
-
-bool TMR1_HasOverflowOccured(void)
+bool TMR2_HasOverflowOccured(void)
 {
     // check if  overflow has occurred by checking the TMRIF bit
-    return(PIR1bits.TMR1IF);
+    bool status = PIR1bits.TMR2IF;
+    if(status)
+    {
+        // Clearing IF flag.
+        PIR1bits.TMR2IF = 0;
+    }
+    return status;
 }
 /**
   End of File

@@ -11,6 +11,11 @@ int BT4M_average_rssi = 0;
 uint8_t BT4M_cur_rssi[2] = {0, 0};
 bt_device_state_t BT4M_device_state = BT_STATE_DISCONECTED;
 
+void BT4M_init() {
+    
+    BT4M_send_command(BT_CMND_CONNECT);
+}
+
 bool BT4M_enter_command_mode(void) {
     
     // Enter command mode
@@ -54,12 +59,14 @@ void BT4M_send_command(bt_cmnd_t cmnd) {
             EUSART2_Write('\n');
             break;
     }
+    
+    
 }
 
 void BT4M_read_buffer() {
     
     BT4M_byte_counter = 0;
-    memcpy(BT4M_char_buff, '\0', sizeof(BT4M_char_buff));
+    memset(BT4M_char_buff, '\0', sizeof(BT4M_char_buff));
     
     do {
         

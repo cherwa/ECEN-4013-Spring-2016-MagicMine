@@ -48,6 +48,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
   Section: Included Files
 */
 #include "eusart2.h"
+#include "pin_manager.h"
 
 /**
   Section: Macro Declarations
@@ -184,6 +185,7 @@ void EUSART2_Receive_ISR(void)
     }
 
     // buffer overruns are ignored
+    
     eusart2RxBuffer[eusart2RxHead++] = RCREG2;
     if(sizeof(eusart2RxBuffer) <= eusart2RxHead)
     {

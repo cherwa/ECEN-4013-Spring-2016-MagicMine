@@ -159,3 +159,9 @@ Code/Mine/MagicMineTesting.X/nbproject/Makefile-genesis.properties
 Code/Mine/MagicMineTesting.X/nbproject/private/configurations.xml
 Code/Mine/MagicMineTesting.X/nbproject/Package-default.bash
 Code/Mine/MagicMineTesting.X/nbproject/Package-default.bash
+/Code/Mine/MagicMine_Integration_1.X/nbproject/private/
+/Code/Mine/MagicMine_Integration_1.X/build/default/
+/Code/Mine/MagicMine_Integration_1.X/dist/default/
+*.d
+
+Code/Mine/MagicMineTesting.X/build/default/production/mcc_generated_files/eusart2.p1.d

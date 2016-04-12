@@ -518,7 +518,7 @@ void pulse(void) {
 void LED_play_pattern(LED_Pattern pattern) {
     
     // Disable interrupt
-    INTERRUPT_GlobalInterruptDisable();
+//    INTERRUPT_GlobalInterruptDisable();
     
     switch(pattern) {
     	case LED_DAMAGE:
@@ -557,7 +557,7 @@ void LED_play_pattern(LED_Pattern pattern) {
     clearPattern();
     
     // Re-enable interrupts
-    INTERRUPT_GlobalInterruptEnable();
+//    INTERRUPT_GlobalInterruptEnable();
 }
 
 void fill_color(uint8_t grb[]) {

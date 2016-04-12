@@ -33,7 +33,8 @@ extern "C" {
         BT_CMND_CONNECT = 5,
         BT_CMND_DISCONECT = 6,
         BT_CMND_IS_CONNECTED = 7,
-        BT_CMND_ENTER_MLDP = 8
+        BT_CMND_ENTER_MLDP = 8,
+        BT_CMND_HEARTBEAT = 9
     } bt_cmnd_t;
     
     typedef struct bt_packet {

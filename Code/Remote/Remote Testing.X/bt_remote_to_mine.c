@@ -5,66 +5,87 @@
  * Created on March 30, 2016, 9:44 PM
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "bt_remote_to_mine.h"
+
+static uint8_t bt_char_buff[15];
+static uint8_t bt_byte_counter = 0;
+static uint8_t bt_read_byte;
+
+bool bt_is_connected = false;
 
 void bt_init() {
     
     // Wait for connection from mine
     
+    while (!bt_is_connected) {
+        if (EUSART_DataReady) {
+
+            bt_read_byte = EUSART_Read();
+
+            bt_char_buff[bt_byte_counter] = bt_read_byte;
+
+            bt_byte_counter++;
+
+            if (strstr(bt_char_buff, "Connected") != NULL || strstr(bt_char_buff, "AOK") != NULL) {
+                bt_is_connected = true;
+                break;
+            }   
+        }
+    }
+}
+
+bool bt_send_command(BT4_command_t cmnd) {
+    
+    switch (cmnd) {
+       
+        case BT_CMND_CONNECT:
+            
+            printf("E,0,%s\n", BT_MINE_MAC);
+            bt_read_buffer();
+            return strncmp(bt_char_buff, "Connected", sizeof("Connected")) == 0;
+            
+        default:
+            printf("%i\n", cmnd); 
+            bt_read_buffer();
+            uint8_t temp[] = {BT_CMND_SUCCESS};
+            return (strncmp(bt_char_buff, temp, sizeof(BT_CMND_SUCCESS) + 1) == 0);
+    }       
+}
+
+void bt_read_buffer() {
+    
+    bt_byte_counter = 0;
+    memset(bt_char_buff, '\0', sizeof(bt_char_buff));
+    
     do {
         
-    } while (EUSART_DataReady);
-}
+        if (EUSART_DataReady) {
+            bt_read_byte = EUSART_Read();
 
-inline void bt_enter_command_mode() {
-    
-}
+            bt_char_buff[bt_byte_counter] = bt_read_byte;
 
-inline void bt_enter_MLDP_mode() {
-    
-}
-
-void bt_detonate() {
-    
-}
-
-void bt_heartbeat() {
-    
-}
-
-void bt_set_arm_mode_auto() {
-    
-}
-
-void bt_set_arm_mode_manual() {
-    
-}
-
-int16_t bt_get_RSSI() {
-    
-    uint8_t read_byte;
-            
-        if (bt_is_connected) {
-            
-            bt_enter_command_mode();
-            
-            printf("M\n");
-
-            __delay_ms(5);
-
-            do {
-
-                read_byte = EUSART_Read();
-                char_buff[buff_index] = read_byte;
-                buff_index++;
-
-            } while (EUSART_DataReady);
-            
-            uint32_t result = strtoul(char_buff, NULL, 16);
-            
-            // Do something with result here
+            bt_byte_counter++;
         }
-} 
+        
+    } while (bt_byte_counter < 15 && bt_read_byte != '\n');
+}
+
+void bt_process_packet(uint8_t* packet) {
+    
+    if (strncmp(packet, "CMD", 3) == 0) {
+        
+        bt_device_state = BT_STATE_CMD_MODE;
+        
+    } else if (strncmp(packet, "ERR", 3) == 0) {
+        
+        bt_device_state = BT_STATE_ERROR;
+        
+    } else if (strncmp(packet, "Connected", 9) == 0) {
+        
+        bt_device_state = BT_STATE_CONNECTED;
+        
+    } else if (strncmp(packet, "Not Connected", 13) == 0) {
+        
+        bt_device_state = BT_STATE_DISCONECTED;
+    }
+}

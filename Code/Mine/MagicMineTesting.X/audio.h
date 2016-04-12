@@ -20,7 +20,7 @@ extern "C" {
         AUDIO_STUN_HIT = 0x0003,
         AUDIO_STUN_END = 0x0004,
         AUDIO_CUSTOM_CAST = 0x0005,
-        AUDIO_UNCHAINED = 0x0006,
+        AUDIO_FIRE = 0x0006,
         AUDIO_VOLUME_MUTE = 0xFFF0,
         AUDIO_VOLUME_1 = 0xFFF1,
         AUDIO_VOLUME_2 = 0xFFF2,
@@ -29,7 +29,6 @@ extern "C" {
         AUDIO_VOLUME_5 = 0xFFF5,
         AUDIO_VOLUME_6 = 0xFFF6,
         AUDIO_VOLUME_MAX = 0xFFF7
-                
     } audio_file_t;
     
     void audio_init(void);

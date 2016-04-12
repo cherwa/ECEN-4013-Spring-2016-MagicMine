@@ -150,7 +150,7 @@
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
         <property key="optimization-assembler-files" value="true"/>
-        <property key="optimization-debug" value="false"/>
+        <property key="optimization-debug" value="true"/>
         <property key="optimization-global" value="true"/>
         <property key="optimization-invariant-enable" value="false"/>
         <property key="optimization-invariant-value" value="16"/>
@@ -245,8 +245,32 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="3.375"/>
+        <property key="voltagevalue" value="3.75"/>
       </PICkit3PlatformTool>
+      <PKOBSKDEPlatformTool>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0xffff"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="memories.userotp" value="true"/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0x3f"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="true"/>
+      </PKOBSKDEPlatformTool>
       <Simulator>
         <property key="codecoverage.enabled" value="Disable"/>
         <property key="codecoverage.enableoutputtofile" value="false"/>

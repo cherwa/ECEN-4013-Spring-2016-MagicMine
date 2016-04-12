@@ -3,8 +3,8 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>Magic_Mine</name>
-            <creation-uuid>58e55844-c202-4c83-a4e6-144bd7d9f5c4</creation-uuid>
+            <name>MagicMine_Integration_1</name>
+            <creation-uuid>c70341da-4d6a-49f6-a5ac-7a92921a2827</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>

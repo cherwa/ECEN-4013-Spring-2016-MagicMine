@@ -1,0 +1,10 @@
+testbench for "pic18f26k22" is
+	begin
+		process is
+			begin
+				loop
+					packetin("Hello", RC1REG, true);
+					wait 5000 ms
+				end loop;
+			end process;
+		end testbench;

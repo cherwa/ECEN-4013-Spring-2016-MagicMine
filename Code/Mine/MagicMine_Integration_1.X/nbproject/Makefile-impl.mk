@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Magic_Mine.X
+PROJECTNAME=MagicMine_Integration_1.X
 
 # Active Configuration
 DEFAULTCONF=default

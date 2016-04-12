@@ -116,6 +116,37 @@
 #define IO_RA2_SetDigitalMode()   do { ANSA2 = 0; } while(0)
 
 
+// get/set IO_RA3 aliases
+#define IO_RA3_TRIS               TRISA3
+#define IO_RA3_PORT               RA3
+#define IO_RA3_WPU                WPUA3
+#define IO_RA3_GetValue()         RA3
+#define IO_RA3_SetDigitalInput()    do { TRISA3 = 1; } while(0)
+#define IO_RA3_SetDigitalOutput()   do { TRISA3 = 0; } while(0)
+
+#define IO_RA3_SetPullup()    do { WPUA3 = 1; } while(0)
+#define IO_RA3_ResetPullup()   do { WPUA3 = 0; } while(0)
+
+
+// get/set IO_RA4 aliases
+#define IO_RA4_TRIS               TRISA4
+#define IO_RA4_LAT                LATA4
+#define IO_RA4_PORT               RA4
+#define IO_RA4_WPU                WPUA4
+#define IO_RA4_ANS                ANSA4
+#define IO_RA4_SetHigh()    do { LATA4 = 1; } while(0)
+#define IO_RA4_SetLow()   do { LATA4 = 0; } while(0)
+#define IO_RA4_Toggle()   do { LATA4 = ~LATA4; } while(0)
+#define IO_RA4_GetValue()         RA4
+#define IO_RA4_SetDigitalInput()    do { TRISA4 = 1; } while(0)
+#define IO_RA4_SetDigitalOutput()   do { TRISA4 = 0; } while(0)
+
+#define IO_RA4_SetPullup()    do { WPUA4 = 1; } while(0)
+#define IO_RA4_ResetPullup()   do { WPUA4 = 0; } while(0)
+#define IO_RA4_SetAnalogMode()   do { ANSA4 = 1; } while(0)
+#define IO_RA4_SetDigitalMode()   do { ANSA4 = 0; } while(0)
+
+
 // get/set IO_RB4 aliases
 #define IO_RB4_TRIS               TRISB4
 #define IO_RB4_LAT                LATB4
@@ -189,42 +220,61 @@
 #define IO_RC0_SetDigitalMode()   do { ANSC0 = 0; } while(0)
 
 
-// get/set IO_RC0 aliases
-#define IO_RC0_TRIS               TRISC0
-#define IO_RC0_LAT                LATC0
-#define IO_RC0_PORT               RC0
-#define IO_RC0_WPU                WPUC0
-#define IO_RC0_ANS                ANSC0
-#define IO_RC0_SetHigh()    do { LATC0 = 1; } while(0)
-#define IO_RC0_SetLow()   do { LATC0 = 0; } while(0)
-#define IO_RC0_Toggle()   do { LATC0 = ~LATC0; } while(0)
-#define IO_RC0_GetValue()         RC0
-#define IO_RC0_SetDigitalInput()    do { TRISC0 = 1; } while(0)
-#define IO_RC0_SetDigitalOutput()   do { TRISC0 = 0; } while(0)
+// get/set IO_RC1 aliases
+#define IO_RC1_TRIS               TRISC1
+#define IO_RC1_LAT                LATC1
+#define IO_RC1_PORT               RC1
+#define IO_RC1_WPU                WPUC1
+#define IO_RC1_ANS                ANSC1
+#define IO_RC1_SetHigh()    do { LATC1 = 1; } while(0)
+#define IO_RC1_SetLow()   do { LATC1 = 0; } while(0)
+#define IO_RC1_Toggle()   do { LATC1 = ~LATC1; } while(0)
+#define IO_RC1_GetValue()         RC1
+#define IO_RC1_SetDigitalInput()    do { TRISC1 = 1; } while(0)
+#define IO_RC1_SetDigitalOutput()   do { TRISC1 = 0; } while(0)
 
-#define IO_RC0_SetPullup()    do { WPUC0 = 1; } while(0)
-#define IO_RC0_ResetPullup()   do { WPUC0 = 0; } while(0)
-#define IO_RC0_SetAnalogMode()   do { ANSC0 = 1; } while(0)
-#define IO_RC0_SetDigitalMode()   do { ANSC0 = 0; } while(0)
+#define IO_RC1_SetPullup()    do { WPUC1 = 1; } while(0)
+#define IO_RC1_ResetPullup()   do { WPUC1 = 0; } while(0)
+#define IO_RC1_SetAnalogMode()   do { ANSC1 = 1; } while(0)
+#define IO_RC1_SetDigitalMode()   do { ANSC1 = 0; } while(0)
 
 
-// get/set IO_RC0 aliases
-#define IO_RC0_TRIS               TRISC0
-#define IO_RC0_LAT                LATC0
-#define IO_RC0_PORT               RC0
-#define IO_RC0_WPU                WPUC0
-#define IO_RC0_ANS                ANSC0
-#define IO_RC0_SetHigh()    do { LATC0 = 1; } while(0)
-#define IO_RC0_SetLow()   do { LATC0 = 0; } while(0)
-#define IO_RC0_Toggle()   do { LATC0 = ~LATC0; } while(0)
-#define IO_RC0_GetValue()         RC0
-#define IO_RC0_SetDigitalInput()    do { TRISC0 = 1; } while(0)
-#define IO_RC0_SetDigitalOutput()   do { TRISC0 = 0; } while(0)
+// get/set IO_RC1 aliases
+#define IO_RC1_TRIS               TRISC1
+#define IO_RC1_LAT                LATC1
+#define IO_RC1_PORT               RC1
+#define IO_RC1_WPU                WPUC1
+#define IO_RC1_ANS                ANSC1
+#define IO_RC1_SetHigh()    do { LATC1 = 1; } while(0)
+#define IO_RC1_SetLow()   do { LATC1 = 0; } while(0)
+#define IO_RC1_Toggle()   do { LATC1 = ~LATC1; } while(0)
+#define IO_RC1_GetValue()         RC1
+#define IO_RC1_SetDigitalInput()    do { TRISC1 = 1; } while(0)
+#define IO_RC1_SetDigitalOutput()   do { TRISC1 = 0; } while(0)
 
-#define IO_RC0_SetPullup()    do { WPUC0 = 1; } while(0)
-#define IO_RC0_ResetPullup()   do { WPUC0 = 0; } while(0)
-#define IO_RC0_SetAnalogMode()   do { ANSC0 = 1; } while(0)
-#define IO_RC0_SetDigitalMode()   do { ANSC0 = 0; } while(0)
+#define IO_RC1_SetPullup()    do { WPUC1 = 1; } while(0)
+#define IO_RC1_ResetPullup()   do { WPUC1 = 0; } while(0)
+#define IO_RC1_SetAnalogMode()   do { ANSC1 = 1; } while(0)
+#define IO_RC1_SetDigitalMode()   do { ANSC1 = 0; } while(0)
+
+
+// get/set IO_RC1 aliases
+#define IO_RC1_TRIS               TRISC1
+#define IO_RC1_LAT                LATC1
+#define IO_RC1_PORT               RC1
+#define IO_RC1_WPU                WPUC1
+#define IO_RC1_ANS                ANSC1
+#define IO_RC1_SetHigh()    do { LATC1 = 1; } while(0)
+#define IO_RC1_SetLow()   do { LATC1 = 0; } while(0)
+#define IO_RC1_Toggle()   do { LATC1 = ~LATC1; } while(0)
+#define IO_RC1_GetValue()         RC1
+#define IO_RC1_SetDigitalInput()    do { TRISC1 = 1; } while(0)
+#define IO_RC1_SetDigitalOutput()   do { TRISC1 = 0; } while(0)
+
+#define IO_RC1_SetPullup()    do { WPUC1 = 1; } while(0)
+#define IO_RC1_ResetPullup()   do { WPUC1 = 0; } while(0)
+#define IO_RC1_SetAnalogMode()   do { ANSC1 = 1; } while(0)
+#define IO_RC1_SetDigitalMode()   do { ANSC1 = 0; } while(0)
 
 
 

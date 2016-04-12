@@ -42,7 +42,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  */
 
 #include "main.h"
-
+#include "mcc_generated_files/eusart1.h"
 /*
     Main application
  */
@@ -50,6 +50,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void main() {
     // Initialize the device
     SYSTEM_Initialize();
+    
+    ANSELAbits.ANSA0 = 0;
+    TRISAbits.RA0 = 0;
 
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
@@ -68,10 +71,10 @@ void main() {
     //INTERRUPT_GlobalInterruptLowDisable();
 
     // Enable the Global Interrupts
-    INTERRUPT_GlobalInterruptEnable();
+//    INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
-    INTERRUPT_PeripheralInterruptEnable();
+//    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
 //    INTERRUPT_GlobalInterruptDisable();
@@ -79,11 +82,26 @@ void main() {
     // Disable the Peripheral Interrupts
 //    INTERRUPT_PeripheralInterruptDisable();
     
-    init_logic();
-    connect_to_peripherals();
+//    delay_25ms_n_times(20);
+    
+//    init_logic();
+//    connect_to_peripherals();
+//    audio_init();
     
     while (1) {
         
+        LATAbits.LA0 = 1;
+        delay_25ms_n_times(40);
+        LATAbits.LA0 = 0;
+        
+        uint8_t i = 0;
+        for (i; i < 8; i++) {
+            LED_play_pattern(LED_ARMED + i);
+        }
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
+        __delay_ms (25);
     }    
 }
 

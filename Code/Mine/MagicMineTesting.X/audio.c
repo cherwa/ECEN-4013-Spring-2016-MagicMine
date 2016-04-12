@@ -34,6 +34,8 @@ void audio_play(audio_file_t command) {
 
 void audio_send_command(audio_file_t command) {
     
+    audio_init();
+    
     uint16_t mask = 0x8000;
     
     WTV_CLOCK_LAT = 0;
@@ -45,10 +47,10 @@ void audio_send_command(audio_file_t command) {
         __delay_us (50);
         
         if (command & mask) {
-            WTV_DATA_LAT = 1;
+            LATCbits.LATC1 = 1;
         } else {
-            WTV_DATA_LAT = 0;
-        } 
+            LATCbits.LATC1 = 0;
+        }
         
         __delay_us (50);
         

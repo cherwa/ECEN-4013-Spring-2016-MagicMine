@@ -5,8 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="Bluetooth" projectFiles="true">
-        <itemPath>bluetooth_commands.h</itemPath>
         <itemPath>bt_remote_to_mine.h</itemPath>
+        <itemPath>bt_common.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Buttons" projectFiles="true">
         <itemPath>buttons.h</itemPath>
@@ -18,7 +18,6 @@
         <itemPath>mcc_generated_files/pin_manager.h</itemPath>
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/eusart.h</itemPath>
-        <itemPath>mcc_generated_files/tmr1.h</itemPath>
         <itemPath>mcc_generated_files/tmr2.h</itemPath>
       </logicalFolder>
       <itemPath>remote_common.h</itemPath>
@@ -44,7 +43,6 @@
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
-        <itemPath>mcc_generated_files/tmr1.c</itemPath>
         <itemPath>mcc_generated_files/tmr2.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
@@ -180,7 +178,7 @@
         <property key="memories.programmemory.partition2.start"
                   value="${memories.programmemory.partition2.start.value}"/>
         <property key="memories.programmemory.start" value="0x0"/>
-        <property key="poweroptions.powerenable" value="false"/>
+        <property key="poweroptions.powerenable" value="true"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

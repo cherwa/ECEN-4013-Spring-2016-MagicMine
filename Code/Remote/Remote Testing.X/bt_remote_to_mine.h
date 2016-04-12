@@ -12,32 +12,28 @@
 extern "C" {
 #endif
 
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/eusart.h"
-#include "bluetooth_commands.h"
+#include "bt_common.h"
+#include "remote_main.h"
 
-#define BT_MINE_MAC 0x001
-#define BT_REMOTE_MAC 0x001
+#define BT_MINE_MAC "001EC030D541"
+#define BT_REMOTE_MAC "001EC030D557"
     
-    static uint8_t char_buff[15];
-    static uint8_t buff_index = 0;
-    bool bt_is_connected = false;
+    bt_device_state_t bt_device_state = false;
+    
+    extern bool bt_is_connected;
     
     void bt_init();
     
-    inline void bt_enter_command_mode();
+    bool bt_send_command(BT4_command_t cmnd);
     
-    inline void bt_enter_MLDP_mode();
+    void bt_process_packet(uint8_t* packet);
     
-    void bt_detonate();
-    
-    void bt_heartbeat();
-    
-    void bt_set_arm_mode_auto();
-    
-    void bt_set_arm_mode_manual();
-    
-    int16_t bt_get_RSSI();
+    void bt_read_buffer();
     
 #ifdef	__cplusplus
 }

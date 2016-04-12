@@ -11,10 +11,23 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    
+    
+#define YELLOW_LED LATAbits.LATA0
+#define WHITE_LED LATAbits.LATA1
+#define ARM_LED LATAbits.LATA2
+#define BLUE_LED LATCbits.LATC0
+#define RED_LED LATCbits.LATC1
+#define YELLOW_BTN PORTBbits.PORTB4
+#define WHITE_BTN PORTBbits.PORTB5
+#define ARM_BTN PORTBbits.PORTB6
+#define BLUE_BTN PORTAbits.PORTA4
+#define RED_BTN PORTAbits.PORTA3
 
+#include "mcc_generated_files/mcc.h"
 #include <stdio.h>
 #include "remote_common.h"
-#include "bluetooth_commands.h"
+#include "bt_remote_to_mine.h"
 #include "buttons.h"
     
     /**
@@ -22,9 +35,9 @@ extern "C" {
      * of the device or if it is currently disarmed.
      */
     typedef enum {
-        DISARMED,       /**< The mine is disarmed and may be armed.*/
-        MANUAL_MODE,    /**< The mine is armed in manual mode.*/
-        AUTOMATIC_MODE  /**< The mine is armed in auto mode.*/
+        STATE_DISARMED,       /**< The mine is disarmed and may be armed.*/
+        STATE_MANUAL_MODE,    /**< The mine is armed in manual mode.*/
+        STATE_AUTOMATIC_MODE  /**< The mine is armed in auto mode.*/
     } arm_mode_t;
     
     /** 
@@ -32,27 +45,23 @@ extern "C" {
      * using the spell selections button. <b>Once this is set, it should
      * not be changed until the game is over or the mine is detonated!</b>
      */
-    extern volatile spell_t selectedSpell = NO_SELECTION;
+    extern volatile spell_t selectedSpell;
     
     // Self test pass/fail indicators.
-    extern bool spellButtonsPassed = false;    /**< true if [testSpellButtons](@ref testSpellButtons) is successful*/
-    extern bool indicatorLEDsPassed = false;   /**< true if [testIndicatorLEDs](@ref testIndicatorLEDs) is successful*/
+    bool spellButtonsPassed;    /**< true if [testSpellButtons](@ref testSpellButtons) is successful*/
+    bool indicatorLEDsPassed;   /**< true if [testIndicatorLEDs](@ref testIndicatorLEDs) is successful*/
+    bool spellButtonsPassed = false;
+    bool indicatorLEDsPassed = false;
     
     // Status/Enable parameters
-    extern volatile arm_mode_t armedMode = DISARMED;   /**< inidicates the current arming mode for the mine.*/
-    extern volatile bool armButtonEnabled = false;     /**< set to true to enable the arm button to send a detonate command to the mine.*/
-    extern volatile bool connectedToMine = false;      /**< set to true if the remote has established a bluetooth connection to the mine. */
+    extern volatile arm_mode_t armedMode;   /**< inidicates the current arming mode for the mine.*/
+    extern volatile bool armButtonEnabled;     /**< set to true to enable the arm button to send a detonate command to the mine.*/
+    extern volatile bool connectedToMine;      /**< set to true if the remote has established a bluetooth connection to the mine. */
+    extern volatile bool arm_held_for_3_seconds;
     
     void main();
     
-    /**
-     * Set the currently selected spell type to the given [spell type](@ref spell_t)
-     *  and attempts to send this to the mine.
-     * @param spellType The spell type to set the mines payload to.
-     */
-    void setSpellType(spell_t spellType);
-    
-    bool bluetoothEnterCommandMode(); /**< Attempts to set the Bluetooth module to command mode.*/
+    void connect_to_peripherals();
     
 #ifdef	__cplusplus
 }

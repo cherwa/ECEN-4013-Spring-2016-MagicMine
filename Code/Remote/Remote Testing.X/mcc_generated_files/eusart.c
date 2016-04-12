@@ -53,7 +53,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
   Section: Macro Declarations
 */
 #define EUSART_TX_BUFFER_SIZE 8
-#define EUSART_RX_BUFFER_SIZE 32
+#define EUSART_RX_BUFFER_SIZE 8
 
 /**
   Section: Global Variables
@@ -90,8 +90,8 @@ void EUSART_Initialize(void)
     // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN enabled; SYNC asynchronous; BRGH hi_speed; CSRC slave; 
     TXSTA = 0x24;
 
-    // Baud Rate = 115200; SPBRGL 16; 
-    SPBRGL = 0x10;
+    // Baud Rate = 115200; SPBRGL 34; 
+    SPBRGL = 0x22;
 
     // Baud Rate = 115200; SPBRGH 0; 
     SPBRGH = 0x00;

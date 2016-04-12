@@ -50,6 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include <xc.h>
 #include "tmr2.h"
+#include "../remote_main.h"
 
 /**
   Section: TMR2 APIs
@@ -62,8 +63,8 @@ void TMR2_Initialize(void)
     // T2CKPS 1:64; T2OUTPS 1:16; TMR2ON off; 
     T2CON = 0x7B;
 
-    // PR2 194; 
-    PR2 = 0xC2;
+    // PR2 255; 
+    PR2 = 0xFF;
 
     // TMR2 0; 
     TMR2 = 0x00;
@@ -76,9 +77,6 @@ void TMR2_Initialize(void)
 
     // Set Default Interrupt Handler
     TMR2_SetInterruptHandler(TMR2_DefaultInterruptHandler);
-
-    // Start TMR2
-    TMR2_StartTimer();
 }
 
 void TMR2_StartTimer(void)
@@ -120,7 +118,7 @@ void TMR2_ISR(void)
     // clear the TMR2 interrupt flag
     PIR1bits.TMR2IF = 0;
 
-    // callback function - called every 31th pass
+    // callback function - called every 46th pass
     if (++CountCallBack >= TMR2_INTERRUPT_TICKER_FACTOR)
     {
         // ticker function call
@@ -139,6 +137,16 @@ void TMR2_CallBack(void)
     {
         TMR2_InterruptHandler();
     }
+    
+    arm_held_for_3_seconds = true;
+    RED_LED = 1;
+    delay_n_ms(2);
+    RED_LED = 0;
+    delay_n_ms(2);
+    RED_LED = 1;
+    delay_n_ms(2);
+    RED_LED = 0;
+    
 }
 
 void TMR2_SetInterruptHandler(void* InterruptHandler){
