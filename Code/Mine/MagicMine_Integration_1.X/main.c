@@ -125,8 +125,24 @@ void main(void)
     
     uint8_t i = 0;
     
+    uint8_t read_byte;
+    
     while (1) {
                 
+        if (EUSART2_DataReady) {
+            read_byte = EUSART2_Read();
+            if (read_byte == 0x0A) {
+                audio_send_command(AUDIO_DAMAGE_CAST);
+
+                   for (i = 0; i < 10; i++) {
+                       random();
+                   }
+
+//                   current_state = DEVICE_STATE_UNARMED;
+                   LED_play_pattern(LED_CLEAR);
+            }
+        }
+        
         if (current_state == DEVICE_STATE_STUNNED) {
             continue;
         }

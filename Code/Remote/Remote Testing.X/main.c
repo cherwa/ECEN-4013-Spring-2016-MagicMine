@@ -105,9 +105,9 @@ void main()
     while (1)
     {
         // Add your application code 
-//        printf("I\n");
-//        printf("%c\n", 0x0A);
-//        delay_n_ms(40);
+        printf("I\n");
+        printf("%c\n", 0x0A);
+        delay_n_ms(40);
     }
 }
 
