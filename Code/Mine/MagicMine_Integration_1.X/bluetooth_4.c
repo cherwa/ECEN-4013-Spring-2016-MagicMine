@@ -5,13 +5,11 @@
  */
 
 #include "bluetooth_4.h"
-#include "util_functions.h"
-#include "LEDs.h"
 
 /**
  * Global variable definitions
  */
-int BT4_average_rssi = 0;
+uint16_t BT4_average_rssi = 0;
 BT4_device_state_t BT4_device_state = BT_STATE_DISCONECTED;
 bool BT4_is_connected = false;
 
@@ -22,12 +20,11 @@ static uint8_t BT4_char_buff[15];
 static uint8_t BT4_read_byte;
 static uint8_t BT4_int_buff[15];
 static uint8_t BT4_byte_counter = 0;
-static char BT4_cur_rssi[2];
+static char BT4_cur_rssi[3];
 
 /**
  * Module functions
  */
-void write_string(const uint8_t* str);
 
 /**
  * 
@@ -35,7 +32,7 @@ void write_string(const uint8_t* str);
  * 
  */
 
-void write_string(const uint8_t* str) {
+void BT4_write_string(const uint8_t* str) {
     
     while (*str != '\0') {
         EUSART2_Write( *(str++) );
@@ -46,13 +43,13 @@ void BT4_init() {
     
 //    BT4_send_command(BT_CMND_CONNECT);
     
-    ANSELBbits.ANSB2 = 0;
-    TRISBbits.RB2 = 1;
+    ANSELBbits.ANSB1 = 0;
+    TRISBbits.RB1 = 0;
     
     uint8_t cmnd_buff[30];
     
     sprintf(cmnd_buff, "E,0,%s\n", BT_REMOTE_MAC);
-    write_string(cmnd_buff);
+    BT4_write_string(cmnd_buff);
     __delay_ms (20);
         
     while (!BT4_is_connected) {
@@ -75,32 +72,34 @@ void BT4_init() {
 bool BT4_enter_command_mode() {
     
     // Enter command mode
+//    BT4_CMND_LAT = 0;
+//    __delay_ms (10);
     BT4_CMND_LAT = 1;
-    __delay_us (50);
+    delay_25ms_n_times(8);
     BT4_CMND_LAT = 0;
     
     return true;
 }
     
-void BT4_send_command(BT4_command_t cmnd) {
+void BT4_send_command(const BT4_command_t cmnd) {
     
     uint8_t i = 0;
     uint8_t* cmnd_buff[50];
     
     switch (cmnd) {
         
-        case BT_CMND_ENTER_MLDP:
+        case 0x04:
             
-            write_string("I\n");
+            BT4_write_string("I\n");
             break;
        
-        case BT_CMND_CONNECT:
+        case 0x04:
             break;
         
         default:
             
             sprintf(cmnd_buff, "%c\n", cmnd);
-            write_string(cmnd_buff);
+            BT4_write_string(cmnd_buff);
             break;
     }
 }
@@ -109,43 +108,134 @@ void BT4_read_to_buffer() {
     
     BT4_byte_counter = 0;
     memset(BT4_char_buff, '\0', sizeof(BT4_char_buff));
+    BT4_read_byte = '\0';
     
-    while (EUSART2_DataReady && BT4_read_byte != '\n') {
+    while (BT4_read_byte != '\n') {
         
-        BT4_read_byte = EUSART2_Read();
+        if (EUSART2_DataReady) {
         
-        BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
-        
-        BT4_byte_counter++;
+            BT4_read_byte = EUSART2_Read();
+
+            BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
+
+            BT4_byte_counter++;
+        }
     }
 }
 
 bool BT4_get_RSSI() {
     
+//    printf("Entering command mode!\n");
+    
     BT4_enter_command_mode();
     BT4_average_rssi = 0;
-    memset(BT4_cur_rssi, '\0', sizeof(BT4_cur_rssi));
+//    memset(BT4_cur_rssi, '\0', sizeof(BT4_cur_rssi));
+    
+    uint8_t cur_val;
+    
+//    printf("Starting data collection...");
     
     uint8_t i = 0;
-    for (i; i < 128; i++) {
-        write_string("M\n");
+    for (; i < 128; i++) {
         
-        BT4_read_to_buffer();
+        memset(BT4_char_buff, '\0', sizeof(BT4_char_buff));
+        BT4_byte_counter = 0;
+        
+        BT4_write_string("M\n");
+        
+        while (1) {
+            BT4_read_byte = EUSART2_Read();
+
+            if (BT4_read_byte == '\n') {
+                break;
+            } else if (BT4_read_byte == '-') {
+                continue;
+            }
+                        
+            BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
+            BT4_byte_counter++;
+        };        
+        
+        cur_val = strtol(BT4_char_buff, NULL, 16);
+        
+        BT4_average_rssi += cur_val;
+        
+        __delay_ms (10);
     }
-    
-    
-    
+
     // Divide by 128 since we sampled 128 times
-    BT4_average_rssi >>= 7;
+//    BT4_average_rssi >>= 7;
+    BT4_average_rssi /= 128;
     
-    return BT4_average_rssi <= 0x4B;
+    printf("Done!\nAverage RSSI: %X", BT4_average_rssi);
+    
+//    BT4_write_string("I\n");
+    BT4_CMND_LAT = 1;
+    
+//    return BT4_average_rssi <= 0x4B;
+    return BT4_average_rssi <= BT4_1M_THRESHOLD;
 }
 
-void BT4_process_packet() {
+void BT4_process_packet(const uint8_t byte) {
     
-    if (strstr(BT4_char_buff, BT_CMND_ACK) != NULL) {
-        LED_play_pattern(LED_MPU_INIT_SUCCESS);
-    } else if (strncmp(BT4_char_buff, "Connected", 9) == 0) {
-        BT4_is_connected = true;
+    switch (byte) {
+        case 0x00:
+            
+            detonate_device();
+            break;
+        
+        case 0x10:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'Y');
+            break;
+        
+        case 0x11:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'W');
+            break;
+        
+        case 0x12:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'B');
+            break;
+        
+        case 0x13:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'R');
+            break;
+        
+        case 0x20:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'Y');
+            break;
+        
+        case 0x21:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'W');
+            break;
+        
+        case 0x22:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'B');
+            break;
+        
+        case 0x23:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'R');           
+            break;
+        
+        case 0x05:
+            break;
+        
+        case 0x06:
+            break;
+        
+        case 0x07:
+            break;
+        
+        case 0x08:
+            break;
+        
+        case 0x09:
+            break;
+        
+        case 0x0A:
+            break;            
     }
+    
+//    if (get_device_state() == DEVICE_STATE_ARMED_AUTO) {
+//        IOCB4 = 1;
+//    }
 }

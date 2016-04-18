@@ -46,7 +46,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "remote_main.h"
 
 // Global vars
-volatile spell_t selectedSpell = NULL;
+volatile spell_t selectedSpell = NO_SELECTION;
 volatile arm_mode_t armedMode = STATE_DISARMED;
 volatile bool armButtonEnabled = false;
 volatile bool connectedToMine = false;
@@ -79,6 +79,8 @@ void main()
     
     // Connect to all peripherals
     
+    TRISAbits.TRISA5 = 1;
+        
     YELLOW_LED = 1;
     delay_n_ms(40);
     WHITE_LED = 1;
@@ -104,10 +106,7 @@ void main()
     
     while (1)
     {
-        // Add your application code 
-        printf("I\n");
-        printf("%c\n", 0x0A);
-        delay_n_ms(40);
+        
     }
 }
 
@@ -134,6 +133,24 @@ void connect_to_peripherals() {
     delay_n_ms(2);
     BLUE_LED = 1;
     WHITE_LED = 1;
+}
+
+void reset_to_start() {
+    
+    // Reset buttons
+    YELLOW_LED = 1;
+    WHITE_LED = 1;
+    ARM_LED = 0;
+    BLUE_LED = 1;
+    RED_LED = 1;
+    
+    // Reset variables
+    selectedSpell = NO_SELECTION;
+    armedMode = STATE_DISARMED;
+    
+    // Reset button states
+    armButtonEnabled = false;
+    arm_held_for_3_seconds = false;
 }
 /**
  End of File

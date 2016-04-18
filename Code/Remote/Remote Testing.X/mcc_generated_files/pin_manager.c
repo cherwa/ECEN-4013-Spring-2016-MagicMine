@@ -58,7 +58,7 @@
  * If the button has been held down for more than 3 seconds, then the arming mode
  * is set to [MANUAL_MODE](@ref MANUAL_MODE) otherwise it is set to [AUTOMATIC_MODE](@ref AUTOMATIC_MODE).
  */
-uint16_t armButtonPressedStartTime;
+volatile uint16_t arm_button_pressed_start_time = 0;
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -78,12 +78,12 @@ void PIN_MANAGER_Initialize(void)
     OPTION_REGbits.nWPUEN = 0x1;
 
     // enable interrupt-on-change individually
-    IOCAN4 = 1;
-    IOCAN3 = 1;
+    IOCAP4 = 1;
+    IOCAP3 = 1;
     IOCBP6 = 1;
     IOCBN6 = 1;
-    IOCBN5 = 1;
-    IOCBN4 = 1;
+    IOCBP5 = 1;
+    IOCBP4 = 1;
     // enable interrupt-on-change globally    
     INTCONbits.IOCIE = 1;   
     bool state = GIE;
@@ -104,8 +104,15 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {    
-    if((IOCAN4 == 1) && (IOCAF4 == 1))
+    if((IOCAP4 == 1) && (IOCAF4 == 1))
     {
+        
+        delay_n_ms(2);
+        if (BLUE_BTN == 1) {
+            IOCAF4 = 0;
+            return;
+        }
+        
         //@TODO Add handling code for IOC on pin RA4
         // BLUE Button
         YELLOW_LED = 0;
@@ -117,12 +124,10 @@ void PIN_MANAGER_IOC(void)
         selectedSpell = BLUE_SPELL;
         armButtonEnabled = true;
         
-        bt_send_command(BT_CMND_ACK);
-        
         // clear interrupt-on-change flag
         IOCAF4 = 0;
     }
-    else if((IOCAN3 == 1) && (IOCAF3 == 1))
+    else if((IOCAP3 == 1) && (IOCAF3 == 1))
     {
         //@TODO Add handling code for IOC on pin RA3
         // RED Button
@@ -144,27 +149,108 @@ void PIN_MANAGER_IOC(void)
         //@TODO Add handling code for IOC on pin RB6
         // ARM Button
 
+        arm_held_for_3_seconds = false;
+        
         if (!armButtonEnabled) {
             IOCBF6 = 0;
             return;
         }
         
-        TMR2_StartTimer();
-
-            YELLOW_LED = 1;
-            WHITE_LED = 1;
-            ARM_LED = armButtonEnabled;
-            BLUE_LED = 1;
-            RED_LED = 1; 
+        delay_n_ms(2);
+        if (PORTBbits.RB6 == 1) {
+            IOCAF4 = 0;
+            arm_button_pressed_start_time = 0;
+            return;
+        }
+        
+        while (ARM_BTN == 0) {
+            __delay_ms (1);
+            arm_button_pressed_start_time++;
             
-            TMR2_StopTimer();
+            if (arm_button_pressed_start_time >= 3000) {
+                arm_held_for_3_seconds = true;
+                ARM_LED = 0;
+                delay_n_ms(2);
+                ARM_LED = 1;
+                delay_n_ms(2);
+                ARM_LED = 0;
+                delay_n_ms(2);
+                ARM_LED = 1;
+                delay_n_ms(2);
+                ARM_LED = 0;
+                delay_n_ms(2);
+                ARM_LED = 1;
+                break;
+            }
+        }
+        
+//        TMR2_StartTimer();
+        if (armedMode == STATE_DISARMED) {
+            if (arm_held_for_3_seconds) {
+
+                switch (selectedSpell) {
+                    case YELLOW_SPELL:
+                        printf("I\n%c\n", 0x10);
+                        break;
+                    case WHITE_SPELL:
+                        printf("I\n%c\n", 0x11);
+                        break;
+                    case BLUE_SPELL:
+                        printf("I\n%c\n", 0x12);
+                        break;
+                    case RED_SPELL:
+                        printf("I\n%c\n", 0x13);
+                        break;
+                }
+                
+                armedMode = STATE_MANUAL_MODE;
+
+            } else {
+
+                switch (selectedSpell) {
+                    case YELLOW_SPELL:
+                        printf("I\n%c\n", 0x20);
+                        break;
+                    case WHITE_SPELL:
+                        printf("I\n%c\n", 0x21);
+                        break;
+                    case BLUE_SPELL:
+                        printf("I\n%c\n", 0x22);
+                        break;
+                    case RED_SPELL:
+                        printf("I\n%c\n", 0x23);
+                        break;
+                }
+                
+                armedMode = STATE_AUTOMATIC_MODE;
+            }
+        } else if (armedMode == STATE_MANUAL_MODE) {
+            printf("I\n%c\n", 0x00);
+            armedMode = STATE_DISARMED;
+            arm_button_pressed_start_time = 0;
+            arm_held_for_3_seconds = false;
+        }
+        
+        YELLOW_LED = selectedSpell == YELLOW_SPELL;
+        WHITE_LED = selectedSpell == WHITE_SPELL;
+        ARM_LED = armButtonEnabled || STATE_MANUAL_MODE;
+        BLUE_LED = selectedSpell == BLUE_SPELL;
+        RED_LED = selectedSpell == RED_SPELL; 
+            
+//        TMR2_StopTimer();
         // clear interrupt-on-change flag
         IOCBF6 = 0;        
     }
-    else if((IOCBN5 == 1) && (IOCBF5 == 1))
+    else if((IOCBP5 == 1) && (IOCBF5 == 1))
     {
         //@TODO Add handling code for IOC on pin RB5
         // WHITE Button
+        
+        delay_n_ms(2);
+        if (WHITE_BTN == 1) {
+            IOCBF5 = 0;
+            return;
+        }
         
         YELLOW_LED = 0;
         WHITE_LED = 1;
@@ -178,10 +264,16 @@ void PIN_MANAGER_IOC(void)
         // clear interrupt-on-change flag
         IOCBF5 = 0;        
     }
-    else if((IOCBN4 == 1) && (IOCBF4 == 1))
+    else if((IOCBP4 == 1) && (IOCBF4 == 1))
     {
         //@TODO Add handling code for IOC on pin RB4
         // YELLOW Button
+        
+        delay_n_ms(2);
+        if (YELLOW_BTN == 1) {
+            IOCBF4 = 0;
+            return;
+        }
         
         YELLOW_LED = 1;
         WHITE_LED = 0;
@@ -195,7 +287,7 @@ void PIN_MANAGER_IOC(void)
         // clear interrupt-on-change flag
         IOCBF4 = 0;
     }
-    }
+}
         
 /**
  End of File

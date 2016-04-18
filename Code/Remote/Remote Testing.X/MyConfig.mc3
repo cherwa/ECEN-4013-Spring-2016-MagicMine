@@ -533,10 +533,6 @@
          <value>34</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T1GPPS%aux2"/>
-         <value>4</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="IOCCP" settingAlias="IOCCP6" alias="disabled"/>
          <value>0</value>
       </entry>
@@ -979,10 +975,6 @@
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="INTERNAL OSCILLATOR" name="HFIntOscClockInHz"/>
          <value>16000000</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T1CKIPPS%aux1"/>
-         <value>%DESELECT%</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="INTERNAL OSCILLATOR" name="CustomIRFC"/>
@@ -1882,7 +1874,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="packageId"/>
-         <value>PDIP20</value>
+         <value>QFN20</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="INTERNAL OSCILLATOR" name="scsTimer1"/>
@@ -3269,12 +3261,12 @@
          <hash>a5391b68ca6c7701029c70cd729c08ac1b8eb3fbf54820b50ab881f50ff33c4a</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files/tmr2.c</file>
-         <hash>41e654acf4470442e1b74f8c71e59fb333a63688e584b7129a1f1ed8f93ee1cb</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files/mcc.h</file>
          <hash>550ed761c057ae568d2e1b996885c8bca934492c9840deb7e214316f682f61c3</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files/tmr2.c</file>
+         <hash>41e654acf4470442e1b74f8c71e59fb333a63688e584b7129a1f1ed8f93ee1cb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/eusart.h</file>

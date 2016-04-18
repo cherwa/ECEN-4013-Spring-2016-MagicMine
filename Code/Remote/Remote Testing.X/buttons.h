@@ -19,8 +19,6 @@ extern "C" {
     
     bool btn_test_spell_btns(); /**< Tests the spell buttons by flashing them 3 times.*/
     
-    bool btn_test_LEDs(); /**< Tests the indicator LEDs by flashing them 3 times.*/
-    
     void btn_set_LEDs(uint8_t val);
     
 #ifdef	__cplusplus

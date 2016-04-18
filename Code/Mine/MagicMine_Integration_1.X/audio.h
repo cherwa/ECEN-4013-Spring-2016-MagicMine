@@ -28,6 +28,8 @@ extern "C" {
         AUDIO_STUN_END = 0x0004,
         AUDIO_CUSTOM_CAST = 0x0005,
         AUDIO_FIRE = 0x0006,
+        AUDIO_START_UP = 0x0007,
+        AUDIO_SHES_GONNA_BLOW = 0x0008,
         AUDIO_VOLUME_MUTE = 0xFFF0,
         AUDIO_VOLUME_1 = 0xFFF1,
         AUDIO_VOLUME_2 = 0xFFF2,

@@ -38,7 +38,7 @@ bool bt_send_command(BT4_command_t cmnd) {
     
     switch (cmnd) {
        
-        case BT_CMND_CONNECT:
+        case 0x01:
             
             printf("E,0,%s\n", BT_MINE_MAC);
             bt_read_buffer();
@@ -70,22 +70,88 @@ void bt_read_buffer() {
     } while (bt_byte_counter < 15 && bt_read_byte != '\n');
 }
 
-void bt_process_packet(uint8_t* packet) {
+void bt_process_packet() {
     
-    if (strncmp(packet, "CMD", 3) == 0) {
+    uint8_t read_byte;
+    
+    while (EUSART_DataReady) {
         
-        bt_device_state = BT_STATE_CMD_MODE;
+        read_byte = EUSART_Read();
         
-    } else if (strncmp(packet, "ERR", 3) == 0) {
-        
-        bt_device_state = BT_STATE_ERROR;
-        
-    } else if (strncmp(packet, "Connected", 9) == 0) {
-        
-        bt_device_state = BT_STATE_CONNECTED;
-        
-    } else if (strncmp(packet, "Not Connected", 13) == 0) {
-        
-        bt_device_state = BT_STATE_DISCONECTED;
+        switch (read_byte) {
+            case 0x20:
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = selectedSpell == BLUE_SPELL;
+                break;
+            case 0x30:
+                YELLOW_LED = 0;
+                WHITE_LED = 0;
+                ARM_LED = 1;
+                BLUE_LED = 0;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 0;
+                WHITE_LED = 1;
+                ARM_LED = 0;
+                BLUE_LED = 1;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 1;
+                WHITE_LED = 0;
+                ARM_LED = 0;
+                BLUE_LED = 0;
+                RED_LED = 1;
+                delay_n_ms(2);
+                YELLOW_LED = 0;
+                WHITE_LED = 0;
+                ARM_LED = 1;
+                BLUE_LED = 0;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 0;
+                WHITE_LED = 1;
+                ARM_LED = 0;
+                BLUE_LED = 1;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 1;
+                WHITE_LED = 0;
+                ARM_LED = 0;
+                BLUE_LED = 0;
+                RED_LED = 1;
+                delay_n_ms(2);
+                YELLOW_LED = 0;
+                WHITE_LED = 0;
+                ARM_LED = 1;
+                BLUE_LED = 0;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 0;
+                WHITE_LED = 1;
+                ARM_LED = 0;
+                BLUE_LED = 1;
+                RED_LED = 0;
+                delay_n_ms(2);
+                YELLOW_LED = 1;
+                WHITE_LED = 0;
+                ARM_LED = 0;
+                BLUE_LED = 0;
+                RED_LED = 1;
+                delay_n_ms(2);
+                
+                reset_to_start();
+                break;
+        }
     }
 }

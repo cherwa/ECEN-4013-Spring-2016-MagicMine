@@ -48,6 +48,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
   Section: Included Files
 */
 #include "eusart.h"
+#include "../bt_remote_to_mine.h"
 
 /**
   Section: Macro Declarations
@@ -200,6 +201,8 @@ void EUSART_Receive_ISR(void)
         eusartRxHead = 0;
     }
     eusartRxCount++;
+    
+    bt_process_packet();
 }
 /**
   End of File

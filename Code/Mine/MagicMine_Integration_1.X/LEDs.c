@@ -59,8 +59,8 @@ static void play_BT4_init_success();
 * @todo This function need to be tested!
 */
 static inline void send_bit(int8_t val);
-static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test);
-static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
+//static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test);
+//static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
 
 /**
  * 
@@ -374,7 +374,7 @@ static void clear_pattern() {
         colorBlack();
     }
     
-    __delay_ms (10);
+//    __delay_ms (10);
 }
 
 static void play_damage(){
@@ -522,16 +522,6 @@ static void play_stun_self() {
         __delay_ms (25);
         __delay_ms (25);
         clear_pattern();
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
-        __delay_ms (25);
 }
 
 static void play_test_passed() {
@@ -560,9 +550,7 @@ static void play_test_failed() {
     delay_25ms_n_times(200);	
 }
 
-
-// Experimental!  
-void pulse(void) {
+void pulse() {
     
     uint8_t pixel;
     uint8_t i = 0;
@@ -584,6 +572,34 @@ void pulse(void) {
         
         draw();
     }
+    
+    clear_pattern();
+}
+
+void pulse_2() {
+    
+    uint8_t pixel;
+    uint8_t i = 0;
+    
+    for (; i < 32; i++) {
+        
+        for (pixel = 0; pixel < PIXEL_COUNT; pixel++) {
+            
+            if (i == 0) {
+                memset(greenPixels, 0x00, PIXEL_COUNT);
+                memset(redPixels, 0x00, PIXEL_COUNT);
+                memset(bluePixels, 0x00, PIXEL_COUNT);
+            } else {
+                greenPixels[pixel] += 0;
+                redPixels[pixel] += 1;
+                bluePixels[pixel] += 0;
+            }
+        }
+        
+        draw();
+    }
+    
+    clear_pattern();
 }
 
 void chase(uint8_t* grb) {
@@ -677,16 +693,15 @@ void chase_with_background(uint8_t* grb, uint8_t* grb_back) {
 
 static void play_MPU_init_success() {
     
-    uint8_t*  grb[3] = {0x50, 0x00, 0x50};
+    uint8_t grb[3] = {0x00, 0x00, 0x00};
     fill_color(grb);
     
     uint8_t i = 0;
     
     for (; i < 24; i++) {
         
-        greenPixels[i] -= 0x05;
-        redPixels[i] += 0x05;
-        bluePixels[i] -= 0x05;
+        greenPixels[i] += 0x09;
+        bluePixels[i] += 0x06;
         
         draw();
         
@@ -730,7 +745,7 @@ static void play_BT4_init_success() {
 void LED_play_pattern(LED_Pattern pattern) {
     
     // Disable interrupt
-    INTERRUPT_GlobalInterruptDisable();
+//    INTERRUPT_GlobalInterruptDisable();
     
     switch(pattern) {
     	case LED_DAMAGE:
@@ -772,7 +787,7 @@ void LED_play_pattern(LED_Pattern pattern) {
         case LED_BT2_INIT_SUCCESS:
             play_BT2_init_success();
             break;
-        case LED_BT4_INIT_SUCESS:
+        case LED_BT4_INIT_SUCCESS:
             play_BT4_init_success();
             break;
     }
@@ -780,7 +795,7 @@ void LED_play_pattern(LED_Pattern pattern) {
     clear_pattern();
     
     // Re-enable interrupts
-    INTERRUPT_GlobalInterruptEnable();
+//    INTERRUPT_GlobalInterruptEnable();
 }
 
 void random() {
@@ -806,7 +821,7 @@ void fill_color(uint8_t* grb) {
     memset(bluePixels, grb[2], PIXEL_COUNT);
 }
 
-void draw(void) {
+void draw() {
     real_draw();
 }
 
@@ -851,11 +866,11 @@ static inline void send_bit(int8_t val) {
     }
 }
 
-static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test) {
-    
-    return (byte_to_test & (1 << bit_to_test));
-}
-
-static inline int8_t isNthBitSet (const uint8_t c, const uint8_t n) {
-    return ((c & mask[n]) != 0);
-}
+//static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test) {
+//    
+//    return (byte_to_test & (1 << bit_to_test));
+//}
+//
+//static inline int8_t isNthBitSet (const uint8_t c, const uint8_t n) {
+//    return ((c & mask[n]) != 0);
+//}

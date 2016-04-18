@@ -18,11 +18,11 @@ extern "C" {
 #define ARM_LED LATAbits.LATA2
 #define BLUE_LED LATCbits.LATC0
 #define RED_LED LATCbits.LATC1
-#define YELLOW_BTN PORTBbits.PORTB4
-#define WHITE_BTN PORTBbits.PORTB5
-#define ARM_BTN PORTBbits.PORTB6
-#define BLUE_BTN PORTAbits.PORTA4
-#define RED_BTN PORTAbits.PORTA3
+#define YELLOW_BTN PORTBbits.RB4
+#define WHITE_BTN PORTBbits.RB5
+#define ARM_BTN PORTBbits.RB6
+#define BLUE_BTN PORTAbits.RA4
+#define RED_BTN PORTAbits.RA3
 
 #include "mcc_generated_files/mcc.h"
 #include <stdio.h>
@@ -63,6 +63,8 @@ extern "C" {
     
     void connect_to_peripherals();
     
+    void reset_to_start();
+        
 #ifdef	__cplusplus
 }
 #endif

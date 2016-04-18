@@ -192,10 +192,10 @@ void EUSART2_Receive_ISR(void)
     }
     eusart2RxCount++;
     
-    if (BT4_is_connected) {
-        BT4_read_to_buffer();
-        BT4_process_packet();
-    }
+//    if (BT4_is_connected) {
+//        BT4_read_to_buffer();
+//        BT4_process_packet();
+//    }
 }
 /**
   End of File

@@ -46,6 +46,9 @@
 #include <xc.h>
 #include "pin_manager.h"
 #include "../ir_common.h"
+#include "../util_functions.h"
+#include "../bluetooth_4.h"
+#include "../LEDs.h"
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -60,15 +63,18 @@ void PIN_MANAGER_Initialize(void)
     WPUB = 0xE;
     TRISA = 0xFF;
 
+    ANSELBbits.ANSB4 = 0;
+    TRISBbits.RB4 = 1;
+    WPUBbits.WPUB4 = 0;
+    
     INTCON2bits.nRBPU = 0x1;
 
     // enable interrupt-on-change individually
     IOCB4 = 0;
     IOCB5 = 1;
     
-    // enable interrupt-on-change globally
-    // enable interrupt-on-change globally    
-    INTCONbits.RBIE = 1;   
+    // enable interrupt-on-change globally  
+    INTCONbits.RBIE = 0;   
 }
 
 
@@ -77,6 +83,18 @@ void PIN_MANAGER_IOC(void)
     if((IOCB4 == 1) && (RBIF == 1))
     {
         //@TODO Add handling code for IOC on pin RB4
+        
+//        if (PORTBbits.RB4 == 0) {
+//            __delay_ms (2);
+//            
+//            if (PORTBbits.RB4 == 0) {
+//                
+//                BT4_process_packet(0x00);
+//                IOCB4 = 0;
+//            }
+//        }
+        
+        pulse_2();
         
         // clear interrupt-on-change flag
         RBIF = 0;

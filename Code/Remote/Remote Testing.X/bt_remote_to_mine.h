@@ -31,7 +31,7 @@ extern "C" {
     
     bool bt_send_command(BT4_command_t cmnd);
     
-    void bt_process_packet(uint8_t* packet);
+    void bt_process_packet();
     
     void bt_read_buffer();
     

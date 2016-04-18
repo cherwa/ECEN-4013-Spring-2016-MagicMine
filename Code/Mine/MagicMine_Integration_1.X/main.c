@@ -45,11 +45,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  */
 
 #include "main.h"
-#include "bluetooth_4.h"
 
 /**
  * Global variable definition
  */
+volatile uint8_t selected_spell = 0;
+volatile mine_state_t current_state = DEVICE_STATE_INIT;
 
 /**
  * Module function definitions
@@ -60,16 +61,6 @@ static void initialize();
 /**
  * Module variables
  */
-
-typedef enum {
-        DEVICE_STATE_INIT,
-        DEVICE_STATE_UNARMED,
-        DEVICE_STATE_ARMED_AUTO,
-        DEVICE_STATE_ARMED_MANUAL,
-        DEVICE_STATE_STUNNED
-    } mine_state_t;
-    
-    static current_state = DEVICE_STATE_INIT;
 
 /*
                          Main application
@@ -127,38 +118,34 @@ void main(void)
     
     uint8_t read_byte;
     
+    uint8_t* buff[3];
+    
     while (1) {
                 
         if (EUSART2_DataReady) {
+            
             read_byte = EUSART2_Read();
-            if (read_byte == 0x0A) {
-                audio_send_command(AUDIO_DAMAGE_CAST);
-
-                   for (i = 0; i < 10; i++) {
-                       random();
-                   }
-
-//                   current_state = DEVICE_STATE_UNARMED;
-                   LED_play_pattern(LED_CLEAR);
-            }
+            BT4_process_packet(read_byte);
         }
         
-        if (current_state == DEVICE_STATE_STUNNED) {
+        if (current_state == DEVICE_STATE_STUNNED || current_state == DEVICE_STATE_UNARMED) {
             continue;
         }
         
         if(accel_motion_detect()) {
             
-            // Blow up!
-            transmit_ir_packet(0);
-            
-            accel_calculate_offset(100);
-//            current_state = DEVICE_STATE_UNARMED;
-            
-            audio_send_command(AUDIO_DAMAGE_CAST);
-            
-            fading_chase(clr);
-            LED_play_pattern(LED_CLEAR);
+            detonate_device();               
+        }
+        
+        if (current_state == DEVICE_STATE_ARMED_AUTO && PORTBbits.RB4 == 0) {
+            detonate_device();
+        }
+        
+        if ((arm_indicator_counter % 5 == 0) && (current_state == DEVICE_STATE_ARMED_AUTO || current_state == DEVICE_STATE_ARMED_MANUAL)) {
+            pulse();
+            __delay_us (10);
+            audio_send_command(0x0009);
+            arm_indicator_counter++;
         }
         
         if (validMIRP_rx && IDH == 0xAB && IDL == 0xCD && STR == 0x64) {
@@ -167,30 +154,17 @@ void main(void)
             
             switch (SPELL) {
                 case 0x00:
-                               
-                    audio_send_command(AUDIO_DAMAGE_CAST);
-
-                   for (i = 0; i < 10; i++) {
-                       random();
-                   }
-
-//                   current_state = DEVICE_STATE_UNARMED;
-                   LED_play_pattern(LED_CLEAR);
+                    
+                    detonate_device();
                    break;
                    
                 case 0x02:
                     
+                    // Do stunning things :)
                     audio_send_command(AUDIO_STUN_HIT);
                     
-//                    current_state = DEVICE_STATE_STUNNED;
+                    current_state = DEVICE_STATE_STUNNED;
                     LED_play_pattern(LED_STUN_CAST);
-                    break;
-                case 0x04:
-                    
-                    audio_send_command(AUDIO_HEAL_CAST);
-                    
-//                    current_state = DEVICE_STATE_UNARMED;
-                    LED_play_pattern(LED_HEAL);
                     break;
             }
         }
@@ -202,24 +176,24 @@ static void initialize() {
     if (current_state != DEVICE_STATE_INIT) {
         return;
     }
+    // Connect to peripherals
     
     LED_init();
     pulse();
     LED_play_pattern(LED_CLEAR);
     
     audio_init();
-    // Connect to peripherals
     
     accel_initialize_MPU();
     
-    delay_25ms_n_times(40);
+//    delay_25ms_n_times(40);
     
     if (accel_test_connection()) {
         LED_play_pattern(LED_MPU_INIT_SUCCESS);
     } else {
         LED_play_pattern(LED_SELF_TEST_FAILED);
     }
-     
+    
 //    do {
 //        BT2_init();
 //    } while (!BT2_is_connected);
@@ -228,10 +202,80 @@ static void initialize() {
     do {
         BT4_init();
     } while (!BT4_is_connected);
-    LED_play_pattern(LED_BT4_INIT_SUCESS);
+    LED_play_pattern(LED_BT4_INIT_SUCCESS);
     
-    audio_send_command(0x0009);
+    audio_send_command(0x0007);
     LED_play_pattern(LED_SELF_TEST_PASSED);
     
     current_state = DEVICE_STATE_UNARMED;
+    
+    TMR3_StartTimer();
+}
+
+void arm_device(const mine_state_t arm_mode, const uint8_t sel_spell) {
+    
+    if (!BT4_get_RSSI()) {
+        return;
+    }
+
+    audio_send_command(0x0008);
+    pulse();
+    delay_25ms_n_times(2);
+    pulse();
+    delay_25ms_n_times(2);
+    pulse();
+
+    delay_25ms_n_times(200);
+
+    selected_spell = sel_spell;
+    current_state = arm_mode;
+    BT4_write_string("\x20\n");
+}
+
+void detonate_device() {
+    
+    if (current_state == DEVICE_STATE_UNARMED) {
+        return;
+    }
+    
+    audio_send_command(0x0008);
+    pulse();
+    delay_25ms_n_times(2);
+    pulse();
+    delay_25ms_n_times(2);
+    pulse();
+
+    BT4_write_string("\x30\n");
+    current_state = DEVICE_STATE_UNARMED;
+    
+    switch (selected_spell) {
+        case 'Y':
+            transmit_ir_packet(2);
+            audio_send_command(AUDIO_STUN_CAST);
+            LED_play_pattern(LED_STUN_CAST);
+            break;
+        
+        case 'W':
+            transmit_ir_packet(0);
+            audio_send_command(AUDIO_FIRE);
+            LED_play_pattern(LED_ELEMENT_DAMAGE);
+            break;
+        
+        case 'B':
+            transmit_ir_packet(4);
+            audio_send_command(AUDIO_HEAL_CAST);
+            LED_play_pattern(LED_HEAL);
+            break;
+        
+        case 'R':
+            transmit_ir_packet(0);
+            audio_send_command(AUDIO_DAMAGE_CAST);
+
+            for (uint8_t i = 0; i < 10; i++) {
+                random();
+            }
+
+            LED_play_pattern(LED_CLEAR);
+            break;
+    }
 }

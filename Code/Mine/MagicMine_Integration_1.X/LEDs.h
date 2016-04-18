@@ -52,7 +52,7 @@ extern "C" {
         LED_CLEAR,
         LED_MPU_INIT_SUCCESS,
         LED_BT2_INIT_SUCCESS,
-        LED_BT4_INIT_SUCESS
+        LED_BT4_INIT_SUCCESS
     } LED_Pattern;
     
 //    const uint8_t PIXEL_COUNT = 24; /**< A constant value for the number of pixels in the ring.*/
@@ -108,7 +108,7 @@ extern "C" {
      * 
      * @todo This function needs to be tested!
      */
-    void draw(void);
+    void draw();
     
     void chase(uint8_t* grb);
     
@@ -117,6 +117,8 @@ extern "C" {
     void chase_with_background(uint8_t* grb, uint8_t* grb_back);
     
     void random();
+    
+    void pulse_2();
     
 #ifdef	__cplusplus
 }

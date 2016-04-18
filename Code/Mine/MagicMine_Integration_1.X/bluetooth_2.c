@@ -74,13 +74,14 @@ bool BT2_send_heartbeat() {
     printf("\x3C%c%c%c%c\xFF", 0x00, 0x00, 0x00, 0x00);
     
     // Wait for ACK from PIU
-    BT2_read_response();
+//    BT2_read_response();
     
-    if (strstr(char_buff, "\x3C\xFF\x00\x00\x00\x00") != NULL) {
-        BT2_send_heartbeat();
-    } else {
-        return true;
-    }
+    return true;
+//    if (strstr(char_buff, "\x3C\xFF\x00\x00\x00\x00") != NULL) {
+//        BT2_send_heartbeat();
+//    } else {
+//        return true;
+//    }
 }
 
 void BT2_read_response() {
