@@ -46,7 +46,6 @@
 #include <xc.h>
 #include "pin_manager.h"
 #include <stdbool.h>
-#include <pic16f1579.h>
 #include "../remote_main.h"
 #include "tmr2.h"
 #include "../bt_common.h"
@@ -71,19 +70,31 @@ void PIN_MANAGER_Initialize(void)
     TRISB = 0xF0;
     TRISC = 0xEC;
     TRISA = 0x38;
+    
+    TRISBbits.TRISB7 = 1;
+    TRISBbits.TRISB5 = 1;
+    TRISBbits.TRISB4 = 1;
+    TRISCbits.TRISC6 = 0;
+    TRISAbits.TRISA1 = 0;
+    TRISAbits.TRISA4 = 0;
+    
     ANSELA = 0x0;
     ANSELB = 0x0;
     ANSELC = 0xCC;
-
+    
+    ANSELCbits.ANSC6 = 0;
+    
     OPTION_REGbits.nWPUEN = 0x1;
 
     // enable interrupt-on-change individually
-    IOCAP4 = 1;
-    IOCAP3 = 1;
+//    IOCAP4 = 1;
+//    IOCAP3 = 1;
+    IOCBP7 = 1;     // YELLOW BTN
     IOCBP6 = 1;
-    IOCBN6 = 1;
+//    IOCBN6 = 1;
     IOCBP5 = 1;
     IOCBP4 = 1;
+    IOCCP0 = 1;     // WHITE BTN
     // enable interrupt-on-change globally    
     INTCONbits.IOCIE = 1;   
     bool state = GIE;
@@ -104,14 +115,17 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {    
-    if((IOCAP4 == 1) && (IOCAF4 == 1))
+    if((IOCBP5 == 1) && (IOCBF5 == 1))
     {
         
         delay_n_ms(2);
-        if (BLUE_BTN == 1) {
-            IOCAF4 = 0;
+        if (BLUE_BTN == 0) {
+            IOCBF5 = 0;
             return;
         }
+        
+        selectedSpell = BLUE_SPELL;
+        armButtonEnabled = true;
         
         //@TODO Add handling code for IOC on pin RA4
         // BLUE Button
@@ -121,16 +135,22 @@ void PIN_MANAGER_IOC(void)
         BLUE_LED = 1;
         RED_LED = 0;
         
-        selectedSpell = BLUE_SPELL;
-        armButtonEnabled = true;
-        
         // clear interrupt-on-change flag
-        IOCAF4 = 0;
+        IOCBF5 = 0;
     }
-    else if((IOCAP3 == 1) && (IOCAF3 == 1))
+    else if((IOCBP4 == 1) && (IOCBF4 == 1))
     {
         //@TODO Add handling code for IOC on pin RA3
         // RED Button
+        
+        delay_n_ms(2);
+        if (RED_BTN == 0) {
+            IOCBF4 = 0;
+            return;
+        }
+        
+        selectedSpell = RED_SPELL;
+        armButtonEnabled = true;
         
         YELLOW_LED = 0;
         WHITE_LED = 0;
@@ -138,11 +158,8 @@ void PIN_MANAGER_IOC(void)
         BLUE_LED = 0;
         RED_LED = 1;
         
-        selectedSpell = RED_SPELL;
-        armButtonEnabled = true;
-        
         // clear interrupt-on-change flag
-        IOCAF3 = 0;        
+        IOCBF4 = 0;        
     }
     else if((IOCBN6 == 1) && (IOCBF6 == 1) || (IOCBP6 == 1) && (IOCBF6 == 1))
     {
@@ -157,13 +174,13 @@ void PIN_MANAGER_IOC(void)
         }
         
         delay_n_ms(2);
-        if (PORTBbits.RB6 == 1) {
-            IOCAF4 = 0;
+        if (ARM_BTN == 0) {
+            IOCBF6 = 0;
             arm_button_pressed_start_time = 0;
             return;
         }
         
-        while (ARM_BTN == 0) {
+        while (ARM_BTN == 1) {
             __delay_ms (1);
             arm_button_pressed_start_time++;
             
@@ -183,8 +200,7 @@ void PIN_MANAGER_IOC(void)
                 break;
             }
         }
-        
-//        TMR2_StartTimer();
+
         if (armedMode == STATE_DISARMED) {
             if (arm_held_for_3_seconds) {
 
@@ -223,6 +239,7 @@ void PIN_MANAGER_IOC(void)
                 }
                 
                 armedMode = STATE_AUTOMATIC_MODE;
+                armButtonEnabled = false;
             }
         } else if (armedMode == STATE_MANUAL_MODE) {
             printf("I\n%c\n", 0x00);
@@ -236,21 +253,23 @@ void PIN_MANAGER_IOC(void)
         ARM_LED = armButtonEnabled || STATE_MANUAL_MODE;
         BLUE_LED = selectedSpell == BLUE_SPELL;
         RED_LED = selectedSpell == RED_SPELL; 
-            
-//        TMR2_StopTimer();
+        
         // clear interrupt-on-change flag
         IOCBF6 = 0;        
     }
-    else if((IOCBP5 == 1) && (IOCBF5 == 1))
+    else if((IOCCP0 == 1) && (IOCCF0 == 1))
     {
         //@TODO Add handling code for IOC on pin RB5
         // WHITE Button
         
         delay_n_ms(2);
-        if (WHITE_BTN == 1) {
-            IOCBF5 = 0;
+        if (WHITE_BTN == 0) {
+            IOCCF0 = 0;
             return;
         }
+        
+        selectedSpell = WHITE_SPELL;
+        armButtonEnabled = true;
         
         YELLOW_LED = 0;
         WHITE_LED = 1;
@@ -258,22 +277,22 @@ void PIN_MANAGER_IOC(void)
         BLUE_LED = 0;
         RED_LED = 0;
         
-        selectedSpell = WHITE_SPELL;
-        armButtonEnabled = true;
-        
         // clear interrupt-on-change flag
-        IOCBF5 = 0;        
+        IOCCF0 = 0;        
     }
-    else if((IOCBP4 == 1) && (IOCBF4 == 1))
+    else if((IOCBP7 == 1) && (IOCBF7 == 1))
     {
-        //@TODO Add handling code for IOC on pin RB4
+        //@TODO Add handling code for IOC on pin RB7
         // YELLOW Button
         
         delay_n_ms(2);
-        if (YELLOW_BTN == 1) {
-            IOCBF4 = 0;
+        if (YELLOW_BTN == 0) {
+            IOCBF7 = 0;
             return;
         }
+        
+        selectedSpell = YELLOW_SPELL;
+        armButtonEnabled = true;
         
         YELLOW_LED = 1;
         WHITE_LED = 0;
@@ -281,11 +300,8 @@ void PIN_MANAGER_IOC(void)
         BLUE_LED = 0;
         RED_LED = 0;
         
-        selectedSpell = YELLOW_SPELL;
-        armButtonEnabled = true;
-        
         // clear interrupt-on-change flag
-        IOCBF4 = 0;
+        IOCBF7 = 0;
     }
 }
         

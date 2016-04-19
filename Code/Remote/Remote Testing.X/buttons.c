@@ -9,11 +9,27 @@
 
 void btn_init() {
     
-    YELLOW_LED = 1;
-    WHITE_LED = 1;
+    WHITE_LED = 0;
+    YELLOW_LED = 0;
     ARM_LED = 0;
-    BLUE_LED = 1;
-    RED_LED = 1;
+    BLUE_LED = 0;
+    RED_LED = 0;
+    
+    delay_n_ms(20);
+    
+    for (uint8_t i = 0; i < 5; i++) {
+        WHITE_LED = ~WHITE_LED;
+        delay_n_ms(2);
+        YELLOW_LED = ~YELLOW_LED;
+        delay_n_ms(2);
+        ARM_LED = ~ARM_LED;
+        delay_n_ms(2);
+        BLUE_LED = ~BLUE_LED;
+        delay_n_ms(2);
+        RED_LED = ~RED_LED;
+        delay_n_ms(20);
+    }
+    delay_n_ms(20);
 }
 
 bool btn_test_spell_btns(void) {
@@ -56,8 +72,8 @@ bool btn_test_spell_btns(void) {
 
 void btn_set_LEDs(uint8_t val) {
 
-    YELLOW_LED = (val & 0x01) != 0 ? 1 : 0;
-    WHITE_LED = (val & 0x02) != 0 ? 1 : 0;
+    WHITE_LED = (val & 0x01) != 0 ? 1 : 0;
+    YELLOW_LED = (val & 0x02) != 0 ? 1 : 0;
     ARM_LED = (val & 0x04) != 0 ? 1 : 0;
     BLUE_LED = (val & 0x08) != 0 ? 1 : 0;
     RED_LED = (val & 0x10) != 0 ? 1 : 0;

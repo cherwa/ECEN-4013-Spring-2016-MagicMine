@@ -40,6 +40,8 @@ extern "C" {
     
     void detonate_device();
     
+    void stun_device();
+    
 #ifdef	__cplusplus
 }
 #endif

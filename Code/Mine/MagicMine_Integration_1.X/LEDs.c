@@ -58,7 +58,7 @@ static void play_BT4_init_success();
 * 
 * @todo This function need to be tested!
 */
-static inline void send_bit(int8_t val);
+//static inline void send_bit(int8_t val);
 //static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test);
 //static inline int8_t isNthBitSet(const uint8_t c, const uint8_t n);
 
@@ -370,105 +370,105 @@ static void colorYellow() {
 }	
 
 static void clear_pattern() {
-    for (int i = 0; i < 24; i++) {
+    for (uint8_t i = 0; i < 24; i++) {
         colorBlack();
     }
-    
-//    __delay_ms (10);
 }
-
-static void play_damage(){
-	//Setting all 24 LED's to Red and blinking 5 times
-	
-    for (uint8_t i = 0; i < 24; i++) {
-		colorRed();
-    }
-    
-	delay_25ms_n_times(5);
-    clear_pattern();
-    delay_25ms_n_times(5);
-}
-
 
 static void play_armed(){
 	
     //Setting all 24 LED's to Red and blinking rapidly
-    int8_t j = 0;
-    uint8_t i;
+    uint8_t grb[3] = {0x00, 0xF0, 0x00};
     
-	while (j < 5) {	
-		
-        for (i = 0; i < 24; i++) {
-			
-            if(i % 2) {
-				colorRed();
-			} else {
-				colorRedTwo();
-			}
-		}
-		
-        delay_25ms_n_times(11);
-		
-        for (i = 0; i < 24; i++) {
-			
-            if(i % 2){
-				colorRedTwo();
-			} else {
-				colorRed();
-			}
-		}	
-		
-        delay_25ms_n_times(11);
-        
-        j++;
-	}
+    fill_color(grb);
+    real_draw();
+    
+    delay_25ms_n_times(40);
 }
 
 static void play_element_damage(){
-	//Alternates shades of blue, switches 4 times
     
-    int8_t j = 0;
-    uint8_t i;
+    uint8_t i = 0;
+
+//    uint8_t grb[3] = {0x20, 0x00, 0x00};
+//    fill_color(grb);
+//    
+//    draw();
+//        
+//    for (i = 0; i < 24; i++) {	
+//
+//        greenPixels[i] = (i% 2 == 0) ? 0x5E : 0x6F;
+//        redPixels[i] = (i % 2 == 0) ? 0x21 : 0x40;
+//        bluePixels[i] = (i% 2 == 0) ? 0x73 : 0x7F;
+//    }
+//
+//    delay_25ms_n_times(7);
+//    draw();
+//
+//    for (i = 0; i < 24; i++) {
+//
+//        greenPixels[i] = (i % 2 == 0) ? 0x6F : 0x5E;
+//        redPixels[i] = (i % 2 == 0) ? 0x40 : 0x21;
+//        bluePixels[i] = (i % 2 == 0) ? 0x7F : 0x73;
+//    }
+//
+//    delay_25ms_n_times(7);
+//    draw();
     
-	while (j < 10) {	
-		
+    uint8_t grb[3] = {0x00, 0x00, 0x00};
+    uint8_t j = 0;
+    
+    while (j < 10) {
+        
+        fill_color(grb);
+        
         for (i = 0; i < 24; i++) {
-			
-            if(i % 2) {
-				colorBlue();
-			} else {
-				colorBlueTwo();
-			}
-		}
-		
-        delay_25ms_n_times(11);
-		
+            
+            if (i % 2 == 0) {
+                greenPixels[i] = 0x43;
+//                redPixels[i] = 0x20;
+                bluePixels[i] = 0x1F;
+            } else {
+                greenPixels[i] = 0x3F;
+//                redPixels[i] = 0x11;
+                bluePixels[i] = 0x13;
+            }
+        }
+        
+        real_draw();
+        delay_25ms_n_times(10);
+        fill_color(grb);
+        
         for (i = 0; i < 24; i++) {
-			
-            if(i % 2){
-				colorBlueTwo();
-			} else {
-				colorBlue();
-			}
-		}	
-		
-        delay_25ms_n_times(11);
+            
+            if (i % 2 != 0) {
+                greenPixels[i] = 0x3F;
+//              redPixels[i] = 0x11;
+                bluePixels[i] = 0x13;
+            } else {
+                greenPixels[i] = 0x43;
+//              redPixels[i] = 0x20;
+                bluePixels[i] = 0x1F;
+            }
+        }
         
         j++;
-	}
+        real_draw();
+        delay_25ms_n_times(10);
+    }
 }
 
 static void play_heal(){
 	
     //Setting all 24 LED's to Green & keeping them on
     
-    int8_t i;
+    uint8_t grb[3] = {0xF0, 0x00, 0x00};
     
-	for (i = 0; i < 24; i++) {
-		colorGreen();
-	}
+    fill_color(grb);
     
-    delay_25ms_n_times(360);
+    real_draw();
+    
+    delay_25ms_n_times(180);
 }
 
 static void play_stun() {
@@ -611,7 +611,7 @@ void chase(uint8_t* grb) {
     uint8_t i = 1;
     uint8_t prev_color;
     
-    draw();
+    real_draw();
     delay_25ms_n_times(1);
     
     for (; i < 24; i++) {
@@ -628,7 +628,7 @@ void chase(uint8_t* grb) {
         memset(bluePixels, 0x00, PIXEL_COUNT);
         bluePixels[i] = prev_color;
         
-        draw();
+        real_draw();
         
         delay_25ms_n_times(1);
     }
@@ -660,7 +660,7 @@ void fading_chase(uint8_t* grb) {
         memset(bluePixels, 0x00, PIXEL_COUNT);
         bluePixels[i] = prev_color - 0x0A;
         
-        draw();
+        real_draw();
         
         delay_25ms_n_times(1);
     }
@@ -685,7 +685,7 @@ void chase_with_background(uint8_t* grb, uint8_t* grb_back) {
         memset(bluePixels, grb_back[2], PIXEL_COUNT);
         bluePixels[i] = grb[2];
         
-        draw();
+        real_draw();
         
         delay_25ms_n_times(1);
     }
@@ -703,7 +703,7 @@ static void play_MPU_init_success() {
         greenPixels[i] += 0x09;
         bluePixels[i] += 0x06;
         
-        draw();
+        real_draw();
         
         delay_25ms_n_times(1);
     }
@@ -719,7 +719,7 @@ static void play_BT2_init_success() {
     uint8_t i = 0;
     
     for (; i < 3; i++) {
-        draw();
+        real_draw();
         delay_25ms_n_times(20);
         clear_pattern();
         delay_25ms_n_times(20);
@@ -735,7 +735,7 @@ static void play_BT4_init_success() {
     uint8_t i = 0;
     
     for (; i < 3; i++) {
-        draw();
+        real_draw();
         delay_25ms_n_times(20);
         clear_pattern();
         delay_25ms_n_times(20);
@@ -745,57 +745,86 @@ static void play_BT4_init_success() {
 void LED_play_pattern(LED_Pattern pattern) {
     
     // Disable interrupt
-//    INTERRUPT_GlobalInterruptDisable();
+//    INTERRUPT_PeripheralInterruptDisable();
+    
+    clear_pattern();
+    
+    uint8_t grb[3] = {0xC0, 0x0F, 0x2A};
     
     switch(pattern) {
     	case LED_DAMAGE:
-            
+        {
             for (int8_t i = 0; i < 20; i++) {
-                play_damage();
+                random();
             }    	    
-    	    break;
+            
+            break;      
+        }
         case LED_ARMED:
-                play_armed();
-            break;
+            play_armed();
+            break;       
+        
         case LED_ELEMENT_DAMAGE:
             play_element_damage();
-            break;    
+            break;       
+        
         case LED_HEAL:
             play_heal();
             break;
+        
         case LED_STUN_CAST:
             play_stun();
             break;
-        case LED_STUN_SELF:
+        
+        case LED_STUN_SELF:   
+        {
             for (int8_t i = 0; i < 5; i++) {
                 clear_pattern();
                 play_stun_self();
-            }
+            }         
             break;
+        }
         case LED_SELF_TEST_PASSED:
+        {
             play_test_passed();
             break;
+        }
         case LED_SELF_TEST_FAILED:
+        {
             play_test_failed();
             break;
+        }
         case LED_CLEAR:
+        {
             clear_pattern();
             break;
+        }
         case LED_MPU_INIT_SUCCESS:
-            play_MPU_init_success();
+        {   
+            clear_pattern();
+//            play_MPU_init_success();
+            play_element_damage();
+//            for (uint8_t i = 0; i < 10; i++) {
+//                fading_chase(grb);
+//            }
             break;
+        }
         case LED_BT2_INIT_SUCCESS:
+        {
             play_BT2_init_success();
             break;
+        }
         case LED_BT4_INIT_SUCCESS:
+        {
             play_BT4_init_success();
             break;
+        }
     }
     
     clear_pattern();
     
     // Re-enable interrupts
-//    INTERRUPT_GlobalInterruptEnable();
+//    INTERRUPT_PeripheralInterruptEnable();
 }
 
 void random() {
@@ -809,7 +838,7 @@ void random() {
         bluePixels[i] = rand() >> 9;
     }
     
-    draw();
+    real_draw();
         
     delay_25ms_n_times(1);
 }
@@ -832,17 +861,14 @@ near static inline void real_draw() {
     for (pixel; pixel < PIXEL_COUNT; pixel++) {
         
         for (bitCount = 128; bitCount != 0; bitCount >>= 1) {
-//            send_bit(bit_test(&greenPixels[pixel], &bitCount));
             greenPixels[pixel] & bitCount ? LEDOne() : LEDZero();
         }
         
         for (bitCount = 128; bitCount != 0; bitCount >>= 1) {
-//            send_bit(isNthBitSet(&redPixels[pixel], &bitCount));
              redPixels[pixel] & bitCount ? LEDOne() : LEDZero();
         }
         
         for (bitCount = 128; bitCount != 0; bitCount >>= 1) {
-//            send_bit(isNthBitSet(&bluePixels[pixel], &bitCount));
              bluePixels[pixel] & bitCount ? LEDOne() : LEDZero();
         }
     }
@@ -850,21 +876,6 @@ near static inline void real_draw() {
     LED_PIN = 0;
 }
 
-/** @todo This function needs to be tested extensively for timing.*/
-
-static inline void send_bit(int8_t val) {
-    
-    if (val == 0) {
-        LED_PIN = 1;
-        Nop();
-        LED_PIN = 0;
-    } else {
-        LED_PIN = 1;
-        Nop();
-        Nop();
-        LED_PIN = 0;
-    }
-}
 
 //static inline int8_t bit_test(uint8_t byte_to_test, uint8_t bit_to_test) {
 //    

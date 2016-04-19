@@ -78,20 +78,6 @@ void main()
     // Initialize Remote's program to start state
     
     // Connect to all peripherals
-    
-    TRISAbits.TRISA5 = 1;
-        
-    YELLOW_LED = 1;
-    delay_n_ms(40);
-    WHITE_LED = 1;
-    delay_n_ms(40);
-    ARM_LED = 1;
-    delay_n_ms(40);
-    BLUE_LED = 1;
-    delay_n_ms(40);
-    RED_LED = 1;
-    delay_n_ms(40);
-    
     connect_to_peripherals();
     
     // Flash indicator LEDs
@@ -138,8 +124,8 @@ void connect_to_peripherals() {
 void reset_to_start() {
     
     // Reset buttons
-    YELLOW_LED = 1;
     WHITE_LED = 1;
+    YELLOW_LED = 1;
     ARM_LED = 0;
     BLUE_LED = 1;
     RED_LED = 1;

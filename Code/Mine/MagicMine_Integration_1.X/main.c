@@ -128,6 +128,10 @@ void main(void)
             BT4_process_packet(read_byte);
         }
         
+        if (EUSART1_DataReady) {
+            BT2_read_response();
+        }
+        
         if (current_state == DEVICE_STATE_STUNNED || current_state == DEVICE_STATE_UNARMED) {
             continue;
         }
@@ -194,22 +198,25 @@ static void initialize() {
         LED_play_pattern(LED_SELF_TEST_FAILED);
     }
     
-//    do {
-//        BT2_init();
-//    } while (!BT2_is_connected);
-    LED_play_pattern(LED_BT2_INIT_SUCCESS);
-    
     do {
         BT4_init();
     } while (!BT4_is_connected);
     LED_play_pattern(LED_BT4_INIT_SUCCESS);
     
-    audio_send_command(0x0007);
-    LED_play_pattern(LED_SELF_TEST_PASSED);
+//    do {
+//        BT2_init();
+//    } while (!BT2_is_connected);
+    
+//    printf("\x3C\x00\x00\x00\x00\xFF");
+    
+//    LED_play_pattern(LED_BT2_INIT_SUCCESS);
+    
+//    TMR3_StartTimer();
+    
+//    audio_send_command(0x0007);
+//    LED_play_pattern(LED_SELF_TEST_PASSED);
     
     current_state = DEVICE_STATE_UNARMED;
-    
-    TMR3_StartTimer();
 }
 
 void arm_device(const mine_state_t arm_mode, const uint8_t sel_spell) {
@@ -278,4 +285,9 @@ void detonate_device() {
             LED_play_pattern(LED_CLEAR);
             break;
     }
+}
+
+void stun_device() {
+    
+//    current_state = DEVICE_STATE_STUNNED;
 }

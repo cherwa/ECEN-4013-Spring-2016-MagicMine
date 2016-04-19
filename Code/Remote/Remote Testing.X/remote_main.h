@@ -13,16 +13,17 @@ extern "C" {
 #endif
     
     
-#define YELLOW_LED LATAbits.LATA0
-#define WHITE_LED LATAbits.LATA1
+#define YELLOW_LED LATCbits.LATC6
+#define WHITE_LED LATAbits.LATA4
 #define ARM_LED LATAbits.LATA2
-#define BLUE_LED LATCbits.LATC0
-#define RED_LED LATCbits.LATC1
-#define YELLOW_BTN PORTBbits.RB4
-#define WHITE_BTN PORTBbits.RB5
+#define BLUE_LED LATAbits.LATA1
+#define RED_LED LATAbits.LATA0
+
+#define YELLOW_BTN PORTBbits.RB7
+#define WHITE_BTN PORTCbits.RC0
 #define ARM_BTN PORTBbits.RB6
-#define BLUE_BTN PORTAbits.RA4
-#define RED_BTN PORTAbits.RA3
+#define BLUE_BTN PORTBbits.RB5
+#define RED_BTN PORTBbits.RB4
 
 #include "mcc_generated_files/mcc.h"
 #include <stdio.h>
