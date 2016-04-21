@@ -165,3 +165,7 @@ Code/Mine/MagicMineTesting.X/nbproject/Package-default.bash
 *.d
 
 Code/Mine/MagicMineTesting.X/build/default/production/mcc_generated_files/eusart2.p1.d
+/Code/Mine/MagicMine_Integration_1.X/debug/
+/Code/Mine/MagicMine_Integration_1.X/dist/
+/Code/Mine/MagicMine_Integration_1.X/build/
+Code/Mine/MagicMine_Integration_1.X/MagicMine_Integration_1.zip
