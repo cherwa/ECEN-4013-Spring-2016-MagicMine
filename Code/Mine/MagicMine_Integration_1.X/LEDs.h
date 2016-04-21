@@ -63,9 +63,9 @@ extern "C" {
      * pixel that will be sent when the [draw()](@ref draw) function is called.
      */
     ///@{
-    extern near uint8_t greenPixels[PIXEL_COUNT];
-    extern near uint8_t redPixels[PIXEL_COUNT];
-    extern near uint8_t bluePixels[PIXEL_COUNT];
+//    extern near uint8_t greenPixels[PIXEL_COUNT];
+//    extern near uint8_t redPixels[PIXEL_COUNT];
+//    extern near uint8_t bluePixels[PIXEL_COUNT];
     ///@}
     
     void LED_init();

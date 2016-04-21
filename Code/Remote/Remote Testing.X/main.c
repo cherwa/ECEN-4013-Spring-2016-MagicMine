@@ -46,12 +46,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "remote_main.h"
 
 // Global vars
-volatile spell_t selectedSpell = NO_SELECTION;
+volatile spell_t selected_spell = NO_SELECTION;
 volatile arm_mode_t armedMode = STATE_DISARMED;
 volatile bool armButtonEnabled = false;
 volatile bool connectedToMine = false;
 volatile bool arm_held_for_3_seconds = false;
-
+bool spell_buttons_passed = false;
+bool indicator_LEDs_passed = false;
 /**
  * @brief Main application
  */
@@ -92,33 +93,47 @@ void main()
     
     while (1)
     {
-        
+
     }
 }
 
 void connect_to_peripherals() {
     
+//    bt_init();
+    
     // Flash button LEDs
     btn_init();
-//    spellButtonsPassed =  btn_test_spell_btns();
     
-//    do {
-//        bt_init();
-//    } while(!bt_is_connected);
-    BLUE_LED = 1;
-    WHITE_LED = 1;
-    delay_n_ms(2);
-    BLUE_LED = 0;
-    WHITE_LED = 0;
-    delay_n_ms(2);
-    BLUE_LED = 1;
-    WHITE_LED = 1;
-    delay_n_ms(2);
-    BLUE_LED = 0;
-    WHITE_LED = 0;
-    delay_n_ms(2);
-    BLUE_LED = 1;
-    WHITE_LED = 1;
+//    if (bt_is_connected) {
+//        BLUE_LED = 1;
+//        WHITE_LED = 1;
+//        delay_n_ms(2);
+//        WHITE_LED = 0;
+//        delay_n_ms(2);
+//        WHITE_LED = 1;
+//        delay_n_ms(2);
+//        WHITE_LED = 0;
+//        delay_n_ms(2);
+//        WHITE_LED = 1;
+//        delay_n_ms(2);
+//        BLUE_LED = 0;
+//        WHITE_LED = 0;
+//    } else {
+//        BLUE_LED = 1;
+//        RED_LED = 1;
+//        delay_n_ms(2);
+//        RED_LED = 0;
+//        delay_n_ms(2);
+//        delay_n_ms(2);
+//        RED_LED = 0;
+//        delay_n_ms(2);
+//        RED_LED = 1;
+//        delay_n_ms(2);
+//        BLUE_LED = 0;
+//        RED_LED = 0;
+//    }
+    
+    reset_to_start();
 }
 
 void reset_to_start() {
@@ -131,7 +146,7 @@ void reset_to_start() {
     RED_LED = 1;
     
     // Reset variables
-    selectedSpell = NO_SELECTION;
+    selected_spell = NO_SELECTION;
     armedMode = STATE_DISARMED;
     
     // Reset button states

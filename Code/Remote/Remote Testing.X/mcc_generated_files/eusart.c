@@ -184,6 +184,8 @@ void EUSART_Transmit_ISR(void)
     }
 }
 
+static uint8_t read_byte;
+
 void EUSART_Receive_ISR(void)
 {
     if(1 == RCSTAbits.OERR)
@@ -202,7 +204,52 @@ void EUSART_Receive_ISR(void)
     }
     eusartRxCount++;
     
-    bt_process_packet();
+    while (EUSART_DataReady) {
+        
+        read_byte = EUSART_Read();
+        
+        switch (read_byte) {
+            case 0x20:
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = 0;
+                delay_n_ms(2);
+                BLUE_LED = 1;
+                delay_n_ms(2);
+                BLUE_LED = selected_spell == BLUE_SPELL;
+                break;
+            case 0x30:
+                for (uint8_t i = 0; i < 4; i++) {
+                    WHITE_LED = 0;
+                    YELLOW_LED = 0;
+                    ARM_LED = 1;
+                    BLUE_LED = 0;
+                    RED_LED = 0;
+                    delay_n_ms(2);                
+                    WHITE_LED = 0;
+                    YELLOW_LED = 1;
+                    ARM_LED = 0;
+                    BLUE_LED = 1;
+                    RED_LED = 0;
+                    delay_n_ms(2);
+                    WHITE_LED = 1;
+                    YELLOW_LED = 0;
+                    ARM_LED = 0;
+                    BLUE_LED = 0;
+                    RED_LED = 1;
+                    delay_n_ms(2);
+}
+                
+                reset_to_start();
+                break;
+        }
+    }
 }
 /**
   End of File

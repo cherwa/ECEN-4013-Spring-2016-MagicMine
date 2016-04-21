@@ -13,6 +13,8 @@ extern "C" {
 #endif
 
 #include "mcc_generated_files/mcc.h"
+#include "LEDs.h"
+#include "main.h"
 #include <string.h>
     
 #define BT2_MINE_MAC "0006667C62F5"

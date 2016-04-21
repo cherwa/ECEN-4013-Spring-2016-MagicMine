@@ -27,7 +27,7 @@ extern "C" {
     
     extern bool bt_is_connected;
     
-    void bt_init();
+    bool bt_init();
     
     bool bt_send_command(BT4_command_t cmnd);
     

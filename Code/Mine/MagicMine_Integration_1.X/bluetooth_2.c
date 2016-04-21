@@ -84,8 +84,8 @@ bool BT2_send_heartbeat() {
     if (strstr(char_buff, "\x3C\xFF\x00\x00\x00\x00") != NULL) {
         BT2_send_heartbeat();
     } else {
-        return true;
         pulse_2();
+        return true;
     }
 }
 

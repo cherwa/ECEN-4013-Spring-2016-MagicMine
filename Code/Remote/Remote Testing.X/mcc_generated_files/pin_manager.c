@@ -49,6 +49,7 @@
 #include "../remote_main.h"
 #include "tmr2.h"
 #include "../bt_common.h"
+#include "../remote_main.h"
 
 /** 
  * The time that the arm button was first pressed when selecting an arming mode.
@@ -58,6 +59,7 @@
  * is set to [MANUAL_MODE](@ref MANUAL_MODE) otherwise it is set to [AUTOMATIC_MODE](@ref AUTOMATIC_MODE).
  */
 volatile uint16_t arm_button_pressed_start_time = 0;
+static uint16_t reset_btn_held;
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -75,14 +77,19 @@ void PIN_MANAGER_Initialize(void)
     TRISBbits.TRISB5 = 1;
     TRISBbits.TRISB4 = 1;
     TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC3 = 0;
     TRISAbits.TRISA1 = 0;
     TRISAbits.TRISA4 = 0;
+    
+//    TRISCbits.TRISC5 = 0;
+//    TRISCbits.TRISC4 = 1;
     
     ANSELA = 0x0;
     ANSELB = 0x0;
     ANSELC = 0xCC;
     
     ANSELCbits.ANSC6 = 0;
+    ANSELCbits.ANSC3 = 0;
     
     OPTION_REGbits.nWPUEN = 0x1;
 
@@ -124,12 +131,13 @@ void PIN_MANAGER_IOC(void)
             return;
         }
         
-        selectedSpell = BLUE_SPELL;
+        selected_spell = BLUE_SPELL;
         armButtonEnabled = true;
         
         //@TODO Add handling code for IOC on pin RA4
         // BLUE Button
         YELLOW_LED = 0;
+        YELLOW_LED2 = PORTCbits.RC6;
         WHITE_LED = 0;
         ARM_LED = armButtonEnabled;
         BLUE_LED = 1;
@@ -149,10 +157,11 @@ void PIN_MANAGER_IOC(void)
             return;
         }
         
-        selectedSpell = RED_SPELL;
+        selected_spell = RED_SPELL;
         armButtonEnabled = true;
         
         YELLOW_LED = 0;
+        YELLOW_LED2 = PORTCbits.RC6;
         WHITE_LED = 0;
         ARM_LED = armButtonEnabled;
         BLUE_LED = 0;
@@ -161,7 +170,7 @@ void PIN_MANAGER_IOC(void)
         // clear interrupt-on-change flag
         IOCBF4 = 0;        
     }
-    else if((IOCBN6 == 1) && (IOCBF6 == 1) || (IOCBP6 == 1) && (IOCBF6 == 1))
+    else if((IOCBP6 == 1) && (IOCBF6 == 1))
     {
         //@TODO Add handling code for IOC on pin RB6
         // ARM Button
@@ -174,37 +183,38 @@ void PIN_MANAGER_IOC(void)
         }
         
         delay_n_ms(2);
-        if (ARM_BTN == 0) {
+        if (ARM_BTN == 0 || !armButtonEnabled) {
             IOCBF6 = 0;
             arm_button_pressed_start_time = 0;
             return;
         }
-        
-        while (ARM_BTN == 1) {
-            __delay_ms (1);
-            arm_button_pressed_start_time++;
-            
-            if (arm_button_pressed_start_time >= 3000) {
-                arm_held_for_3_seconds = true;
-                ARM_LED = 0;
-                delay_n_ms(2);
-                ARM_LED = 1;
-                delay_n_ms(2);
-                ARM_LED = 0;
-                delay_n_ms(2);
-                ARM_LED = 1;
-                delay_n_ms(2);
-                ARM_LED = 0;
-                delay_n_ms(2);
-                ARM_LED = 1;
-                break;
-            }
-        }
 
         if (armedMode == STATE_DISARMED) {
+            
+            while (ARM_BTN == 1) {
+                __delay_ms (1);
+                arm_button_pressed_start_time++;
+            
+                if (arm_button_pressed_start_time >= 3000) {
+                    arm_held_for_3_seconds = true;
+                    ARM_LED = 0;
+                    delay_n_ms(2);
+                    ARM_LED = 1;
+                    delay_n_ms(2);
+                    ARM_LED = 0;
+                    delay_n_ms(2);
+                    ARM_LED = 1;
+                    delay_n_ms(2);
+                    ARM_LED = 0;
+                    delay_n_ms(2);
+                    ARM_LED = 1;
+                    break;
+                }
+            }
+            
             if (arm_held_for_3_seconds) {
 
-                switch (selectedSpell) {
+                switch (selected_spell) {
                     case YELLOW_SPELL:
                         printf("I\n%c\n", 0x10);
                         break;
@@ -218,12 +228,12 @@ void PIN_MANAGER_IOC(void)
                         printf("I\n%c\n", 0x13);
                         break;
                 }
-                
+                                
                 armedMode = STATE_MANUAL_MODE;
 
             } else {
 
-                switch (selectedSpell) {
+                switch (selected_spell) {
                     case YELLOW_SPELL:
                         printf("I\n%c\n", 0x20);
                         break;
@@ -244,16 +254,17 @@ void PIN_MANAGER_IOC(void)
         } else if (armedMode == STATE_MANUAL_MODE) {
             printf("I\n%c\n", 0x00);
             armedMode = STATE_DISARMED;
-            arm_button_pressed_start_time = 0;
             arm_held_for_3_seconds = false;
         }
         
-        YELLOW_LED = selectedSpell == YELLOW_SPELL;
-        WHITE_LED = selectedSpell == WHITE_SPELL;
+        YELLOW_LED = selected_spell == YELLOW_SPELL;
+        YELLOW_LED2 = PORTCbits.RC6;
+        WHITE_LED = selected_spell == WHITE_SPELL;
         ARM_LED = armButtonEnabled || STATE_MANUAL_MODE;
-        BLUE_LED = selectedSpell == BLUE_SPELL;
-        RED_LED = selectedSpell == RED_SPELL; 
+        BLUE_LED = selected_spell == BLUE_SPELL;
+        RED_LED = selected_spell == RED_SPELL; 
         
+        arm_button_pressed_start_time = 0;
         // clear interrupt-on-change flag
         IOCBF6 = 0;        
     }
@@ -268,10 +279,30 @@ void PIN_MANAGER_IOC(void)
             return;
         }
         
-        selectedSpell = WHITE_SPELL;
-        armButtonEnabled = true;
+        if (armedMode == STATE_DISARMED) {
+            selected_spell = WHITE_SPELL;
+            armButtonEnabled = true;            
+        }
+        
+        reset_btn_held = 0;
+        
+        while (WHITE_BTN == 1) {
+            __delay_ms (1);
+            reset_btn_held++;
+            
+            if (reset_btn_held >= 3000) {
+                RESET();
+            } else if (reset_btn_held % 500 == 0) {
+                WHITE_LED = 1;
+                delay_n_ms(2);
+                WHITE_LED = 0;
+                delay_n_ms(2);
+                WHITE_LED = selected_spell == WHITE_SPELL;
+            }
+        }
         
         YELLOW_LED = 0;
+        YELLOW_LED2 = 0;
         WHITE_LED = 1;
         ARM_LED = armButtonEnabled;
         BLUE_LED = 0;
@@ -291,10 +322,11 @@ void PIN_MANAGER_IOC(void)
             return;
         }
         
-        selectedSpell = YELLOW_SPELL;
+        selected_spell = YELLOW_SPELL;
         armButtonEnabled = true;
         
         YELLOW_LED = 1;
+        YELLOW_LED2 = PORTCbits.RC6;
         WHITE_LED = 0;
         ARM_LED = armButtonEnabled;
         BLUE_LED = 0;

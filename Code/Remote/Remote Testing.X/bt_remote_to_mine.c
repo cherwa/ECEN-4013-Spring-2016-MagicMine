@@ -13,11 +13,17 @@ static uint8_t bt_read_byte;
 
 bool bt_is_connected = false;
 
-void bt_init() {
+bool bt_init() {
     
     // Wait for connection from mine
     
+    uint16_t timeout = 0;
+    
     while (!bt_is_connected) {
+        
+        __delay_ms(1);
+        timeout++;
+        
         if (EUSART_DataReady) {
 
             bt_read_byte = EUSART_Read();
@@ -31,7 +37,15 @@ void bt_init() {
                 break;
             }   
         }
+        
+        if (timeout >= 10000) {
+            return false;
+        } else if (timeout % 1000 == 0) {
+            BLUE_LED = ~BLUE_LED;
     }
+}
+
+    return true;
 }
 
 bool bt_send_command(BT4_command_t cmnd) {
@@ -73,7 +87,7 @@ void bt_read_buffer() {
 void bt_process_packet() {
     
     uint8_t read_byte;
-    
+        
     while (EUSART_DataReady) {
         
         read_byte = EUSART_Read();
@@ -92,64 +106,31 @@ void bt_process_packet() {
                 delay_n_ms(2);
                 BLUE_LED = 1;
                 delay_n_ms(2);
-                BLUE_LED = selectedSpell == BLUE_SPELL;
+                BLUE_LED = selected_spell == BLUE_SPELL;
                 break;
             case 0x30:
-                YELLOW_LED = 0;
-                WHITE_LED = 0;
-                ARM_LED = 1;
-                BLUE_LED = 0;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 0;
-                WHITE_LED = 1;
-                ARM_LED = 0;
-                BLUE_LED = 1;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 1;
-                WHITE_LED = 0;
-                ARM_LED = 0;
-                BLUE_LED = 0;
-                RED_LED = 1;
-                delay_n_ms(2);
-                YELLOW_LED = 0;
-                WHITE_LED = 0;
-                ARM_LED = 1;
-                BLUE_LED = 0;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 0;
-                WHITE_LED = 1;
-                ARM_LED = 0;
-                BLUE_LED = 1;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 1;
-                WHITE_LED = 0;
-                ARM_LED = 0;
-                BLUE_LED = 0;
-                RED_LED = 1;
-                delay_n_ms(2);
-                YELLOW_LED = 0;
-                WHITE_LED = 0;
-                ARM_LED = 1;
-                BLUE_LED = 0;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 0;
-                WHITE_LED = 1;
-                ARM_LED = 0;
-                BLUE_LED = 1;
-                RED_LED = 0;
-                delay_n_ms(2);
-                YELLOW_LED = 1;
-                WHITE_LED = 0;
-                ARM_LED = 0;
-                BLUE_LED = 0;
-                RED_LED = 1;
-                delay_n_ms(2);
-                
+        
+                for (uint8_t i = 0; i < 4; i++) {
+                    YELLOW_LED = 0;
+                    WHITE_LED = 0;
+                    ARM_LED = 1;
+                    BLUE_LED = 0;
+                    RED_LED = 0;
+                    delay_n_ms(2);
+                    YELLOW_LED = 0;
+                    WHITE_LED = 1;
+                    ARM_LED = 0;
+                    BLUE_LED = 1;
+                    RED_LED = 0;
+                    delay_n_ms(2);
+                    YELLOW_LED = 1;
+                    WHITE_LED = 0;
+                    ARM_LED = 0;
+                    BLUE_LED = 0;
+                    RED_LED = 1;
+                    delay_n_ms(2);
+                }
+        
                 reset_to_start();
                 break;
         }

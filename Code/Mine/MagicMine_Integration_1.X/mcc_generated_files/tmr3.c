@@ -186,7 +186,7 @@ void TMR3_CallBack(void)
         TMR3_InterruptHandler();
     }
     
-    BT2_send_heartbeat();
+//    BT2_send_heartbeat();
     
     arm_indicator_counter++;
 }

@@ -5,6 +5,8 @@
  */
 
 #include "bluetooth_4.h"
+#include "util_functions.h"
+#include "LEDs.h"
 
 /**
  * Global variable definitions
@@ -114,13 +116,13 @@ void BT4_read_to_buffer() {
         
         if (EUSART2_DataReady) {
         
-            BT4_read_byte = EUSART2_Read();
-
-            BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
-
-            BT4_byte_counter++;
-        }
+        BT4_read_byte = EUSART2_Read();
+        
+        BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
+        
+        BT4_byte_counter++;
     }
+}
 }
 
 bool BT4_get_RSSI() {
@@ -150,14 +152,14 @@ bool BT4_get_RSSI() {
                 break;
             } else if (BT4_read_byte == '-') {
                 continue;
-            }
-                        
+    }
+    
             BT4_char_buff[BT4_byte_counter] = BT4_read_byte;
             BT4_byte_counter++;
         };        
-        
+    
         cur_val = strtol(BT4_char_buff, NULL, 16);
-        
+    
         BT4_average_rssi += cur_val;
         
         __delay_ms (10);

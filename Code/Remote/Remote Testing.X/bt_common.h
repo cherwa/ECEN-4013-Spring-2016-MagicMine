@@ -25,7 +25,7 @@ extern "C" {
      * Values are used to easily send specific commands using the bluetooth modules
      */
     
-    typedef enum {
+    typedef enum bt4_commands {
         BT_CMND_DETONATE = 0x00,
         BT_CMND_ARM_MANUAL = 0x01,
         BT_CMND_ARM_AUTO = 0x02,

@@ -45,6 +45,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  */
 
 #include "main.h"
+#include "bluetooth_4.h"
 
 /**
  * Global variable definition
@@ -60,8 +61,6 @@ static void initialize();
 
 /**
  * Module variables
- */
-
 /*
                          Main application
  */
@@ -118,18 +117,18 @@ void main(void)
     
     uint8_t read_byte;
     
-    uint8_t* buff[3];
-    
     while (1) {
                 
         if (EUSART2_DataReady) {
-            
             read_byte = EUSART2_Read();
-            BT4_process_packet(read_byte);
+            
+
+//          current_state = DEVICE_STATE_UNARMED;
+            LED_play_pattern(LED_CLEAR);
         }
         
-        if (EUSART1_DataReady) {
-            BT2_read_response();
+        if (current_state == DEVICE_STATE_STUNNED) {
+            BT4_process_packet(read_byte);
         }
         
         if (current_state == DEVICE_STATE_STUNNED || current_state == DEVICE_STATE_UNARMED) {
@@ -138,18 +137,16 @@ void main(void)
         
         if(accel_motion_detect()) {
             
-            detonate_device();               
-        }
-        
-        if (current_state == DEVICE_STATE_ARMED_AUTO && PORTBbits.RB4 == 0) {
-            detonate_device();
-        }
-        
-        if ((arm_indicator_counter % 5 == 0) && (current_state == DEVICE_STATE_ARMED_AUTO || current_state == DEVICE_STATE_ARMED_MANUAL)) {
-            pulse();
-            __delay_us (10);
-            audio_send_command(0x0009);
-            arm_indicator_counter++;
+            // Blow up!
+            transmit_ir_packet(0);
+            
+            accel_calculate_offset(100);
+//            current_state = DEVICE_STATE_UNARMED;
+            
+            audio_send_command(AUDIO_DAMAGE_CAST);
+            
+            fading_chase(clr);
+            LED_play_pattern(LED_CLEAR);
         }
         
         if (validMIRP_rx && IDH == 0xAB && IDL == 0xCD && STR == 0x64) {
@@ -158,17 +155,30 @@ void main(void)
             
             switch (SPELL) {
                 case 0x00:
-                    
-                    detonate_device();
+                               
+                    audio_send_command(AUDIO_DAMAGE_CAST);
+
+                   for (i = 0; i < 10; i++) {
+                       random();
+                   }
+
+//                   current_state = DEVICE_STATE_UNARMED;
+                   LED_play_pattern(LED_CLEAR);
                    break;
                    
                 case 0x02:
                     
-                    // Do stunning things :)
                     audio_send_command(AUDIO_STUN_HIT);
                     
-                    current_state = DEVICE_STATE_STUNNED;
+//                    current_state = DEVICE_STATE_STUNNED;
                     LED_play_pattern(LED_STUN_CAST);
+                    break;
+                case 0x04:
+                    
+                    audio_send_command(AUDIO_HEAL_CAST);
+                    
+//                    current_state = DEVICE_STATE_UNARMED;
+                    LED_play_pattern(LED_HEAL);
                     break;
             }
         }
@@ -177,16 +187,19 @@ void main(void)
 
 static void initialize() {
     
+    audio_send_command(0x0007);
+    LED_play_pattern(LED_SELF_TEST_PASSED);
+    
     if (current_state != DEVICE_STATE_INIT) {
         return;
     }
-    // Connect to peripherals
     
     LED_init();
     pulse();
     LED_play_pattern(LED_CLEAR);
     
     audio_init();
+    // Connect to peripherals
     
     accel_initialize_MPU();
     
@@ -197,26 +210,22 @@ static void initialize() {
     } else {
         LED_play_pattern(LED_SELF_TEST_FAILED);
     }
+//    do {
+//        BT2_init();
+//    } while (!BT2_is_connected);
+    LED_play_pattern(LED_BT2_INIT_SUCCESS);
     
     do {
         BT4_init();
     } while (!BT4_is_connected);
     LED_play_pattern(LED_BT4_INIT_SUCCESS);
     
-//    do {
-//        BT2_init();
-//    } while (!BT2_is_connected);
-    
-//    printf("\x3C\x00\x00\x00\x00\xFF");
-    
-//    LED_play_pattern(LED_BT2_INIT_SUCCESS);
-    
-//    TMR3_StartTimer();
-    
 //    audio_send_command(0x0007);
 //    LED_play_pattern(LED_SELF_TEST_PASSED);
     
     current_state = DEVICE_STATE_UNARMED;
+    
+    TMR3_StartTimer();
 }
 
 void arm_device(const mine_state_t arm_mode, const uint8_t sel_spell) {
@@ -241,18 +250,9 @@ void arm_device(const mine_state_t arm_mode, const uint8_t sel_spell) {
 
 void detonate_device() {
     
-    if (current_state == DEVICE_STATE_UNARMED) {
-        return;
-    }
+    audio_send_command(0x0009);
+    LED_play_pattern(LED_SELF_TEST_PASSED);
     
-    audio_send_command(0x0008);
-    pulse();
-    delay_25ms_n_times(2);
-    pulse();
-    delay_25ms_n_times(2);
-    pulse();
-
-    BT4_write_string("\x30\n");
     current_state = DEVICE_STATE_UNARMED;
     
     switch (selected_spell) {
@@ -285,9 +285,4 @@ void detonate_device() {
             LED_play_pattern(LED_CLEAR);
             break;
     }
-}
-
-void stun_device() {
-    
-//    current_state = DEVICE_STATE_STUNNED;
 }

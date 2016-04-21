@@ -21,6 +21,7 @@ void btn_init() {
         WHITE_LED = ~WHITE_LED;
         delay_n_ms(2);
         YELLOW_LED = ~YELLOW_LED;
+        YELLOW_LED2 = PORTCbits.RC6;
         delay_n_ms(2);
         ARM_LED = ~ARM_LED;
         delay_n_ms(2);

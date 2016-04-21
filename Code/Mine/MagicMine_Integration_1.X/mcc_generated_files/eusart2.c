@@ -174,6 +174,8 @@ void EUSART2_Transmit_ISR(void)
     }
 }
 
+static uint8_t byte;
+
 void EUSART2_Receive_ISR(void)
 {
     if(1 == RCSTA2bits.OERR)
@@ -192,10 +194,67 @@ void EUSART2_Receive_ISR(void)
     }
     eusart2RxCount++;
     
-//    if (BT4_is_connected) {
-//        BT4_read_to_buffer();
-//        BT4_process_packet();
-//    }
+    byte = EUSART2_Read();
+    
+    if (byte == 'I' || byte == '\n') {
+        return;
+    }
+    
+    switch (byte) {
+        case 0x00:
+            detonate_device();
+            break;
+        
+        case 0x10:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'Y');
+            break;
+        
+        case 0x11:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'W');
+            break;
+        
+        case 0x12:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'B');
+            break;
+        
+        case 0x13:
+            arm_device(DEVICE_STATE_ARMED_MANUAL, 'R');
+            break;
+        
+        case 0x20:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'Y');
+            break;
+        
+        case 0x21:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'W');
+            break;
+        
+        case 0x22:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'B');
+            break;
+        
+        case 0x23:
+            arm_device(DEVICE_STATE_ARMED_AUTO, 'R');           
+            break;
+        
+        case 0x05:
+            break;
+        
+        case 0x06:
+            break;
+        
+        case 0x07:
+            break;
+        
+        case 0x08:
+            break;
+        
+        case 0x09:
+            break;
+        
+        case 0x0A:
+            break;            
+    }
 }
 /**
   End of File
